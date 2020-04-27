@@ -1,23 +1,23 @@
 # main links
 main:
-  - title: "Course units"
+  - title: "Kurseinheiten"
     url: /units.html
-  - title: "About"
-    url: /about.html
-  - title: "Course home"
-    url: /index.html
-  - title: "OER home"
-    url: https://oer.uni-marburg.de/goto.php?target=cat_320&client_id=mriliasmooc
-  - title: "Sitemap"
+  - title: "FAQ"
+    url: /faq.html
+  - title: "Zu ILIAS"
+    url: https://ilias.uni-marburg.de/ilias.php?ref_id=1858892&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilrepositorygui
+  - title: "Zur OER"
+    url: https://oer.uni-marburg.de/goto.php?target=cat_1651239&client_id=UNIMR
+  - title: "Seitenübersicht"
     url: /sitemap.html
     
     
 docs:
   - title: Ways out
     children:
-      - title: "Course units"
+      - title: "Kurseinheiten"
         url: /units.html
-      - title: "Course home"
-        url: /index.html
-      - title: "OER home"
-        url: https://oer.uni-marburg.de/goto.php?target=cat_320&client_id=mriliasmooc
+      - title: "Zu ILIAS"
+        url: https://ilias.uni-marburg.de/ilias.php?ref_id=1858892&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilrepositorygui
+      - title: "Zum OER"
+        url: https://oer.uni-marburg.de/goto.php?target=cat_1651239&client_id=UNIMR

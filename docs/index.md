@@ -1,17 +1,17 @@
 ---
-title: Geo Information Science
+title: Medienkompetenz Umweltinformatik
 layout: splash
 date: '2018-02-06 13:00:00 +0100'
 header:
   overlay_color: "#000"
   overlay_filter: 0.6
-  overlay_image: "/assets/images/gis_title.jpg"
-  caption: 'Photo credit: [**Environmental Informatics Marburg**](https://www.flickr.com/environmentalinformatics-marburg/)'
-  cta_label: Go to course units
+  overlay_image: "/assets/images/title_1600_500.jpg"
+  caption: 'Photo: [**Environmental Informatics Marburg**](https://www.flickr.com/environmentalinformatics-marburg/)'
+  cta_label: Zum Kursinhalt
   cta_url: "/units.html"
-excerpt: Fast - Affordable - Good. Development and Operationalization of Spatial Analysis.
+excerpt: Fachliche Bedeutung von Medien verstehen und professionelle Handlungskompetenz zum Medieneinsatz erwerben.
 feature_row_intro:
-- excerpt: Master level course in [Physical Geography](https://www.uni-marburg.de/fb19/studium/studiengaenge/msc-phygeo) at Marburg University
+- excerpt: Einführungskurs im [Bachelorstudiengang Geographie](https://www.uni-marburg.de/de/fb19/studium/studiengaenge/bsc_geographie){:target="_blank"} und im [Lehramtsstudium Erdkunde](https://www.uni-marburg.de/de/fb19/studium/studiengaenge/erdkunde-lehramt-gymnasium/herzlich-willkommen-beim-bachelor-geographie) an der Philipps Universität Marburg
 feature_row_ilos:
 - image_path: "/assets/images/envobs_ilos.jpg"
   alt: PC monitor laying in the garden of the institute.
@@ -21,64 +21,50 @@ feature_row_ilos:
 
 {% include feature_row id="feature_row_intro" type="center" %}
 
-One could claim that the fact living on the surface of the earth and only get to know a small space through direct personal experience is the most important motivation for most of the geographic work. Compensation for this lack of direct experience has been and is being made, especially in scientific geography, with the help of efficient spatio-temporal techniques of abstraction. 
 
-Knowledge of spatial and/or temporal aspects of our environment is increasingly in demand for action-relevant relationships. Whether we ask as tourists, consumers, producers or planners spatial information, or even knowledge. 
-
-Geographic Information Science (GIS) is based on versatile and powerful software tools that are used in modeling, analysis, data mining merging and numerous other spatio-temporal applications. Nevertheless the most powerful tool is our mind developing the concepts and developing the necessary algorithms.
-
-# Intended learning outcomes
-At the end of this course you should be able
-
-* to understand, adapt and develop geographic information science methods 
-* to design workflows suitable to solve common spatio temporal data-related issues
-* to deploy your workflows using geo-information science tools, R scripts and collaborative code management platforms for task management and issue tracking
-* to critically evaluate your spatiao-temporal analysis
-* to communicate your workflow and analysis results,
+## Allgemeines 
+Medien und Modelle sind wissenschaftliche Grundelemente der Geographie. Sie bilden die Basis für den Erkenntnisgewinn in der Forschung und dienen als Kommunikationsmittel. Medien und Modelle sind damit in erster Linie kein pädagogisches Element, sondern fester Bestandteil einer fachlichen Auseinandersetzung mit einem Thema. Deshalb stellt die fachlich begründete Auswahl und der themenspezifische Einsatz von Medien und Modellen eine wichtige Kernkompetenz von Lehrerinnen und Lehrern für die Planung eines fachlich begründeten Unterrichts dar.
 
 
+## Lernziele
+Am Ende dieses Moduls können Sie
+* eine größere Gruppe von Geomedien überblicksartig erklären und kategorisieren und exemplarisch eigene Geomedien erstellen,
+* ausgewählte Faktoren, Funktionen und Prozesse in realen Räumen auf Basis von Geomedien beschreiben und erklären,
+* Geomedien für die Lösung spezifischer Probleme auswählen und einsetzen,
+* ausgewählte Faktoren, Funktionen und Prozesse in realen Räumen modellieren,
+* die Eignung von Geomedien für die Lösung spezifischer Probleme reflektieren.
 
 
-# Course features
+## Kursmerkmale
+Der Kurs ist primär für Studierende unserer Präsenzveranstaltung gedacht, eignet sich in gewissem Maße aber auch zum Selbststudium.
 
-The course is linked to the research of the Nature 4.0 project, heavily integrated into the parallel [Geo Information Systems](https://oer.uni-marburg.de/goto.php?target=crs_327&client_id=mriliasmooc){:target="_blank"} and build upon the parallel [Data Analysis](https://oer.uni-marburg.de/goto.php?target=crs_326&client_id=mriliasmooc){:target="_blank"} courses. It is intended as a blended learning module in our study program although the provided introductions, explanations and examples might be useful for self-study, too.
-
-
-
-# Syllabus
-
-| Session | Topic | Content |
-|-------|--------|---------|
-|| **Geographic Information Science basics** ||
-| 1 | Geographic Information Science | Get to know basic GIS principles the open software approach and the R-spatial-biotop|
-| 2 | Understanding the working environment the concept of remote sensing GIS and data anaysis and how to deal with it | Check out various methods for handling raster datasets and raster information retrieval in R and GIS |
-|| **Project 1: You cannot see the wood for the trees** | Baseline data analysis |
-| 3 | Problem: Comprehensive discussion of whatever concepts for tree identification | Deconstruct the problem, identify research tasks and sketch a project workflow |
-| 4 | Spotlight: Setting up your working environment | Getting your PC to work no matter what kind of operating system or hardware | 
-| 5 | Spotlight: Lidar CHMs and more | Getting in touch with the technique and underlying concepts | 
-| 6 | Spotlight: Programming | Improve your workflow and scripting skills | 
-| 7 | Spotlight: Segmentation of trees | 20 Lines of Code for reaching the goal of project 1 |
-| 8 | Project 1 discussion | Present your prelimary paper to your peers |
-| 9 | Peer feedback | Evaluate the work of your peers, reflect your own workflow and discuss potential improvements |
-|| **Project 2: Trees in a forest - competetion densities and more** | Index-based anaysis of tree patterns |
-| 10 | Problem: Relationship of tree (species) in space | Decompose the problem, identify research tasks and sketch a project workflow |
-| 11 | Spotlight: Densities and Competition | Identify and implement meaningful indices |
-| 12 | Spotlight: Paper works| How can I tie it together|
-| 13 | Project 2 discussion  | Present your paper to your peers |
-|| **Wrap up** ||
-| 14 | Feedback and goodbye | Get feedback from your peers and instructors, tell us how you self-assess your skills and happy holidays |
+Information aufgrund der **Coronavirus-Pandemie**: Aus Gründen des Infektionsschutzes sind Präsenzveranstaltung derzeit nicht möglich. Der Kurs findet deshalb in der digitalen Welt statt. Studierende, die den Kurs im Sommersemester 2020 besuchen, finden alle notwendigen Informationen im Bereich [How-to MeKo]({{ site.baseurl }}{% link _unit0/unit0-01_overview.md %}) auf dieser Webseiten oder im geschlossenen [Kursbereich der Ilias-Lernplattform](https://ilias.uni-marburg.de/ilias.php?ref_id=1858892&cmd=frameset&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilRepositoryGUI).
+{: .notice--info}
 
 
-# Deliverables
+## Studien- und Prüfungsleistung
 
-The graded course certificate will be based on a team portfolio hosted as a team repository on GitHub. The individual portfolio items are defined in the respective course assignments along with the information if they will be marked or not. Marked portfolio items encompass the presentation and peer-review the paper which inform about the results of two problem solving assignments related to the computation and analysis of the geographic information systems products.
+In jeder der sechs Kurseinheiten werden mehrere Aufgaben gestellt. Jede Aufgabe umfasst drei Unteraufgaben in den Schwierigkeitsniveaus L1 (minimal), L2 (solide) und L3 (vertieft), die jeweils mit maximal zwei Punkten bewertet werden. Die Bearbeitung und auch die Bewertung der höheren Schwierigkeitsniveaus (L2 bzw. L3) setzt immer auch die Bearbeitung der niedrigeren Niveaus voraus. Die Studienleistung gilt als bestanden, wenn durch die frist- und formgerechte Abgabe der Übungsergebnisse mindestens so viele Bewertungspunkte erreicht wurden, wie durch die vollständig erfolgreiche Bearbeitung aller Unteraufgaben des Niveaus L1 erreicht werden können. Dies entspricht einem Drittel der insgesamt für alle Aufgaben möglichen Punktzahl. Details zur Abgabe von Aufgaben und dem begleitenden Tutorium finden Sie im Bereich [How-to MeKo]({{ site.baseurl }}{% link _unit0/unit0-01_overview.md %}) auf dieser Webseiten.
 
+Die Prüfungsleistung ist eine Klausur mit theoretischen und praktischen Aufgaben.
 
-# Preparation and prerequisites
-
-The courses assumes basic knowledge and skills in remote sensing and GIS. Required R and GIS skills can be developed by the parallel courses [Data Analysis](https://oer.uni-marburg.de/goto.php?target=crs_326&client_id=mriliasmooc){:target="_blank"} and [Geo Information Systems](https://oer.uni-marburg.de/goto.php?target=crs_327&client_id=mriliasmooc){:target="_blank"}.
-
+Die Studienleistung und die Prüfungsleistung ist individuell zu erbringen.
 
 
-# Instructor
-{% include author-profile.html %}
+## Ablauf
+
+Jede Kurseinheit ist auf einen Zeitraum von zwei Wochen ausgelegt und besteht aus einem Lern- und einem Übungsteil. Die Übungsphase wird durch ein Tutorium begleitet. Die abgegebenen Aufgaben werden in der jeweils folgenden Kurseinheit nachbereitet.
+
+{% include figure image_path="/assets/images/ablaufplan.jpg" alt="Ablaufplan des Kurses." %}
+
+## Kurs- und Tutoriumszeiten
+**Kurszeiten**: Donnerstags, 8:15 bis 10:45 Uhr
+
+**Tutorien**: Mittwochs, 7:00 bis 8:15 Uhr / 10:00 bis 12:00 Uhr / 12:00 bis 14:00 Uhr 
+
+## Team
+
+{% for author in site.data.authors %} 
+  {% include author-profile.html %}
+ <br /> 
+{% endfor %}

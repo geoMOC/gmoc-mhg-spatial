@@ -1,5 +1,5 @@
 ---
-title: Course Units
+title: Kurseinheiten
 permalink: /units.html
 sidebar:
         nav: "units" 
