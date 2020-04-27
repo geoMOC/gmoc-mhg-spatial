@@ -1,8 +1,8 @@
 ---
-title: Corona-Pandemie und MeKo
+title: Corona-Pandemie und Präsenzveranstaltungen
 ---
 
-Bedingt durch die Corona-Pandemie findet das Sommersemester umfassend digital statt. Hier finden Sie alle notwendigen Informationen zum Lernen auf Distanz im Rahmen des Moduls Medienkompetenz.
+Bedingt durch die Corona-Pandemie findet das Sommersemester umfassend digital statt. Hier finden Sie alle notwendigen Informationen zum Lernen auf Distanz im Rahmen des Moduls Umweltsysteme - Modellierung und Simulation.
 
 <!--more-->
 
@@ -17,8 +17,8 @@ _Verzweifeln Sie nicht. Haben Sie keine Angst aufgrund den Herausforderungen ein
 _Machen wir was draus!_
 
 
-_Rieke Ammoneit, Kevin Dippel, Jonas Beckmann, David Langenohl, Thomas Nauss, Carina Peter, Chris Reudenbach, Alice Ziegler_
+_Thomas Brenner und  Chris Reudenbach_
 
 _P. S. Wenn Sie nicht über die notwendigen technischen Voraussetzungen verfügen (z.B. kein Internetzugang) um an der digitalen Lehre teilzunehmen, melden Sie sich bitte umgehend bei uns._
 
-{% include video id="_T-3EHB_3Ns" provider="youtube" %}
+
