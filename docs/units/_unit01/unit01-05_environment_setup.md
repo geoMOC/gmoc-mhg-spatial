@@ -86,5 +86,3 @@ saga_path = linkSAGA()
 otb_path = linkOTB()
 ```
 
-For a more advanced and automated project setup have also a look at the [extended setup spotlight]({{ site.baseurl }}{% link _unit05/unit05-02_extended_setup.md %})
-

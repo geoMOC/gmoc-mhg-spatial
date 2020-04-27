@@ -5,9 +5,7 @@ main:
   - title: "FAQ"
     url: /faq.html
   - title: "Zu ILIAS"
-    url: https://ilias.uni-marburg.de/ilias.php?ref_id=1858892&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilrepositorygui
-  - title: "Zur OER"
-    url: https://oer.uni-marburg.de/goto.php?target=cat_1651239&client_id=UNIMR
+    url: https://ilias.uni-marburg.de/ilias.php?ref_id=1884284&cmd=frameset&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilRepositoryGUI
   - title: "Seitenübersicht"
     url: /sitemap.html
     
@@ -18,6 +16,4 @@ docs:
       - title: "Kurseinheiten"
         url: /units.html
       - title: "Zu ILIAS"
-        url: https://ilias.uni-marburg.de/ilias.php?ref_id=1858892&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilrepositorygui
-      - title: "Zum OER"
-        url: https://oer.uni-marburg.de/goto.php?target=cat_1651239&client_id=UNIMR
+        url: https://ilias.uni-marburg.de/ilias.php?ref_id=1884284&cmd=frameset&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilRepositoryGUI

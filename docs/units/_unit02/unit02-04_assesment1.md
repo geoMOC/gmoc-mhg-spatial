@@ -41,7 +41,7 @@ But let's focus on our problem. Probably your first attempt is to risk a look on
 
 It is not really necessary to say that in most situation that are a bit more sophisticated a *"click one button approach"* will not lead to success. Mainly because of the creative urges you need for your solution. Exactly this is the situation for ambitious and advanced users or researchers. But how can we escape? One of the most practicable way is to ask somebody. This works even better if you did analyze and understand what you want. In real life is the combination of both very successful. Both approaches are supporting each other you can ask better and more focused questions if you understand what you are asking for and vice versa thinking about your questions supports your needs to understand how and what you want to do. Sounds like an easy approach. 
 
-Again in real life you have to to it by your own. That means "Google is your friend" and "read the fu..... manuals and papers". So let's start and try it. For a brief introduction feel free to read [Spotlight Landscapes]({{ site.baseurl }}{% link _unit05/unit05-11_Exkurs_Paradigms.md %}){:target="_blank"}.
+Again in real life you have to to it by your own. That means "Google is your friend" and "read the fu..... manuals and papers". So let's start and try it. For a brief introduction feel free to read 
 
 
 

@@ -110,9 +110,9 @@ collections:
   unit04:
     output: true
     permalink: /:collection/:title.html
-  unit05:
-    output: true
-    permalink: /:collection/:title.html
+#  unit05:
+#    output: true
+#    permalink: /:collection/:title.html
 worksheets:
     output: true
     permalink: /:collection/:title.html
@@ -180,16 +180,6 @@ defaults:
     values:
       category: "Project 2: Competition and Biodiversity"
       tags: "Unit|04"
-      layout: single
-      sidebar:
-        nav: "units" 
-  # unit05
-  - scope:
-      path: ""
-      type: unit05
-    values:
-      category: "Spotlights"
-      tags: "Unit|05"
       layout: single
       sidebar:
         nav: "units" 
