@@ -95,6 +95,9 @@ collections:
   examples:
     output: true
     permalink: /:collection/:title.html
+  unit0:
+    output: true
+    permalink: /:collection/:title.html
   unit01:
     output: true
     permalink: /:collection/:title.html
@@ -110,7 +113,7 @@ collections:
   unit05:
     output: true
     permalink: /:collection/:title.html
-  worksheets:
+worksheets:
     output: true
     permalink: /:collection/:title.html
 
@@ -126,6 +129,18 @@ defaults:
       layout: single
       sidebar:
         nav: "units" 
+ # unit0
+  - scope:
+      path: ""
+      type: unit0
+    values:
+      category: "How To Modellierung und Simulation"
+      tags: "Unit|0"
+      layout: single
+      sidebar:
+        nav: "units" 
+      toc: true
+      toc_label: On this page              
   # unit01
   - scope:
       path: ""
