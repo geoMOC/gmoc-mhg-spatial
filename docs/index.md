@@ -61,7 +61,4 @@ Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie 
 
 ## Team
 
-{% for author in site.data.authors %} 
-  {% include author-profile.html %}
- <br /> 
-{% endfor %}
+{% include author-profile.html %}
