@@ -58,3 +58,10 @@ Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie 
 ## Kurs- und Tutoriumszeiten
 **Kurszeiten**: Dienstags abends 18:15-19:45 Uhr, jeweils am 28.04., 5.6.,12.06., 19.06. und 26.06
 
+
+## Team
+
+{% for author in site.data.authors %} 
+  {% include author-profile.html %}
+ <br /> 
+{% endfor %}

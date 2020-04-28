@@ -1,0 +1,11 @@
+# /_data/authors.yml
+- reudenbach:
+  name             : "Chris Reudenbach"
+  avatar           : "/assets/images/reudenbach.jpg"
+  email            : "reudenbach@geo.uni-marburg.de"
+  home             : "https://www.uni-marburg.de/de/fb19/fachbereich/staff/dr-christoph-reudenbauch"
+- brenner:
+  name             : "Thomas Brenner"
+  avatar           : "/assets/images/brenner.jpg"
+  email            : "brenner@geo.uni-marburg.de"
+  home             : "https://www.uni-marburg.de/de/fb19/fachbereich/staff/prof-dr-dr-thomas-brenner"
