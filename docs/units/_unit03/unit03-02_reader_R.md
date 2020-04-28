@@ -47,7 +47,7 @@ print(my_vector_4)
 ```
 Die  `print` Funktion kann weggelassen und nur der Variable Name eingegeben werden.
 
-## Length of a vector
+## Länge eines Vektors
 Um die Länge eines Vektors also die Anzahl seiner Elemente zu erhalten dient die  `length` Funktion:
 
 ```r
@@ -118,5 +118,6 @@ my_deleted_vector
 ## [1]  1  2 30  5  6  7  8  9 10
 ```
 
-Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden: [Daten Typen](http://www.statmethods.net/input/datatypes.html){:target="_blank"} site at Quick R. There you will also find an overview on how to get [Objekte](http://www.statmethods.net/input/contents.html){:target="_blank"}. 
-Of course, looking into the package documentation or search the web is always a good idea, too.
+Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden: [Daten Typen](http://www.statmethods.net/input/datatypes.html){:target="_blank"}.
+
+Natürlich ist es auch immer eine gute Idee, in die Paketdokumentation zu schauen oder im Internet zu suchen.

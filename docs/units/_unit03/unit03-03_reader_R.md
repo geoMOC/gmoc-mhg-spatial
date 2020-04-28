@@ -7,7 +7,7 @@ toc_label: In this example
 
 Sogenannte Listen sind die wohl flexibleste Daten Struktur in R.
 
-## Creation of a list
+## Erzeugen einer Liste
 Eine Liste wird mit der `list` Funktion erzeugt. 
 
 ```r
@@ -65,7 +65,7 @@ my_list_4
 ```
 
 
-## Structure of a list
+## Struktur einer Liste
 Um die Länge einer Liste also die Anzahl seiner Elemente zu erhalten dient die  `length` Funktion:
 
 ```r
@@ -106,7 +106,7 @@ str(my_list_4)
 ##  $ : num [1:5] 1 2 3 4 5
 ##  $ : chr [1:3] "A" "B" "C"
 ```
-## Displaying and accessing the content of a list
+## Anzeigen und Zugreifen auf den Inhalt einer Liste
 Um auf Elemente einer Liste zugreifen zu können, müssen Sie die Position des 
 Elements in der Liste innerhalb **doppelter** eckiger Klammern (nicht in einfachen Klammern 
 wie es bei Vektoren der Fall ist) addressieren. 
@@ -136,10 +136,9 @@ my_list_3[[2]][[1]][1]
 ```
 ## [1] 2.5
 ```
-## Changing, adding or deleting an element of a list
-To add an element, you have to add a new vector to the list at a specified 
-position. To overwrite an element of a list, you have to get it using the logic
-of accessing the value(s) of a list presented above:
+## Ändern Hinzufügen oder Löschen eines Listenelements
+Um ein Element hinzuzufügen, müssen Sie der Liste einen neuen Vektor an eine definierte 
+Position schreiben. Um ein Element einer Liste zu überschreiben, müssen Sie es mit der obigen Zugriffslogik  auf den/die Wert(e) setzen:
 
 ```r
 # add an element to a list
@@ -178,7 +177,7 @@ my_list
 ## [[2]]
 ## [1] "G" "H"
 ```
-To actually delete an element, it has to be set to `NULL`.
+Um ein Element tatsächlich zu löschen, muss es auf `NULL` gesetzt werden.
 
 ```r
 my_list[[2]] <- NULL
@@ -190,5 +189,6 @@ my_list
 ## [1] 1 2 3 4 5
 ```
 Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden: [data type](http://www.statmethods.net/input/datatypes.html){:target="_blank"} 
-site at Quick R. There you will also find an overview of how to get [information about an object](http://www.statmethods.net/input/contents.html){:target="_blank"}. 
-Of course, looking into the package documentation or search the web is always a good idea, too.
+Dort finden Sie auch [Information über Objekte](http://www.statmethods.net/input/contents.html){:target="_blank"}. 
+
+Natürlich ist es auch immer eine gute Idee, in die Paketdokumentation zu schauen oder im Internet zu suchen.

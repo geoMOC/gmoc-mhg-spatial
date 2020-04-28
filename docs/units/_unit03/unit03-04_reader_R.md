@@ -1,15 +1,14 @@
 ---
-title: "Example: Data Frame Basics"
+title: "Beispiel: Data Frame Basics"
 toc: true
 toc_label: In this example
 ---
 
 
-Data frames are one of the most heavily used data structures in R.
+Data frames sind aufgrund ihrer Tabellenstruktur die wohl am häufigsten verwendete Datenstruktur in R.
 
-## Creation of a data frame
-A data frame is created from scratch by supplying vectors to the `data.frame`
-function. Here are some examples:
+## Erzeugen eines data frames
+Ein data frame kann durch Verbinden von zwei vektoren mit Hilfe der Funktion  `data.frame` erzeugt werden:
 
 ```r
 x <- c(2.5, 3.5, 3.4)
@@ -38,14 +37,12 @@ my_other_df
 ## 2 3 B
 ## 3 4 C
 ```
-The `colnames` function allows to supply column names to an existing data
-frame. Alternatively, the column names can be set within the `data.frame` 
-function by assign the vector elements to a variable (capital X and Y in the example above).
+Die `colnames` Funktion erlaubr es  Spaltennamen für existierende Spaltenköpfe zu vergeben. Alternativ können Spaltennamen auch durch ansprechen der Position in der Dataframe Matrix angesprochen werden.(Die Groß0buchstaben X and Y in obigem Beispiel).
 
 
-## Dimensions of a data frame
-To get the dimensions of a data frame, use the `ncol` (number of columns), 
-`nrow` (number of rows) or `str` (structure) function:
+## Dimensionen eines  data frames
+Die Dimensionen  eines data frames werden mit der `ncol` (number of columns), 
+`nrow` (number of rows) oder  `str` (structure) Funktion abgefragt:
 
 ```r
 ncol(my_other_df)
@@ -74,11 +71,11 @@ str(my_other_df)
 ```
 
 
-## Displaying and accessing the content of a data frame
+## Darstellung und Abfragen der Inhalte eines data frames
 
-The content of a data frame is accessed by either a position information 
-given in square brackets (e.g. `df[3,4]`) or a column name given after a $ sign
-(e.g. `df$columnName`). Here is an example:
+Auf den Inhalt eines Datenrahmens wird entweder über eine Positionsinformation 
+in eckigen Klammern angegeben (z.B. `df[3,4]`) oder ein Spaltenname nach einem $-Zeichen
+(z.B. `df$Spaltenname`):
 
 
 
@@ -110,29 +107,11 @@ my_other_df$Y  # Shows second column
 ## Levels: A B C
 ```
 
-If position information is used, the ordering matters. If you think of a data
-frame like a table, then the following applies:
 
- * In a 1-D data frame, the first dimension is the row
- * In a 2-D data frame, the first dimension is the row, the second the column
-
-Higher dimensions follow the same logic.
-
-Here are some possible combinations:
-
- * Single row, all columns: `df[x,]`                <!--with $x \in \text{number of rows}$ IMPLEMENT LATEX MATH TO JEKYLL -->
- * Single column, all rows: `df[,y]`                <!--with $x \in \text{number of columns}$ -->
- * Single row and column: `df[x,y]`                 <!--with $x, y \in \text{number of rows, columns}$ -->
- * All except one row, all columns: `df[-x,y]`      <!--with $x \in \text{number of rows}$ -->
- * Selected rows, all columns: `df[c(x1, x2, x3),]` <!--with $x1, x2, x3 \in \text{number of rows}$ -->
- * Continous rows, all columns: `df[c(x1:x2),]`     <!--with $x1, x2 \in \text{number of rows}$ -->
-
-In summary, dimensions like rows or columns which should be selected have positive 
-numbers, dimensions that should be hidden have negative numbers, and if all entries of
-a dimension should be selected one just leaves the field empty. If more than
-one dimension should be shown or hidden, one has to supply these information with a 
-vector defined by the `c` function.
-
+Zusammenfassend lässt sich sagen, dass Dimensionen wie Zeilen oder Spalten, die ausgewählt werden sollten behandelt werden. Dabei sind negative Zahlen, Dimensionen, die ausgeblendet werden sollen und positive Zahlen Dimensionen die angezeigt werden sollen. Falls alle Einträge von
+einer Dimension ausgewählt werden sollen, lässt man das Feld einfach leer. Wenn mehr als
+eine Dimension ein- oder ausgeblendet werden soll, muss man diese Informationen mit einem 
+Vektor, der durch die `c`-Funktion definiert ist ansprechen.
 
 ```r
 my_other_df[c(1,3),]  # Shows rows 1 and 3
@@ -154,9 +133,9 @@ my_other_df[c(1,2),]  # Shows rows 1 to 2
 ## 2 3 B
 ```
 
-If you are interested in the first or last rows, you can also use the `head` or
-`tail` functions. The default number of lines to be displayed is five but this can be changed with the
-second argument. Let us have a look at the first two rows:
+Wenn Sie an der ersten oder letzten Zeile interessiert sind, können Sie auch den `head` oder
+`tail` Funktionen arbeiten. Die Standardanzahl der anzuzeigenden Zeilen ist fünf, aber dies kann mit dem zweiten Argument angepasst werden:
+
 
 ```r
 head(my_other_df, 2)
@@ -168,7 +147,7 @@ head(my_other_df, 2)
 ## 2 3 B
 ```
 
-And now on the last two rows:
+Die letzten beiden Zeilen:
 
 ```r
 tail(my_other_df, 2)
@@ -181,12 +160,9 @@ tail(my_other_df, 2)
 ```
 
 ## Changing, adding or deleting an element of a data frame
-In order to change an element of a data frame (individual value or entire
-vectors like rows or columns), you have to access it following the logic above.
-To add or delete a column, you have to supply/remove a vector to the specified
-position.
-
-Other more specific changes will be covered later. 
+Um ein Element eines Datenrahmens zu ändern (einzelner Wert oder ganze
+Vektoren wie Zeilen oder Spalten), müssen Sie nach der obigen Logik darauf zugreifen.
+Um eine Spalte hinzuzufügen oder zu löschen, müssen Sie einen Vektor an die angegebene Adresse eintragen/entfernen.
 
 ```r
 # overwrite an element
@@ -239,6 +215,8 @@ my_other_df
 ## 2 300 B
 ## 3 401 C
 ```
-As for lists, to actually delete an element, it has to be set to `NULL`.
+Wie bei den Listen, so muss ein Element, um tatsächlich gelöscht zu werden, auf `NULL` gesetzt werden.
+Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden: [data type](http://www.statmethods.net/input/datatypes.html){:target="_blank"} 
+Dort finden Sie auch [Information über Objekte](http://www.statmethods.net/input/contents.html){:target="_blank"}. 
 
-For more information have a look at e.g. the respective [data type](http://www.statmethods.net/input/datatypes.html){:target="_blank"} site at Quick R. There you will also find an overview on how to get [information about an object](http://www.statmethods.net/input/contents.html){:target="_blank"}. Of course, looking into the package documentation or search the web is always a good idea, too.
+Natürlich ist es auch immer eine gute Idee, in die Paketdokumentation zu schauen oder im Internet zu suchen.
