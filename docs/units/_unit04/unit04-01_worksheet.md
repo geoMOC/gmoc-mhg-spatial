@@ -21,7 +21,7 @@ Die Lernziele der ersten Übung sind:
 ## Einstieg in räumliche Daten
 
 
-```
+```r
 # 0 --- Arbeitsablauf
 # Das nachfolgende Script berbindet die Daten der Datei Kreise2010.csv mit 
 # von von Eurostat zur Verfügung gestellten NUTS3 Geometriedaten (Vektordaten der Kreise)
