@@ -18,6 +18,11 @@ Nach allgemeiner Auffassung ist die Karte ein orientiertes, verkleinertes, vereb
 
 Um diesen Zusammenhang an einem Beispiel zu verdeutlichen, betrachten Sie bitte die berühmte “Cosmographie” des Ptolemäus (Abb. 01-01, erstmalig gedruckt um 1410 in Italien, hier die Ulmer “Druckausgabe” von Lienhart 1482).
 
+<html>
+<a href="http://upload.wikimedia.org/wikipedia/commons/b/b9/Johannes_Schnitzer_Weltkarte.jpg" title="Abbildung 01-01: Die Weltkarte des Johannes Schnitzler"><img src="http://upload.wikimedia.org/wikipedia/commons/b/b9/Johannes_Schnitzer_Weltkarte.jpg" width="100%" alt="Abbildung 01-01: Die Weltkarte des Johannes Schnitzler"></a>
+</html>
+
+
 {{  http://upload.wikimedia.org/wikipedia/commons/b/b9/Johannes_Schnitzer_Weltkarte.jpg  }}
 
 //Abbildung 01-01: Weltkarte des Ptolemäus. Die hier gezeigte Weltkarte ist mit den zwölf Winden illustriert und eine der 32 Karten aus der „Cosmographia“ die von Lienhart Holle aus Ulm am 6. Juli 1482 herausgegeben wurde. Dies war die erste gedruckte Kartenausgabe nördlich der Alpen (Lienhart 1482)

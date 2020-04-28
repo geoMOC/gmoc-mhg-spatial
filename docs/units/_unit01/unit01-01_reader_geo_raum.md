@@ -14,7 +14,7 @@ Fragestellungen, die räumliche Aspekte beinhalten, werden oft geographische Fra
 
 *  Die Planung der räumlichen Verteilung von Infrastruktur ist ein geographisches Problem, das viele Interessen im Raum aufeinander abstimmen muss. *Wo errichte ich für eine Region (eine gewisse Anzahl von Menschen) eine Klinik (Supermarkt, Schwimmbad…)?*
 
-*     In der Analyse oder Vorhersage von ökonomischen oder oder soziodemographischen Zusammenhängen werden geographische Fragen bearbeitet. *Welche sozioökonomischen Parameter sind räumlich geclustered? Gibt es einen räumlichen oder zeitlichen Zusammenhang zwischen Strukturschwäche und ungünstiger ökonomischer Entwicklung?*
+* In der Analyse oder Vorhersage von ökonomischen oder oder soziodemographischen Zusammenhängen werden geographische Fragen bearbeitet. *Welche sozioökonomischen Parameter sind räumlich geclustered? Gibt es einen räumlichen oder zeitlichen Zusammenhang zwischen Strukturschwäche und ungünstiger ökonomischer Entwicklung?*
 
 
 *  In der Organisation und Planung von Logistik geht es um geographische Problemlösungen.// Auf welchem Weg erreiche ich als Auslieferungsfahrer am effizientesten meine Kunden?//
