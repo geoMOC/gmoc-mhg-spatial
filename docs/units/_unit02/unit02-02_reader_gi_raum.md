@@ -5,7 +5,7 @@ toc_label: In this worksheet
 ---
 ## Raum im GIS
 
-Wir haben bislang ständig und ohne besondere Vorüberlegungen mit den Begriffen Raum und Zeit gearbeitet. Um die bereits im Abschnitt [Objekte im Raum]({{ site.baseurl }}{% link _unit01/unit01-03_reader_gi.md %}) vorgestellten Raumkonzepte (diskrete Geoobjekte, kontinuierliche Räume) in GI-Systemen und letztlich auch insgesamt wissenschaftlich nutzbar zu machen, müssen wir diese Begriffe konkreter fassen.
+Wir haben bislang ständig und ohne besondere Vorüberlegungen mit den Begriffen Raum und Zeit gearbeitet. Um die bereits im Abschnitt [Objekte im Raum]({{ site.baseurl }}{% link _unit01/unit01-03_reader_geo_raum.md %}) vorgestellten Raumkonzepte (diskrete Geoobjekte, kontinuierliche Räume) in GI-Systemen und letztlich auch insgesamt wissenschaftlich nutzbar zu machen, müssen wir diese Begriffe konkreter fassen.
 
 Der Raum in GI-Systemen wird in Anlehnung an die Mathematik und Physik als dreidimensionaler euklidischer Raum verstanden. Aus dem Mathematikunterricht kennen wir die euklidische Ebene (mit 2 Dimensionen) und den euklidischen Raum (mit 3 Dimensionen). Am einfachsten kann der euklidische Raum mit Hilfe eines kartesischen Koordinatensystems beschrieben werden, in dem die Koordinaten entlang senkrecht aufeinander stehender Achsen abgetragen sind (vgl. Abb. 02-1)
 

@@ -5,9 +5,9 @@ toc_label: In this worksheet
 ---
 
 
-Wir haben im Reader 01 festgestellt, dass diskrete Geoobjekte sowie multidimensionale Merkmalsausprägungen von Raumkontinua mit Hilfe von Koordinaten verortet und als [Geographische Daten]({{ site.baseurl }}{% link _unit01/unit01-04_reader_gi.md %}) in Computern gespeichert werden können. Solche binären Geodaten stellen folglich die geographische Repräsentation von Wirklichkeit in GI-Systemen dar.
+Wir haben im Reader 01 festgestellt, dass diskrete Geoobjekte sowie multidimensionale Merkmalsausprägungen von Raumkontinua mit Hilfe von Koordinaten verortet und als [Geographische Daten]({{ site.baseurl }}{% link _unit01/unit01-04_reader_geo_raum.md %}) in Computern gespeichert werden können. Solche binären Geodaten stellen folglich die geographische Repräsentation von Wirklichkeit in GI-Systemen dar.
 
-Die Grundlage für die Informationsreduktion bilden sogenannte Datenmodelle. Ein Datenmodell wird durch die Abstraktion von einzelnen Objekten (Entitäten) und deren Eigenschaften (Attribute) gebildet. In diesem Vorgang werden gleiche Objektarten (z. B. Flüsse, Bundesstraßen, städtische Gebiete) zusammengefasst. Da die Grundlage aller GI-Systeme auf einer räumlichen Repräsentationen beruht, muss die schon bekannte  [Geographische Abstraktion]({{ site.baseurl }}{% link _unit01/unit01-02_reader_gi.md %}) für ein besseres Verständnis der Datenmodellierung etwas reorganisiert und angepasst werden.
+Die Grundlage für die Informationsreduktion bilden sogenannte Datenmodelle. Ein Datenmodell wird durch die Abstraktion von einzelnen Objekten (Entitäten) und deren Eigenschaften (Attribute) gebildet. In diesem Vorgang werden gleiche Objektarten (z. B. Flüsse, Bundesstraßen, städtische Gebiete) zusammengefasst. Da die Grundlage aller GI-Systeme auf einer räumlichen Repräsentationen beruht, muss die schon bekannte  [Geographische Abstraktion]({{ site.baseurl }}{% link _unit01/unit01-02_reader_geo_raum.md %}) für ein besseres Verständnis der Datenmodellierung etwas reorganisiert und angepasst werden.
 
 <html><a href="https://www.flickr.com/photos/environmentalinformatics-marburg/13950604266" title="02-7 by Environmental Informatics Marburg, on Flickr"><img src="https://farm6.staticflickr.com/5471/13950604266_962c830058.jpg" width="500" height="290" alt="02-7"></a></html>
 
