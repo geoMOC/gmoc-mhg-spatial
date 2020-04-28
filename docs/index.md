@@ -36,7 +36,7 @@ Am Ende dieses Teilmoduls können Sie
 ## Kursmerkmale
 Der Kurs ist primär für Studierende in Präsenzveranstaltung gedacht, eignet sich in gewissem Maße aber auch zum Selbststudium.
 
-Information aufgrund der **Coronavirus-Pandemie**: Aus Gründen des Infektionsschutzes sind Präsenzveranstaltung derzeit nicht möglich. Der Kurs findet deshalb digital statt. Studierende, die den Kurs im Sommersemester 2020 besuchen, finden alle notwendigen Informationen im Bereich [How-to Digital Learning]({{ site.baseurl }}{% link _unit0/unit0-01_overview.md %}) auf dieser Webseiten oder im geschlossenen [Kursbereich der Ilias-Lernplattform](https://ilias.uni-marburg.de/ilias.php?ref_id=1884284&cmd=frameset&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilRepositoryGUI).
+Information aufgrund der **Coronavirus-Pandemie**: Aus Gründen des Infektionsschutzes sind Präsenzveranstaltung derzeit nicht möglich. Der Kurs findet deshalb digital statt. 
 {: .notice--info}
 
 
