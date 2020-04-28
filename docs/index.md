@@ -45,6 +45,7 @@ Information aufgrund der **Coronavirus-Pandemie**: Aus Gründen des Infektionssc
 In jedem der drei Blöcke des Kurses ist ein individuelles Projekt durchzuführen und ein entsprechender Projektbericht zu verfassen. Der Umfang des Berichtes soll je 2-3 Seiten betragen. Genauere Angaben zu den Projekten erfolgen in den jeweiligen Blöcken. Jeder Bericht wird bewertet und die Note im Kurs ergibt sich als Durchschnitt aus den drei Bewertungen. Die Prüfungsleistung ist individuell zu erbringen.
 
 
+
 ## Ablauf
 
 Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie im [Kursbereich der Ilias-Lernplattform Sitzung 1](https://ilias.uni-marburg.de/ilias.php?ref_id=1900529&cmd=infoScreen&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilRepositoryGUI), in der Ablauf und zum Inhaltgeklärt werden sowie die erste inhaltliche Veranstaltung stattfindet. Dieser Online Kurs behandelt den ersten Block. 
