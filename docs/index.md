@@ -1,17 +1,17 @@
 ---
-title: Medienkompetenz Umweltinformatik
+title: Modellierung und Umweltsysteme
 layout: splash
 date: '2018-02-06 13:00:00 +0100'
 header:
   overlay_color: "#000"
   overlay_filter: 0.6
-  overlay_image: "/assets/images/title_1600_500.jpg"
-  caption: 'Photo: [**Environmental Informatics Marburg**](https://www.flickr.com/environmentalinformatics-marburg/)'
+  overlay_image: "/assets/images/spatial_data_title.jpg"
+  caption: 'Photo: [**NASA/Ames/JPL-Caltech**](https://photojournal.jpl.nasa.gov/jpeg/PIA17446.jpg)'
   cta_label: Zum Kursinhalt
   cta_url: "/units.html"
-excerpt: Fachliche Bedeutung von Medien verstehen und professionelle Handlungskompetenz zum Medieneinsatz erwerben.
+excerpt: Visualisierung und Vorhersage räumlicher Daten.
 feature_row_intro:
-- excerpt: Einführungskurs im [Bachelorstudiengang Geographie](https://www.uni-marburg.de/de/fb19/studium/studiengaenge/bsc_geographie){:target="_blank"} und im [Lehramtsstudium Erdkunde](https://www.uni-marburg.de/de/fb19/studium/studiengaenge/erdkunde-lehramt-gymnasium/herzlich-willkommen-beim-bachelor-geographie) an der Philipps Universität Marburg
+- excerpt: Einführungskurs im [Master Studiengang Wirtschaftsgeographie ](https://www.uni-marburg.de/de/fb19/studium/studiengaenge/m-sc-wirtschaftsgeographie/herzlich-willkommen-beim-master-wirtschaftsgeographie){:target="_blank"} an der Philipps Universität Marburg
 feature_row_ilos:
 - image_path: "/assets/images/envobs_ilos.jpg"
   alt: PC monitor laying in the garden of the institute.
@@ -58,10 +58,3 @@ Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie 
 ## Kurs- und Tutoriumszeiten
 **Kurszeiten**: Dienstags abends 18:15-19:45 Uhr, jeweils am 28.04., 5.6.,12.06., 19.06. und 26.06
 
-
-## Team
-
-{% for author in site.data.authors %} 
-  {% include author-profile.html %}
- <br /> 
-{% endfor %}
