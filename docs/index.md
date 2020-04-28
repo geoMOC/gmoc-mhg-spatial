@@ -19,6 +19,7 @@ feature_row_ilos:
   excerpt: "Template..."
 ---
 
+{% include feature_row id="feature_row_intro" type="center" %}
 
 
 
