@@ -37,7 +37,7 @@ Am Ende dieses Teilmoduls können Sie
 Der Kurs ist primär für Studierende in Präsenzveranstaltung gedacht, eignet sich in gewissem Maße aber auch zum Selbststudium.
 
 Information aufgrund der **Coronavirus-Pandemie**: Aus Gründen des Infektionsschutzes sind Präsenzveranstaltung derzeit nicht möglich. Der Kurs findet deshalb digital statt. 
-{: .notice--info}
+
 
 
 ## Studien- und Prüfungsleistung
