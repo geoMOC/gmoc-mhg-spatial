@@ -60,7 +60,10 @@ invisible(lapply(libs, library, character.only = TRUE))
 # 2---  Herunterladenund Einlesen der Daten
 
 # Aus dem Statistikkurs lesen wir die Kreisdaten ein
-Kreise <- read.table ("Kreisdaten2010.csv",header=T,sep=';')
+# Sie sind aus Bequemlichkeitsgründen auf github verfügbar
+
+download.file(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/Kreisdaten2010.csv",     destfile = "Kreisdaten2010.csv")
+
 
 # von eurostat holen wir die Geometriedaten (also die GI Daten für die NUTS3 Kreise)
 download.file(url = "https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/nuts/download/ref-nuts-2016-01m.geojson.zip",
