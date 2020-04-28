@@ -1,17 +1,17 @@
 ---
-title: Modellierung und Umweltsysteme
+title: Medienkompetenz Umweltinformatik
 layout: splash
 date: '2018-02-06 13:00:00 +0100'
 header:
   overlay_color: "#000"
   overlay_filter: 0.6
-  overlay_image: "/assets/images/spatial_data_title.jpg"
-  caption: 'Photo: [**NASA/Ames/JPL-Caltech**](https://photojournal.jpl.nasa.gov/jpeg/PIA17446.jpg)'
+  overlay_image: "/assets/images/title_1600_500.jpg"
+  caption: 'Photo: [**Environmental Informatics Marburg**](https://www.flickr.com/environmentalinformatics-marburg/)'
   cta_label: Zum Kursinhalt
   cta_url: "/units.html"
-excerpt: Visualisierung und Vorhersage räumlicher Daten.
+excerpt: Fachliche Bedeutung von Medien verstehen und professionelle Handlungskompetenz zum Medieneinsatz erwerben.
 feature_row_intro:
-- excerpt: Einführungskurs im [Master Studiengang Wirtschaftsgeographie ](https://www.uni-marburg.de/de/fb19/studium/studiengaenge/m-sc-wirtschaftsgeographie/herzlich-willkommen-beim-master-wirtschaftsgeographie){:target="_blank"} an der Philipps Universität Marburg
+- excerpt: Einführungskurs im [Bachelorstudiengang Geographie](https://www.uni-marburg.de/de/fb19/studium/studiengaenge/bsc_geographie){:target="_blank"} und im [Lehramtsstudium Erdkunde](https://www.uni-marburg.de/de/fb19/studium/studiengaenge/erdkunde-lehramt-gymnasium/herzlich-willkommen-beim-bachelor-geographie) an der Philipps Universität Marburg
 feature_row_ilos:
 - image_path: "/assets/images/envobs_ilos.jpg"
   alt: PC monitor laying in the garden of the institute.
@@ -48,7 +48,7 @@ In jedem der drei Blöcke des Kurses ist ein individuelles Projekt durchzuführe
 
 ## Ablauf
 
-Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie im [Kursbereich der Ilias-Lernplattform Sitzung 1](https://ilias.uni-marburg.de/ilias.php?ref_id=1900529&cmd=infoScreen&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilRepositoryGUI), in der Ablauf und zum Inhaltgeklärt werden sowie die erste inhaltliche Veranstaltung stattfindet. Dieser Online Kurs behandelt den ersten Block. 
+Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie im [Kursbereich der Ilias-Lernplattform](https://ilias.uni-marburg.de/ilias.php?ref_id=1900529&cmd=infoScreen&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilRepositoryGUI), in der Ablauf und zum Inhaltgeklärt werden sowie die erste inhaltliche Veranstaltung stattfindet. Dieser Online Kurs behandelt den ersten Block. 
 
  . Der Link wird je nach technischer Möglichkeit über Ilias bekanntgegeben. Zur Vorbereitung  der Sprechstunden wird in Ilias ein Forum eingerichtet in dem die Fragen bis jeweils Montag Abend 18:00 Uhr eingestellt werden müssen. Die Sprechstunde dient der Beantwortung aller Fragen, die zu den Vorlesungsaufzeichnungen und den gestellten Übungsaufgaben im Forum gestellt wurden. Sollte die Sprechstunde nicht stattfinden können wird es einen Screencast mit der Beantwortung der Fragen geben.
     • Die Projektaufgabe wird bis zum 12.05.2020 eingestellt.
