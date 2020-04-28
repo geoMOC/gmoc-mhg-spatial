@@ -1,0 +1,2 @@
+<a href="{{ site.baseurl }}/assets/scripts/{{ include.R }}" download="{{ include.R }}">Feel free to download this PDF to your computer.</a>
+</div>

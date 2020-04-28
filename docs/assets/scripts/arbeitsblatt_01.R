@@ -1,29 +1,3 @@
----
-title: Warmup - Datensäuberung und Visualisierung
-toc: true
-toc_label: In this worksheet
----
-
-
-
-## Lernziele
-
-Die Lernziele der ersten Übung sind:
-
----
-
-  * Installation von R Rstudio und den notwendigen Libraries
-  * Erste Schritte mit R
-  * Aufbereitung und Darstellung eines zusammengesetzten Datensatzes 
- 
----
-
-## Einstieg in räumliche Daten
-
-Datenanalyse und Datenvisualisierung ist in der Regel begleitet von einer umfangreichen Vorbereitung der Daten. Üblicherweise kann dies von Hand mit einem Editor oder automatisiert durch entsprechende Skripte Erfolgen. Insbesondere für die Reproduzierbarkeit und die einfache Anpassung weiterer Vorverarbeitungsschritte ist es oft sinnvoll sich mit einer automatischen Datenvorprozessierung zu beschäftigen. Dies kann oft sehr mühevoll sein. Ungeachtet der Herausforderungen die sich einem Anfänger entgegenstellen ist es der Mühe wert da nicht nur im wissenschaftlichen Sinne Reproduzierbarkeit des vollständigen Arbeitsablaufs höchste Priorität hat sondern die gesamte Analyse von den Rohdaten bis zu den Ergebnissen transparent nachvollziehbar bleibt. 
-
-
-```r
 # 0 --- Arbeitsablauf
 # Das nachfolgende Script berbindet die Daten der Datei Kreise2010.csv mit 
 # von von Eurostat zur Verfügung gestellten NUTS3 Geometriedaten (Vektordaten der Kreise)
@@ -51,9 +25,9 @@ setwd(rootDIR)
 # falls nicht wird es installiert 
 libs= c("sf","mapview","tmap","ggplot2","RColorBrewer","jsonlite","tidyverse")
 for (lib in libs){
-if(!lib %in% utils::installed.packages()){
-  utils::install.packages(lib)
-}}
+  if(!lib %in% utils::installed.packages()){
+    utils::install.packages(lib)
+  }}
 # nicht wundern lapply()ist eine integrierte for Schleife die alle im vector libs
 # enthaltenen packages lädt indem sie den package namen als character string an die 
 # function library übergibt
@@ -109,11 +83,11 @@ lau_nuts3 = lau_nuts3[!duplicated(lau_nuts3[,"LAU CODE"]),]
 
 # nun gilt es die beiden bereinigten Tabellen nach diesen beeiden Spalten zusammen zu führen
 lookup_merge_kreise = merge(Kreise,  lau_nuts3,
-           by.x = "Kreis", by.y = "LAU CODE")
+                            by.x = "Kreis", by.y = "LAU CODE")
 
 # und zuletzt wird diese Tabelle an die Geometrie angehengen
 nuts3_kreise = merge(nuts3_de,lookup_merge_kreise,
-            by.x = "NUTS_ID", by.y = "NUTS 3 CODE")
+                     by.x = "NUTS_ID", by.y = "NUTS 3 CODE")
 
 # Projektion in die die amtliche deutsche Projection ETRS89 URM32
 nuts3_kreise = st_transform(nuts3_kreise, "+init=EPSG:25832")
@@ -128,16 +102,3 @@ mapview(nuts3_kreise,zcol="Anteil.Baugewerbe",breaks=seq(0,0.2, by=0.025))+mapvi
 # map it with tmap
 tm_shape(nuts3_kreise, projection = 25832) + 
   tm_polygons(c("Anteil.Baugewerbe","Anteil.Hochschulabschluss"),    breaks=seq(0,0.2, by=0.025))
-
-
-```
-
-Das Skript kann unter [arbeitsblatt_01]({{ site.baseurl }}/assets/scripts/arbeitsblatt_01.R){:target="_blank"} heruntergeladen werden
-
-## Bearbeiten Sie…
-Versuchen Sie `Rstusio `R`, `Rstudio` und die notwendigen Pakete zu installieren. Bei Fragen nutzen Sie bitte das Forum. 
-
-* Das Skript schrittweise ablaufen zu lassen [Rstudio Hilfe Ausführen von Code](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-and-Executing-Code)
-* nutzen Sie Rstudio um die Variableninhalte zu betrachten [Data Viewer](https://support.rstudio.com/hc/en-us/articles/205175388-Using-the-Data-Viewer)
-* Versuchen Sie sich mit der Datenvisualisierung Vertraut zu machen. Hierzu können Sie die Vignetten von `tmap` und `mapview` nutzen. [tmap](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html), [mapview](https://r-spatial.github.io/mapview/articles/articles/mapview_01-basics.html)
-

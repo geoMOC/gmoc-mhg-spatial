@@ -134,7 +134,7 @@ defaults:
       path: ""
       type: unit0
     values:
-      category: "Rahmenbedingungen"
+      category: "Formales"
       tags: "Unit|0"
       layout: single
       sidebar:
@@ -158,7 +158,7 @@ defaults:
       path: ""
       type: unit02
     values:
-      category: "reader GI Raumkonzepte"
+      category: "Reader GI Raumkonzepte"
       tags: "Unit|02"
       layout: single
       sidebar:
@@ -168,7 +168,7 @@ defaults:
       path: ""
       type: unit03
     values:
-      category: " Reader Einführung in R"
+      category: " Reader Intro in R"
       tags: "Unit|03"
       layout: single
       sidebar:
@@ -178,7 +178,7 @@ defaults:
       path: ""
       type: unit04
     values:
-      category: "Arbeitsblätter "
+      category: "Arbeitsblätter"
       tags: "Unit|04"
       layout: single
       sidebar:
