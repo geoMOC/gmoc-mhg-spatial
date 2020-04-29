@@ -20,7 +20,7 @@ Die Lernziele der ersten Übung sind:
  
 ---
 
-
+Im nachfolgenden Skript werden einigige wichtige Techniken der R-Programmiersprache benutzt. Einige kennen Sie bereits andere sind im Reader R-Intro erklärt. Vor allem die beiden "Arbeitspferde" für Wiederholungen `for` und Bedingungen `if` werden eingeführt. Bitte schauen sie für die grundsätzliche Funktionsweise in den Reader.
 
 
 ```r
