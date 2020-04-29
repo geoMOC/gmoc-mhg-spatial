@@ -58,9 +58,6 @@ Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie 
 ## Syllabus
 
 
-# Syllabus
-
-
 | Sitzung | Datum | Thema | Inhalt |
 |---|---|---|
 || **Block 1**   ||
