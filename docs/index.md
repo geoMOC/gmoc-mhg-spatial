@@ -51,9 +51,10 @@ In jedem der drei Blöcke des Kurses ist ein individuelles Projekt durchzuführe
 
 Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie im [Kursbereich der Ilias-Lernplattform](https://ilias.uni-marburg.de/ilias.php?ref_id=1900529&cmd=infoScreen&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilRepositoryGUI), in der Ablauf und zum Inhaltgeklärt werden sowie die erste inhaltliche Veranstaltung stattfindet. Dieser Online Kurs behandelt den ersten Block. 
 
- . Der Link wird je nach technischer Möglichkeit über Ilias bekanntgegeben. Zur Vorbereitung  der Sprechstunden wird in Ilias ein Forum eingerichtet in dem die Fragen bis jeweils Montag Abend 18:00 Uhr eingestellt werden müssen. Die Sprechstunde dient der Beantwortung aller Fragen, die zu den Vorlesungsaufzeichnungen und den gestellten Übungsaufgaben im Forum gestellt wurden. Sollte die Sprechstunde nicht stattfinden können wird es einen Screencast mit der Beantwortung der Fragen geben.
-    • Die Projektaufgabe wird bis zum 12.05.2020 eingestellt.
-    • 30.06.2020 (04 Uhr): Abgabe des Projektes
+* Der Link wird je nach technischer Möglichkeit über Ilias bekanntgegeben. Zur Vorbereitung  der Präsenzzeiten wird in Ilias ein Forum eingerichtet in dem die Fragen, die Berücksichtigung finden sollen, bis jeweils Montag Abend 18:00 Uhr eingestellt werden sollten. 
+* Die Präsenzzeit dient der Beantwortung der Fragen, die zu den Vorlesungsinput den Readern und  den gestellten Übungsaufgaben im Forum gestellt wurden. Sollte die Präsenzveranstaltung technisch nicht stattfinden können wird ein Screencast mit der Beantwortung der Fragen und neuem Input online gestellt
+* Die Rahmenbdingungen für die Projektaufgabe wird bis zum 19.05.2020 eingestellt
+* Abgabe des Projektes: 30.06.2020 (04 Uhr)
 
 ## Kurszeiten und Inhalte
 
