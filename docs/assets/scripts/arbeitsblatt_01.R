@@ -14,6 +14,8 @@
 rm(list=ls())
 ## festlegen des Arbeitsverzeichnisses
 # rootDIR enthält nur den Dateipfad
+# die Tilde ~ steht dabei für das Nutzere-Home-Directory unter Windows 
+# üblicherweise Nutzer/Dokumente
 # mit setwd() wird das working directory festgelegt
 rootDIR="~/Schreibtisch/spatialstatSoSe2020/"
 setwd(rootDIR)
@@ -28,7 +30,7 @@ for (lib in libs){
   if(!lib %in% utils::installed.packages()){
     utils::install.packages(lib)
   }}
-# nicht wundern lapply()ist eine integrierte for Schleife die alle im vector libs
+# nicht wundern lapply()ist eine integrierte for-Schleife die alle im vector libs
 # enthaltenen packages lädt indem sie den package namen als character string an die 
 # function library übergibt
 invisible(lapply(libs, library, character.only = TRUE))
@@ -52,7 +54,7 @@ nuts3 = st_read("NUTS_RG_01M_2016_3857_LEVL_3.geojson")
 
 # Um nur Deutschland Kreise zu erhalten filtern wir sie 
 # auf den Wert "DE" in der Spalte CNTR_CODE
-# Achtung wir überschreiben die alte Variable mit den gefilterten Inhalten 
+# Achtung wir legen eine neue Variable für Deutschland an
 nuts3_de = nuts3[nuts3$CNTR_CODE=="DE",]
 
 # herunter laden der offiziellen Zuweisungstabellen für Lokale Verwaltungseinheiten (LAU) <-> NUTS3 Konversion

@@ -39,6 +39,8 @@ Die Lernziele der ersten Übung sind:
 rm(list=ls())
 ## festlegen des Arbeitsverzeichnisses
 # rootDIR enthält nur den Dateipfad
+# die Tilde ~ steht dabei für das Nutzer-Home-Verzeichnis unter Windows 
+# üblicherweise Nutzer/Dokumente
 # mit setwd() wird das working directory festgelegt
 rootDIR="~/Schreibtisch/spatialstatSoSe2020/"
 setwd(rootDIR)
@@ -77,7 +79,7 @@ nuts3 = st_read("NUTS_RG_01M_2016_3857_LEVL_3.geojson")
 
 # Um nur Deutschland Kreise zu erhalten filtern wir sie 
 # auf den Wert "DE" in der Spalte CNTR_CODE
-# Achtung wir überschreiben die alte Variable mit den gefilterten Inhalten 
+# Achtung wir legen eine neue Variable für Deutschland an
 nuts3_de = nuts3[nuts3$CNTR_CODE=="DE",]
 
 # herunter laden der offiziellen Zuweisungstabellen für Lokale Verwaltungseinheiten (LAU) <-> NUTS3 Konversion
