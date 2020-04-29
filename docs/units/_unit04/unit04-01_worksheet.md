@@ -4,7 +4,6 @@ toc: true
 toc_label: In this worksheet
 ---
 
-## Einstieg in räumliche Daten
 
 Datenanalyse und Datenvisualisierung ist in der Regel begleitet von einer umfangreichen Vorbereitung der Daten. Üblicherweise kann dies von Hand mit einem Editor oder automatisiert durch entsprechende Scripte erfolgen. <!--more-->Insbesondere für die Reproduzierbarkeit und die einfache Anpassung weiterer Vorverarbeitungsschritte ist es oft sinnvoll sich mit einer automatischen Datenvorprozessirrung zu beschäftigen. Dies kann oft sehr mühevoll sein. Ungeachtet der Herausforderungen die sich einem Anfänger entgegenstellen ist es der Mühe wert da nicht nur im wissenschaftlichen Sinne Reproduzierbarkeit des vollständigen Arbeitsablaufs höchste Priorität hat sondern die gesamte Analyse von den Rohdaten bis zu den Ergebnissen transparent nachvollziehbar bleibt. 
 
