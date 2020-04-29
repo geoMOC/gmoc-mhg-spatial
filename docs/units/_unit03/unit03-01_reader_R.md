@@ -5,7 +5,7 @@ toc_label: In this worksheet
 ---
 
 Um es klarzustellen: R ist die statistische Programmiersprache, die Sie in diesem Kurs verwenden werden (und die auch von vielen anderen Wissenschaftlern verwendet wird). 
-Mit R können Sie jenseits der Ihnen bereits bekannten statistischen Auswertugnen maßgeschneiderte Skripte und Funktionen schreiben, um Ihren Analyse-Workflow zu implementieren. R kann weitestgehend die traditionellen GI Softwarepakete ersetzten.
+Mit R können Sie jenseits der Ihnen bereits bekannten statistischen Auswertugnen maßgeschneiderte Skripte und Funktionen schreiben, um Ihren Analyse-Workflow zu implementieren. R kann weitestgehend die traditionellen GI Softwarepakete ersetzten.<!--more-->
 
 RStudio ist eine integrierte Entwicklungsumgebung (IDE) für R und andere Programmiersprachen, die Ihr Leben ein wenig komfortabler macht. Anstelle von RStudio können Sie natürlich weiterhin die die ihnen bekannte integrierte Entwicklungsumgebung verwenden oder auch jede Art von Texteditor verwenden, aber wir empfehlen RStudio vor allem für Anfänger (fortgeschrittene Programmierer wissen was ihnen gefällt).
 
