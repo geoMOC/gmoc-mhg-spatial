@@ -17,7 +17,7 @@ Fragestellungen, die räumliche Aspekte beinhalten, werden oft geographische Fra
 * In der Analyse oder Vorhersage von ökonomischen oder oder soziodemographischen Zusammenhängen werden geographische Fragen bearbeitet. *Welche sozioökonomischen Parameter sind räumlich geclustered? Gibt es einen räumlichen oder zeitlichen Zusammenhang zwischen Strukturschwäche und ungünstiger ökonomischer Entwicklung?*
 
 
-*  In der Organisation und Planung von Logistik geht es um geographische Problemlösungen.// Auf welchem Weg erreiche ich als Auslieferungsfahrer am effizientesten meine Kunden?//
+*  In der Organisation und Planung von Logistik geht es um geographische Problemlösungen.*Auf welchem Weg erreiche ich als Auslieferungsfahrer am effizientesten meine Kunden?*
 
 
 *  Das Management von Liegenschaften in der Verwaltung (Kataster), in der Landwirtschaft (precision farming) und in der Forstwirtschaft ist eng verknüpft mit vielfältigen geographischen Fragestellungen.

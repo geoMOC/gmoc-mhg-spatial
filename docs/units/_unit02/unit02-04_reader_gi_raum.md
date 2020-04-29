@@ -8,7 +8,7 @@ In der Praxis ist es offenkundig nahezu beliebig an welches Wort der Begriff „
 Das Vierkomponentenmodell eines GIS und seine funktionalen Komponenten. Quelle: Eigene Darstellung verändert nach (Bill 2008)
 
 <html>
- <a  href="https://www.flickr.com/photos/environmentalinformatics-marburg/13898597476" title="01-09-evap by Environmental Informatics Marburg, on Flickr"><img src="https://farm3.staticflickr.com/2914/13898597476_31f7b3b514_n.jpg" width="50%"  alt="01-09-evap"></a></a>
+ <a  href="https://www.flickr.com/photos/environmentalinformatics-marburg/13898597476" title="01-09-evap by Environmental Informatics Marburg, on Flickr"><img src="https://farm3.staticflickr.com/2914/13898597476_31f7b3b514_n.jpg" width="50%"  alt="01-09-evap"></a>
 </html>
 
 *Abbildung 01-09: Das Vierkomponentenmodell eines GIS und seine funktionalen Komponenten. Quelle: Eigene Darstellung verändert nach (Bill 2008)*
@@ -25,7 +25,7 @@ Darüber hinaus wandelt sich das Verständnis der einzelnen Definitionen mit ein
 Open Source-Konzeption der OSGEO4W Gruppe: GIS als Verbund von kommerziellen oder Open Source-Softwarepaketen (Neteler 2009)
 
 <html>
- <a  href="http://apps.p2g.in/images/osgeo_software_stack.png" title="osgeosoftware stack"><img src="http://apps.p2g.in/images/osgeo_software_stack.png" width="50%"  alt="osgeo softwarestack"></a></a>
+ <a  href="http://apps.p2g.in/images/osgeo_software_stack.png" title="osgeosoftware stack"><img src="http://apps.p2g.in/images/osgeo_software_stack.png" width="50%"  alt="osgeo softwarestack"></a>
 </html>
 
 
@@ -38,7 +38,7 @@ GIS-Software sind umfassende Softwarewerkzeuge, die sowohl kommerziell als auch 
 
 Projektorientierter Einsatz eines GI-Systems dargestellt als Workflow zur Abstraktion der Echtwelt. Quelle Eigener Entwurf nach (Bill 2008)
 <html>
- <a  ="https://www.flickr.com/photos/environmentalinformatics-marburg/13898619726" title="01-11-evap_flow by Environmental Informatics Marburg, on Flickr"><img src="https://farm4.staticflickr.com/3720/13898619726_c8e6cd3379.jpg" width="50%"  alt="01-11-evap_flow"></a></a>
+ <a  ="https://www.flickr.com/photos/environmentalinformatics-marburg/13898619726" title="01-11-evap_flow by Environmental Informatics Marburg, on Flickr"><img src="https://farm4.staticflickr.com/3720/13898619726_c8e6cd3379.jpg" width="50%"  alt="01-11-evap_flow"></a>
 </html>
 
 *Abbildung 01-11: Projektorientierter Einsatz eines GI-Systems dargestellt als Workflow zur Abstraktion der Echtwelt. Quelle Eigener Entwurf nach (Bill 2008)*
