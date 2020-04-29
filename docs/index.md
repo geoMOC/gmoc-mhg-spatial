@@ -55,22 +55,21 @@ Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie 
     • Die Projektaufgabe wird bis zum 12.05.2020 eingestellt.
     • 30.06.2020 (04 Uhr): Abgabe des Projektes
 
-## Syllabus
-
+## Kurszeiten und Inhalte
 
 | Sitzung | Datum | Thema | Inhalt |
-|---|---|---|
-|| **Block 1**   ||
+|:-------:|:--------:|:---------|:---------|
+| **Block 1** ||||
 | 1 | 28.05.  | Einführung | Einführung in geographische und GI Raumkonzepte, Einführung in `R` als Programmiersprache, Einstiegsbeispiel Verknüpfung von Tabellen mit Geometriedaten |
 | 2 | 05.05.  | Räumliche Datenvisualisierung, Karten und mehr | Die reproduzierbare Erstellung von Karten zur explorativen und interaktiven Nutzung sowie zur Darstellung von Ergebnissen |
 | 3 | 12.05.  | Räumliche Datenvorhersage und ihre Exploration | Überblick über wichtige Methoden zur räumlichen Vorhersage und ihre Darstellung |
 | 4 | 19.05.  | Maschinelles Lernen in der räumlichen Datenvorhersage - Teil 1 die Grundlagen  | Grundlagen des Maschinellen Lernens am Beispiel des random forest Algorithmus, räumliche Besonderheiten |
 | 5 | 26.05.  | Maschinelles Lernen in der räumlichen Datenvorhersage - Teil 2 das Projekt  | Projekt zu einer einfachen ML Anwendung inkl. Visualisierung und Kurzanalyse  |
 
-## Kurs- und Tutoriumszeiten
-**Kurszeiten**: Dienstags abends 18:15-19:45 Uhr, jeweils am 28.04., 05.05.,12.05., 19.05. und 26.05
 
 ## Team
+
+Block 1 wird von Chris Reudenbach durchgeführt während die Blöcke 2 und 3 von Thomas Brenner geleitet werden. 
 
 {% for author in site.data.authors %} 
   {% include author-profile.html %}
