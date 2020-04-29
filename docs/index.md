@@ -1,17 +1,17 @@
 ---
-title: Modellierung und Umweltsysteme
+title: Geoinformatik für Bachelor Basiskurs
 layout: splash
-date: '2018-02-06 13:00:00 +0100'
+date: '2020-06-04 13:00:00 +0100'
 header:
   overlay_color: "#000"
   overlay_filter: 0.6
-  overlay_image: "/assets/images/spatial_data_title.jpg"
-  caption: 'Photo: [**NASA/Ames/JPL-Caltech**](https://photojournal.jpl.nasa.gov/jpeg/PIA17446.jpg)'
+  overlay_image: "/assets/images/head-lahnclim-960x212.jpg"
+  caption: 'Photo: [**Reudenbach**]'
   cta_label: Zum Kursinhalt
   cta_url: "/units.html"
 excerpt: Visualisierung und Vorhersage räumlicher Daten.
 feature_row_intro:
-- excerpt: Einführungskurs im [Master Studiengang Wirtschaftsgeographie ](https://www.uni-marburg.de/de/fb19/studium/studiengaenge/m-sc-wirtschaftsgeographie/herzlich-willkommen-beim-master-wirtschaftsgeographie){:target="_blank"} an der Philipps Universität Marburg
+- excerpt: Einführungskurs im [Bachelor Studiengang Geographie ](https://www.uni-marburg.de/de/studium/studienangebot/bachelor/geographiebsc){:target="_blank"} an der Philipps Universität Marburg
 feature_row_ilos:
 - image_path: "/assets/images/envobs_ilos.jpg"
   alt: PC monitor laying in the garden of the institute.
@@ -24,7 +24,7 @@ feature_row_ilos:
 
 
 ## Allgemeines 
-Raum-zeitliche Daten und ihre Analyse sowie die raumzeitlich Vorhersage auf diese Daten sind wissenschaftliche Grundelemente der Geographie. Die Analysen bilden die Grundlage für den Erkenntnisgewinn in der Forschung und die resultierenden Medien sind die zentralen  Kommunikationsmittel. Daten und Datenanalyse sowie die Modellierung dieser Daten sind daher  fester Bestandteil des fachlichen Verstehens. Der basale Umgang mit Daten, Vorbereitung, visuelle Exploration, Analyse und Präsentation stellt eine wichtige Kernkompetenz für raumzeiltliche öknonomische und soziale Prozesse dar. 
+Raum-zeitliche Daten und ihre Manipulation, Analyse und Darstellung sind wissenschaftliche Grundelemente der Geographie. Die Analysen bilden die Grundlage für den Erkenntnisgewinn in der Forschung und die resultierenden Medien sind die zentralen  Kommunikationsmittel. Daten und Datenanalyse sowie die Modellierung dieser Daten sind daher  fester Bestandteil des fachlichen Verstehens. Der basale Umgang mit Daten, Vorbereitung, visuelle Exploration, Analyse und Präsentation stellt eine wichtige Kernkompetenz für das Berufsbild einer Geographin dar. 
 
 ## Lernziele
 Am Ende dieses Teilmoduls können Sie
@@ -43,13 +43,13 @@ Information aufgrund der **Coronavirus-Pandemie**: Aus Gründen des Infektionssc
 
 ## Studien- und Prüfungsleistung
 
-In jedem der drei Blöcke des Kurses ist ein individuelles Projekt durchzuführen und ein entsprechender Projektbericht zu verfassen. Der Umfang des Berichtes soll je 2-3 Seiten betragen. Genauere Angaben zu den Projekten erfolgen in den jeweiligen Blöcken. Jeder Bericht wird bewertet und die Note im Kurs ergibt sich als Durchschnitt aus den drei Bewertungen. Die Prüfungsleistung ist individuell zu erbringen.
+Es ist ein individuelles Projekt durchzuführen und ein entsprechender Projektbericht zu verfassen. Der Umfang des Berichtes soll je 2-3 Seiten betragen. Genauere Angaben zu den Projekten erfolgen im Kursverlauf. Die Prüfungsleistung ist individuell zu erbringen.
 
 
 
 ## Ablauf
 
-Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie im [Kursbereich der Ilias-Lernplattform](https://ilias.uni-marburg.de/ilias.php?ref_id=1900529&cmd=infoScreen&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilRepositoryGUI), in der Ablauf und zum Inhaltgeklärt werden sowie die erste inhaltliche Veranstaltung stattfindet. Dieser Online Kurs behandelt den ersten Block. 
+Am 04.06.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie im [Kursbereich der Ilias-Lernplattform](https://ilias.uni-marburg.de/ilias.php?ref_id=1899952&cmd=frameset&cmdClass=ilrepositorygui&cmdNode=ts&baseClass=ilrepositorygui). Die Online-Materialien sind die Grundlage für den Kurs Geoinformatik. 
 
 * Der Link wird je nach technischer Möglichkeit über Ilias bekanntgegeben. Zur Vorbereitung  der Präsenzzeiten wird in Ilias ein Forum eingerichtet in dem die Fragen, die Berücksichtigung finden sollen, bis jeweils Montag Abend 18:00 Uhr eingestellt werden sollten. 
 * Die Präsenzzeit dient der Beantwortung der Fragen, die zu den Vorlesungsinput den Readern und  den gestellten Übungsaufgaben im Forum gestellt wurden. Sollte die Präsenzveranstaltung technisch nicht stattfinden können wird ein Screencast mit der Beantwortung der Fragen und neuem Input online gestellt
@@ -61,16 +61,17 @@ Am 28.04.2020 findet die Online-Auftaktveranstaltung statt. Den Link finden Sie 
 | Sitzung | Datum | Thema | Inhalt |
 |:-------:|:--------:|:---------|:---------|
 | **Block 1** ||||
-| 1 | 28.05.  | Einführung | Einführung in geographische und GI Raumkonzepte, Einführung in `R` als Programmiersprache, Einstiegsbeispiel Verknüpfung von Tabellen mit Geometriedaten |
-| 2 | 05.05.  | Räumliche Datenvisualisierung, Karten und mehr | Die reproduzierbare Erstellung von Karten zur explorativen und interaktiven Nutzung sowie zur Darstellung von Ergebnissen |
-| 3 | 12.05.  | Räumliche Datenvorhersage und ihre Exploration | Überblick über wichtige Methoden zur räumlichen Vorhersage und ihre Darstellung |
-| 4 | 19.05.  | Maschinelles Lernen in der räumlichen Datenvorhersage - Teil 1 die Grundlagen  | Grundlagen des Maschinellen Lernens am Beispiel des random forest Algorithmus, räumliche Besonderheiten |
-| 5 | 26.05.  | Maschinelles Lernen in der räumlichen Datenvorhersage - Teil 2 das Projekt  | Projekt zu einer einfachen ML Anwendung inkl. Visualisierung und Kurzanalyse  |
+| 1 | 04.06.  | Einführung | Einführung in geographische und GI Raumkonzepte, Einführung in `Qgis Portable`, Einstiegsbeispiel Datenaquise |
+| 2 | 11.06.  |  |  |
+| 3 | 18.06.  |  |  |
+| 4 | 25.06.  |  |  |
+| 5 | 02.07.  |  |  |
+| 6 | 09.07.  |  |  |
+| 7 | 16.07.  |  |  |
 
 
-## Team
+## Kursleitung
 
-Block 1 wird von Chris Reudenbach durchgeführt während die Blöcke 2 und 3 von Thomas Brenner geleitet werden. 
 
 {% for author in site.data.authors %} 
   {% include author-profile.html %}
