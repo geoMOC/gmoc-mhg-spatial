@@ -20,22 +20,21 @@ Die Lernziele der ersten Übung sind:
 
 ## Einstieg in räumliche Daten
 
-Datenanalyse und Datenvisualisierung ist in der Regel begleitet von einer umfangreichen Vorbereitung der Daten. Üblicherweise kann dies von Hand mit einem Editor oder automatisiert durch entsprechende Skripte Erfolgen. Insbesondere für die Reproduzierbarkeit und die einfache Anpassung weiterer Vorverarbeitungsschritte ist es oft sinnvoll sich mit einer automatischen Datenvorprozessierung zu beschäftigen. Dies kann oft sehr mühevoll sein. Ungeachtet der Herausforderungen die sich einem Anfänger entgegenstellen ist es der Mühe wert da nicht nur im wissenschaftlichen Sinne Reproduzierbarkeit des vollständigen Arbeitsablaufs höchste Priorität hat sondern die gesamte Analyse von den Rohdaten bis zu den Ergebnissen transparent nachvollziehbar bleibt. 
+Datenanalyse und Datenvisualisierung ist in der Regel begleitet von einer umfangreichen Vorbereitung der Daten. Üblicherweise kann dies von Hand mit einem Editor oder automatisiert durch entsprechende Scripte Erfolgen. Insbesondere für die Reproduzierbarkeit und die einfache Anpassung weiterer Vorverarbeitungsschritte ist es oft sinnvoll sich mit einer automatischen Datenvorprozessirrung zu beschäftigen. Dies kann oft sehr mühevoll sein. Ungeachtet der Herausforderungen die sich einem Anfänger entgegenstellen ist es der Mühe wert da nicht nur im wissenschaftlichen Sinne Reproduzierbarkeit des vollständigen Arbeitsablaufs höchste Priorität hat sondern die gesamte Analyse von den Rohdaten bis zu den Ergebnissen transparent nachvollziehbar bleibt. 
 
 
 ```r
 # 0 --- Arbeitsablauf
-# Das nachfolgende Script berbindet die Daten der Datei Kreise2010.csv mit 
+# Das nachfolgende Script verbindet die Daten der Datei Kreise2010.csv mit 
 # von von Eurostat zur Verfügung gestellten NUTS3 Geometriedaten (Vektordaten der Kreise)
 # Um diese Verbinden zu können bedarf es in dem vorliegenden Fall einer weiteren Tabelle
 # Diese stellt die Verbindung zwischen denen in der Datei Kreise2010.csv verwendeten LAU Kodierung
 # und der NUTS3 Kodierung her.
 # Um diese Beiden Tabellen verbinden zu können müßen einige Manipulationen an den  Daten vorgenommen werden
-# Im Letzen Schritt wird die gesäuberte Datentablle über die NUTS3 Vodes an die Geometrie angehangen und mit 
-# mapview und tmap visulaisiert
+# Im letzten Schritt wird die gesäuberte Datentabelle über die NUTS3 Codes an die Geometrie an gehangen und mit 
+# mapview und tmap visualisiert
 
-# 1---  Vorbereitung der Arrbeitsumgebung
-
+# 1---  Vorbereitung der Arbeitsumgebung
 ## Säubern der Arbeitsumgebung
 rm(list=ls())
 ## festlegen des Arbeitsverzeichnisses
@@ -135,9 +134,9 @@ tm_shape(nuts3_kreise, projection = 25832) +
 Das Skript kann unter [arbeitsblatt_01]({{ site.baseurl }}/assets/scripts/arbeitsblatt_01.R){:target="_blank"} heruntergeladen werden
 
 ## Bearbeiten Sie…
-Versuchen Sie `Rstusio `R`, `Rstudio` und die notwendigen Pakete zu installieren. Bei Fragen nutzen Sie bitte das Forum. 
+Versuchen Sie  `R`, `Rstudio` und die notwendigen Pakete zu installieren. Bei Fragen nutzen Sie bitte das Forum. Falls erfolgreich Versuchen Sie bitte folgende Aufgaben zu bearbeiten:
 
-* Das Skript schrittweise ablaufen zu lassen [Rstudio Hilfe Ausführen von Code](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-and-Executing-Code)
+* das Skript schrittweise durchzugehen. Das geht sehr einfach mit Cursor in die Zeile und Alt+Enter näheres siehe unter [Rstudio Hilfe Ausführen von Code](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-and-Executing-Code) bzw. unter `Hilfe->Cheatsheets->Rstudio IDE cheatsheets`.
 * nutzen Sie Rstudio um die Variableninhalte zu betrachten [Data Viewer](https://support.rstudio.com/hc/en-us/articles/205175388-Using-the-Data-Viewer)
-* Versuchen Sie sich mit der Datenvisualisierung Vertraut zu machen. Hierzu können Sie die Vignetten von `tmap` und `mapview` nutzen. [tmap](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html), [mapview](https://r-spatial.github.io/mapview/articles/articles/mapview_01-basics.html)
+* Versuchen Sie sich mit der Datenvisualisierung vertraut zu machen. Hierzu können Sie die Vignetten von `tmap` und `mapview` nutzen. [tmap](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html), [mapview](https://r-spatial.github.io/mapview/articles/articles/mapview_01-basics.html)
 
