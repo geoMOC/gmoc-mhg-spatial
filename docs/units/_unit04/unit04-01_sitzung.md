@@ -1,5 +1,5 @@
 ---
-title: "Sitzung 1: - Datensäuberung und Visualisierung"
+title: "Sitzung 1: - Datentabellen und Geometrien"
 ---
 
 
