@@ -1,5 +1,5 @@
 ---
-title: "Best-Practice-Skripte "
+title: Best-Practice-Skripte
 toc: true
 toc_label: In diesem Arbeitsblatt
 ---
