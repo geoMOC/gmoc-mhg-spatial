@@ -1,5 +1,5 @@
 ---
-title: Warmup - Datensäuberung und Visualisierung
+title: Arbeitsblatt Sitzung 1 - Datensäuberung und Visualisierung
 toc: true
 toc_label: In this worksheet
 ---
@@ -25,6 +25,20 @@ Im nachfolgenden Skript werden einigige wichtige Techniken der R-Programmierspra
 
 
 ```r
+# merge_LAU_NUTS3.R 
+# Autor: Chris Reudenbach, creuden@gmail.com
+# Urheberrecht: Chris Reudenbach 2020 GPL (>= 3)
+#
+# Beschreibung: Skript verbindet Kreisdaten die mit Hilfe von LAU Schlüsseln
+# kodiert sind mit einer von Eurostat zur Verfügung gestellten Geometrie.
+#  
+#
+# Eingabe: Tabelle (ASCII) mit LAU Schlüsselspalte, Lookuptabelle LAU-NUTS, NUTS Geometrie in eine GDAL kompatiblen Dateiformat.
+#
+# Ausgabe:  Simple Feature(sf) Objekt mit allen Tabelleninhalten
+#
+# Anmerkungen: Die Daten werden im Skript heruntergeladen und eingelesen. Da diese mit statischen URLs und Dateinamen versehen sind müssen etwaige Veränderungen angepasst werden
+
 # 0 --- Arbeitsablauf
 # Das nachfolgende Script verbindet die Daten der Datei Kreise2010.csv mit 
 # von von Eurostat zur Verfügung gestellten NUTS3 Geometriedaten (Vektordaten der Kreise)
@@ -35,7 +49,12 @@ Im nachfolgenden Skript werden einigige wichtige Techniken der R-Programmierspra
 # Im letzten Schritt wird die gesäuberte Datentabelle über die NUTS3 Codes an die Geometrie an gehangen und mit 
 # mapview und tmap visualisiert
 
-# 1---  Vorbereitung der Arbeitsumgebung
+
+# 0 - Umgebung einrichten, 
+#     Pakete und Funktionen laden
+#     Variablen definieren
+#---------------------
+
 ## Säubern der Arbeitsumgebung
 rm(list=ls())
 ## festlegen des Arbeitsverzeichnisses
@@ -61,7 +80,12 @@ if(!lib %in% utils::installed.packages()){
 # function library übergibt
 invisible(lapply(libs, library, character.only = TRUE))
 
-# 2---  Herunterladenund Einlesen der Daten
+# 1 - Daten Vorverarbeitung
+#--------------------
+
+
+##- Laden und Einlesen der Rohdaten
+#--------------------
 
 # Aus dem Statistikkurs lesen wir die Kreisdaten ein
 # Sie sind aus Bequemlichkeitsgründen auf github verfügbar
@@ -93,7 +117,8 @@ download.file(url = "https://ec.europa.eu/eurostat/documents/345175/501971/EU-28
 # Datenblatt "DE" abgespeichert sind lesen wir nur dieses sheet ein
 lau_nuts3 = readxl::read_xlsx("EU-28-LAU-2019-NUTS-2016-1.xlsx",sheet = "DE")
 
-# 3---  Säubern und Vorbereiten der Daten
+##-  Säubern und Vorbereiten der Daten
+#------------------------------------
 
 # die unten eingeladene LAU-Kodierung enthält 8 Stellen wobei die letzen beiden lokale Untegruppen darstellen
 # daher muss bei 4 Ziffern der Kreise Tabelle eine führende Null vorangestellt werden
@@ -120,8 +145,14 @@ nuts3_kreise = merge(nuts3_de,lookup_merge_kreise,
 # Projektion in die die amtliche deutsche Projection ETRS89 URM32
 nuts3_kreise = st_transform(nuts3_kreise, "+init=EPSG:25832")
 
+# 2 - Analyse
+#--------------------
+# findet in diesem Beispiel nicht statt
 
-# 4---  Visualisierung der Daten
+
+# 3 - Ergebnisausgabe und Visualisierung 
+#--------------------
+
 
 # map it with mapview
 # note you have to switch the layers on the upper left corner
