@@ -6,9 +6,7 @@ toc_label: In diesem Arbeitsblatt
 
 ## Gliederung eines Skripts
 
-Die Meinungen darüber, wie ein Skript am besten zu strukturieren ist, gehen weit auseinander. 
-
-Wir erstellen auf diese Weise ein Skript das Top Down abläuft. Es ist die einfachste Form um reproduzierbare Analysen zu gewährleisten
+Die Meinungen darüber, wie ein Skript am besten zu strukturieren ist, gehen weit auseinander. Wir erstellen die einfachste Variante, ein Skript das Top Down abläuft. Es ist ein eleicht durschaubare und effektive Form um reproduzierbare Analysen zu gewährleisten.
 
 ### Kommentarblock zu Beginn des Skripts
 
