@@ -25,6 +25,7 @@ Im nachfolgenden Skript werden einigige wichtige Techniken der R-Programmierspra
 
 
 ```r
+#---------------------------------------------------------
 # merge_LAU_NUTS3.R 
 # Autor: Chris Reudenbach, creuden@gmail.com
 # Urheberrecht: Chris Reudenbach 2020 GPL (>= 3)
@@ -37,9 +38,7 @@ Im nachfolgenden Skript werden einigige wichtige Techniken der R-Programmierspra
 #
 # Ausgabe:  Simple Feature(sf) Objekt mit allen Tabelleninhalten
 #
-# Anmerkungen: Die Daten werden im Skript heruntergeladen und eingelesen. Da diese mit statischen URLs und Dateinamen versehen sind müssen etwaige Veränderungen angepasst werden
-
-# 0 --- Arbeitsablauf
+# Anmerkungen: Die Daten werden im Skript heruntergeladen und eingelesen. Da diese mit statischen URLs und Dateinamen versehen sind müssen etwaige Veränderungen angepasst werden.
 # Das nachfolgende Script verbindet die Daten der Datei Kreise2010.csv mit 
 # von von Eurostat zur Verfügung gestellten NUTS3 Geometriedaten (Vektordaten der Kreise)
 # Um diese Verbinden zu können bedarf es in dem vorliegenden Fall einer weiteren Tabelle
@@ -48,6 +47,7 @@ Im nachfolgenden Skript werden einigige wichtige Techniken der R-Programmierspra
 # Um diese Beiden Tabellen verbinden zu können müßen einige Manipulationen an den  Daten vorgenommen werden
 # Im letzten Schritt wird die gesäuberte Datentabelle über die NUTS3 Codes an die Geometrie an gehangen und mit 
 # mapview und tmap visualisiert
+#---------------------------------------------------------
 
 
 # 0 - Umgebung einrichten, 
