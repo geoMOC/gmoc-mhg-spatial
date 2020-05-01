@@ -95,7 +95,7 @@ collections:
   examples:
     output: true
     permalink: /:collection/:title.html
-  unit0:
+  unit00:
     output: true
     permalink: /:collection/:title.html
   unit01:
@@ -132,10 +132,10 @@ defaults:
  # unit0
   - scope:
       path: ""
-      type: unit0
+      type: unit00
     values:
       category: "Formales"
-      tags: "Unit|0"
+      tags: "Unit|00"
       layout: single
       sidebar:
         nav: "units" 
@@ -178,11 +178,13 @@ defaults:
       path: ""
       type: unit04
     values:
-      category: "Arbeitsblätter"
+      category: "Sitzungen"
       tags: "Unit|04"
       layout: single
       sidebar:
         nav: "units" 
+      toc: true
+      toc_label: On this page          
   # pages
   - scope:
       path: "_pages"

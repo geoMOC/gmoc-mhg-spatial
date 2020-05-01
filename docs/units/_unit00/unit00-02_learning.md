@@ -16,7 +16,7 @@ Die Kursplanung sah immer Dienstags einen vierstündigen Block vor. Diese Verans
 
 Jeden Dienstag starten wir mit einer neuen Kurseinheit. Für diese finden Sie neue Lernmaterialien und neue Aufgaben auf dieser Webseite. Das können Videos, Texte, Verweise auf Literatur etc. sein. Für die Bearbeitung der Projektaufgabe haben Sie bis zum 30.06.2020 (04 Uhr): Zeit.
 
-Abgesehen von den damit verbundenen Fristen, können Sie sich Ihr Lernen und die Bearbeitung der Aufgaben frei einteilen. Weitere Informationen zur Prüfungsleistung finden Sie [hier]({{ site.baseurl }}{% link _unit0/unit0-03_assignments.md %}))
+Abgesehen von den damit verbundenen Fristen, können Sie sich Ihr Lernen und die Bearbeitung der Aufgaben frei einteilen. Weitere Informationen zur Prüfungsleistung finden Sie [hier]({{ site.baseurl }}{% link _unit00/unit00-03_assignments.md %}))
 
 
 ## Lernen mit Webkonferenzen

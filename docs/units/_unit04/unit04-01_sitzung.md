@@ -1,7 +1,5 @@
 ---
-title: Warmup - Datensäuberung und Visualisierung
-toc: true
-toc_label: In this worksheet
+title: "Sitzung 1: - Datensäuberung und Visualisierung"
 ---
 
 
@@ -20,22 +18,41 @@ Die Lernziele der ersten Übung sind:
  
 ---
 
-Im nachfolgenden Skript werden einigige wichtige Techniken der R-Programmiersprache benutzt. Einige kennen Sie bereits andere sind im Reader R-Intro erklärt. Vor allem die beiden "Arbeitspferde" für Wiederholungen `for` und Bedingungen `if` werden eingeführt. Bitte schauen sie für die grundsätzliche Funktionsweise in den Reader.
+Im nachfolgenden Skript werden einige wichtige Techniken der R-Programmiersprache benutzt. Einige kennen Sie bereits andere sind im Reader R-Intro erklärt. Vor allem die beiden "Arbeitspferde" für Wiederholungen `for` und Bedingungen `if` werden eingeführt. Bitte schauen sie für die grundsätzliche Funktionsweise in den Reader.
 
 
 
 ```r
-# 0 --- Arbeitsablauf
+#---------------------------------------------------------
+# merge_LAU_NUTS3.R 
+# Autor: Chris Reudenbach, creuden@gmail.com
+# Urheberrecht: Chris Reudenbach 2020 GPL (>= 3)
+#
+# Beschreibung: Skript verbindet Kreisdaten die mit Hilfe von LAU Schlüsseln
+# kodiert sind mit einer von Eurostat zur Verfügung gestellten Geometrie.
+#  
+#
+# Eingabe: Tabelle (ASCII) mit LAU Schlüsselspalte, Lookuptabelle LAU-NUTS, NUTS Geometrie in eine GDAL kompatiblen Dateiformat.
+#
+# Ausgabe:  Simple Feature(sf) Objekt mit allen Tabelleninhalten
+#
+# Anmerkungen: Die Daten werden im Skript heruntergeladen und eingelesen. Da diese mit statischen URLs und Dateinamen versehen sind müssen etwaige Veränderungen angepasst werden.
 # Das nachfolgende Script verbindet die Daten der Datei Kreise2010.csv mit 
 # von von Eurostat zur Verfügung gestellten NUTS3 Geometriedaten (Vektordaten der Kreise)
 # Um diese Verbinden zu können bedarf es in dem vorliegenden Fall einer weiteren Tabelle
 # Diese stellt die Verbindung zwischen denen in der Datei Kreise2010.csv verwendeten LAU Kodierung
 # und der NUTS3 Kodierung her.
-# Um diese Beiden Tabellen verbinden zu können müßen einige Manipulationen an den  Daten vorgenommen werden
+# Um diese Beiden Tabellen verbinden zu können müssen einige Manipulationen an den  Daten vorgenommen werden
 # Im letzten Schritt wird die gesäuberte Datentabelle über die NUTS3 Codes an die Geometrie an gehangen und mit 
 # mapview und tmap visualisiert
+#---------------------------------------------------------
 
-# 1---  Vorbereitung der Arbeitsumgebung
+
+# 0 - Umgebung einrichten, 
+#     Pakete und Funktionen laden
+#     Variablen definieren
+#---------------------
+
 ## Säubern der Arbeitsumgebung
 rm(list=ls())
 ## festlegen des Arbeitsverzeichnisses
@@ -47,9 +64,9 @@ rootDIR="~/Schreibtisch/spatialstatSoSe2020/"
 setwd(rootDIR)
 
 ## laden der benötigten libraries
-# wir definieren zuerst eine liste mit den paketnamen und 
+# wir definieren zuerst eine liste mit den Paketnamen und 
 # nutzen dann eine for  schleife die jedes element aus der  liste nimmt 
-# und schaut ob es bereits intalliert ist utils::installed.packages() 
+# und schaut ob es bereits installiert ist utils::installed.packages() 
 # falls nicht wird es installiert 
 libs= c("sf","mapview","tmap","ggplot2","RColorBrewer","jsonlite","tidyverse")
 for (lib in libs){
@@ -61,9 +78,14 @@ if(!lib %in% utils::installed.packages()){
 # function library übergibt
 invisible(lapply(libs, library, character.only = TRUE))
 
-# 2---  Herunterladenund Einlesen der Daten
+# 1 - Daten Vorverarbeitung
+#--------------------
 
-# Aus dem Statistikkurs lesen wir die Kreisdaten ein
+
+##- Laden und Einlesen der Rohdaten
+#--------------------
+
+# Aus dem Statistik-Kurs lesen wir die Kreisdaten ein
 # Sie sind aus Bequemlichkeitsgründen auf github verfügbar
 
 download.file(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/Kreisdaten2010.csv",     destfile = "Kreisdaten2010.csv")
@@ -93,16 +115,17 @@ download.file(url = "https://ec.europa.eu/eurostat/documents/345175/501971/EU-28
 # Datenblatt "DE" abgespeichert sind lesen wir nur dieses sheet ein
 lau_nuts3 = readxl::read_xlsx("EU-28-LAU-2019-NUTS-2016-1.xlsx",sheet = "DE")
 
-# 3---  Säubern und Vorbereiten der Daten
+##-  Säubern und Vorbereiten der Daten
+#------------------------------------
 
-# die unten eingeladene LAU-Kodierung enthält 8 Stellen wobei die letzen beiden lokale Untegruppen darstellen
+# die unten eingeladene LAU-Kodierung enthält 8 Stellen wobei die letzten beiden lokale Untergruppen darstellen
 # daher muss bei 4 Ziffern der Kreise Tabelle eine führende Null vorangestellt werden
-# dies geschieht durch Abffrage der Stellen im der entsprechenden Spalte
+# dies geschieht durch Abfrage der Stellen im der entsprechenden Spalte
 Kreise$Kreis[nchar(Kreise$Kreis) < 5] = paste0("0",Kreise$Kreis[nchar(Kreise$Kreis) < 5])
 
 # bei der LAU Tabelle sind die letzten 3 Ziffern für Unterregionen von Nuts3 daher können sie ignoriert werden
-# einfache lösung die zeichenkette (character) wird auf die passende länge abgeschnitten
-# dazu muss dem data.frame Feld "LAU CODE" die von 1-5 gekappte Spalte zugewieden werden
+# einfache Lösung die Zeichenkette (character) wird auf die passende Länge abgeschnitten
+# dazu muss dem data.frame Feld "LAU CODE" die von 1-5 gekappte Spalte zugewiesen werden
 lau_nuts3$`LAU CODE`=substr(lau_nuts3$`LAU CODE`,start = 1,stop = 5)
 
 # jetzt müssen nur noch die Duplikate entfernt werden Das Ausrufezeichen ist dabei die Verneinung 
@@ -113,21 +136,27 @@ lau_nuts3 = lau_nuts3[!duplicated(lau_nuts3[,"LAU CODE"]),]
 lookup_merge_kreise = merge(Kreise,  lau_nuts3,
            by.x = "Kreis", by.y = "LAU CODE")
 
-# und zuletzt wird diese Tabelle an die Geometrie angehengen
+# und zuletzt wird diese Tabelle an die Geometrie angehangen
 nuts3_kreise = merge(nuts3_de,lookup_merge_kreise,
             by.x = "NUTS_ID", by.y = "NUTS 3 CODE")
 
-# Projektion in die die amtliche deutsche Projection ETRS89 URM32
+# Projektion in die die amtliche deutsche Projektion ETRS89 URM32
 nuts3_kreise = st_transform(nuts3_kreise, "+init=EPSG:25832")
 
+# 2 - Analyse
+#--------------------
+# findet in diesem Beispiel nicht statt
 
-# 4---  Visualisierung der Daten
 
-# map it with mapview
+# 3 - Ergebnisausgabe und Visualisierung 
+#--------------------
+
+
+# Webkarte mit mapview
 # note you have to switch the layers on the upper left corner
 mapview(nuts3_kreise,zcol="Anteil.Baugewerbe",breaks=seq(0,0.2, by=0.025))+mapview(nuts3_kreise,zcol="Anteil.Hochschulabschluss",breaks=seq(0,0.2, by=0.025))
 
-# map it with tmap
+# mStatische Karte mit tmap
 tm_shape(nuts3_kreise, projection = 25832) + 
   tm_polygons(c("Anteil.Baugewerbe","Anteil.Hochschulabschluss"),    breaks=seq(0,0.2, by=0.025))
 
