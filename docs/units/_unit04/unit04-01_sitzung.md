@@ -143,6 +143,13 @@ nuts3_kreise = merge(nuts3_de,lookup_merge_kreise,
 # Projektion in die die amtliche deutsche Projektion ETRS89 URM32
 nuts3_kreise = st_transform(nuts3_kreise, "+init=EPSG:25832")
 
+# säubern der Tabellen
+# löschen nach Spaltennamen
+nuts3_kreise[,c("id","FID","MOUNT_TYPE","LAU NAME NATIONAL","LEVL_CODE","LAU NAME LATIN","COAST_TYPE","COAST change compared to last year","CITY_ID","CITY_ID change compared to last year","CITY_NAME", "GREATER_CITY_ID","GREATER_CITY_ID change compared to last year","GREATER_CITY_NAME","FUA_ID" ,"FUA_ID change compared to last year",  "FUA_NAME","CHANGE (Y/N)","DEG change compared to last year")]= NULL
+# umgruppieren nach Spaltenindex
+nuts3_kreise[,c(1,2,3,14,4,5,6,7,8,9,10,11,12,15,16,17)]
+
+
 # 2 - Analyse
 #--------------------
 # findet in diesem Beispiel nicht statt
@@ -152,11 +159,11 @@ nuts3_kreise = st_transform(nuts3_kreise, "+init=EPSG:25832")
 #--------------------
 
 
-# Webkarte mit mapview
+# Interaktive Darstellung mit Mapview Farbgebung nach Anteil.Baugewerbe
 # note you have to switch the layers on the upper left corner
 mapview(nuts3_kreise,zcol="Anteil.Baugewerbe",breaks=seq(0,0.2, by=0.025))+mapview(nuts3_kreise,zcol="Anteil.Hochschulabschluss",breaks=seq(0,0.2, by=0.025))
 
-# mStatische Karte mit tmap
+# Darstellung mit tmap Farbgebung nach Anteil.Baugewerbe
 tm_shape(nuts3_kreise, projection = 25832) + 
   tm_polygons(c("Anteil.Baugewerbe","Anteil.Hochschulabschluss"),    breaks=seq(0,0.2, by=0.025))
 
