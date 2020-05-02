@@ -80,7 +80,7 @@ excerpt_separator: <!--more-->
 markdown: kramdown
 # theme: minima
 remote_theme: "GeoMOER/moer-jekyll-theme"
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "mhg" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 auto_ids: true
 
 # Default Settings
