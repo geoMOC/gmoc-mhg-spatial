@@ -64,6 +64,6 @@ Besuchen Sie die folgenden Webseiten. Analysieren Sie vor dem Hintergrund Ihres 
 
   * Was wird repräsentiert? Geoobjekte oder Raumkontinua?
   * Welche Dimension und Geometrie liegt der Repräsentation ihrer Meinung nach zugrunde?
-  *  Versuchen Sie einige weitere alltägliche Beispiele für die Bedeutung von Lage und Dimensionalität zu finden.
-  *  Überlegen Sie sich unterschiedliche Konzepte wie die Höhe eines bestimmten Raumausschnitts repräsentiert werden kann
+  * Versuchen Sie einige weitere alltägliche Beispiele für die Bedeutung von Lage und Dimensionalität zu finden.
+  
 
