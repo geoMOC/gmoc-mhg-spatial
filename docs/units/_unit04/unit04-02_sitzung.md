@@ -3,7 +3,7 @@ title: "Sitzung 2: -  Region, Distanz und räumlicher Einfluß"
 ---
 
 
-Die ansprechende Visualisierung von komplexen räumlichen Daten ist eine der großen Stärken von `R`<!--more-->
+
 Geodaten sind prinzipiell wie gewöhnliche Daten. Allerdings sind die Aspekte, die bei der Verwendung von Geodaten zu beachten sind auf Fragen der Skala, der Zonierung (aggregierte  Flächeneinheiten) der Topologie (der Lage im Verhältnis zu anderen Entitäten) und am einfachsten der Entfernung zueinander. <!--more-->
 
 Dies berührt fragen der der räumlichen Autokorrelation und Inhomogenität, also letztlich der Konzeption auf welcher Skala hat Raum einen Einfluss.
