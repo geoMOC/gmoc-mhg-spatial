@@ -56,10 +56,11 @@ Eine geeignete räumliche und zeitliche Beschreibung von Geoobjekten und ihrer E
 ## Bearbeiten Sie...
 Besuchen Sie die folgenden Webseiten. Analysieren Sie vor dem Hintergrund Ihres neu erworbenen Wissens folgendes:
 
-  * [Tank & Rast](http://maps.rast.de/standorte/rast/fullscreen)
-  * [Wetterbote – Lahn](http://wetterbote.de/pegel/lahn.htm)
-  * [HLUG Marburg](http://www.hlug.de/?id=7122&station=1004)
-  * [Cineplex Marburg](http://www.cineplex.de)
+*    [Öffentliche WCs in Australien](https://toiletmap.gov.au/Plan)
+*    [Aktuelle Pegel Lahn](http://www.wetterbote.de/wetter/pegel/lahn.htm)
+*    [Bad Arolsen](http://www.hlug.de/medien/luft/recherche/recherche.php?station=1115)
+*    [Cineplex](http://www.cineplex.de/kino/home/city32/)
+
 
   * Was wird repräsentiert? Geoobjekte oder Raumkontinua?
   * Welche Dimension und Geometrie liegt der Repräsentation ihrer Meinung nach zugrunde?

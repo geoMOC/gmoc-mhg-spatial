@@ -46,16 +46,15 @@ Geodaten sind Merkmalsausprägungen, die hinsichtlich eines spezifischen Zwecks,
 
 ## Bearbeiten Sie…
 Versuchen Sie diese sehr abstrakte Sichtweise auf räumliche Daten und Informationen im GIS-Alltag wiederzufinden. Besuchen Sie die  folgenden Webseiten. 
-* Welche Merkmale/Merkmalsausprägungen werden genannt (evtl. auch welche werden nicht genannt)? 
 
 Hier die Links:
 
-*    [Öffentliche Toilleten in Australien](https://toiletmap.gov.au/Plan)
+*    [Öffentliche WCs in Australien](https://toiletmap.gov.au/Plan)
 *    [Aktuelle Pegel Lahn](http://www.wetterbote.de/wetter/pegel/lahn.htm)
 *    [Bad Arolsen](http://www.hlug.de/medien/luft/recherche/recherche.php?station=1115)
 *    [Cineplex](http://www.cineplex.de/kino/home/city32/)
 
-
+* Welche Merkmale/Merkmalsausprägungen werden genannt (evtl. auch welche werden nicht genannt)? 
 * Ist die Abstraktion für den von Ihnen *vermuteten* Zweck (Zielsetzung) sinnvoll? 
 * Ist der geographische Aspekt für Sie ersichtlich?
 *  Gibt es formale/inhaltliche Unterschiede in der geographischen Repräsentation der Bad Arolsener Lufthygiene-Messstation und des Marburger Cineplex?
