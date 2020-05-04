@@ -1,7 +1,7 @@
 ---
 title: "Sitzung 2: -  Region, Distanz und räumlicher Einfluß"
 author: "Chris Reudenbach"
-date: "1 Mai 2020"
+date: "01 Mai 2020"
 output: 
   html_document: 
     fig_caption: yes
