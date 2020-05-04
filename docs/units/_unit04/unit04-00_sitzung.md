@@ -1,5 +1,7 @@
 ---
 title: "Inhalt"
+toc: true
+toc_label: In this example
 ---
 
 

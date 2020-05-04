@@ -1,15 +1,7 @@
 ---
 title: "Sitzung 2: -  Region, Distanz und räumlicher Einfluß"
-author: "Chris Reudenbach"
-date: "01 Mai 2020"
-output: 
-  html_document: 
-    fig_caption: yes
-    fig_height: 6.5
-    fig_width: 10
-    keep_md: yes
-editor_options: 
-  chunk_output_type: console
+toc: true
+toc_label: In this example
 ---
 
 
@@ -27,11 +19,11 @@ Die Lernziele der zweiten Übung sind:
 
 ---
 
-  * Verständnis für die konzeptionellen Hintergründe der Begriffe Region, Distanz und räumlicher Einfluss bezogen auf die jeweilig verfügbaren Datenmodelle
-  * Datenmanipulation und Nutzen von R 
-  * Erstellen und Nutzung von räumlichen Datenmodellen (Raster- und Vektordaten) für die Alltagsarbeit
+* Verständnis für die konzeptionellen Hintergründe der Begriffe Region, Distanz und räumlicher Einfluss bezogen auf die jeweilig verfügbaren Datenmodelle
+* Datenmanipulation und Nutzen von R 
+* Erstellen und Nutzung von räumlichen Datenmodellen (Raster- und Vektordaten) für die Alltagsarbeit
 
- 
+
 ---
 
 
@@ -228,19 +220,19 @@ Wir erstellen für eine Anzahl Punkte eine Distanzmatrix. Wenn die Positionen in
 staedte=c("München","Berlin","Hamburg","Köln","Bonn","Hannover","Nürnberg","Stuttgart","Freiburg","Marburg")
 
 # Abfragen der Geokoordinaten der Städte mit eine lapply Schleife
- coord_city = lapply(staedte, function(x){
- latlon = c(geo_osm(x)[2],geo_osm(x)[1])
- class(latlon) = "numeric"
+coord_city = lapply(staedte, function(x){
+  latlon = c(geo_osm(x)[2],geo_osm(x)[1])
+  class(latlon) = "numeric"
   p = st_sfc(st_point(latlon), crs = 4326)
- st_sf(name = x,p)
- #st_sf(p)
- })
- 
+  st_sf(name = x,p)
+  #st_sf(p)
+})
+
 # Umwandeln der Liste in eine Matrix mit den Stadtnamen und Spalten die Lat Lon benannt sind
- geo_coord_city = do.call("rbind", coord_city)
+geo_coord_city = do.call("rbind", coord_city)
 
 # plotten der Punkte
- mapview(geo_coord_city,  color='red',legend = FALSE)
+mapview(geo_coord_city,  color='red',legend = FALSE)
 ```
 
 <!--html_preserve--><div id="htmlwidget-6351161e92343e344deb" style="width:800px;height:600px;" class="leaflet html-widget"></div>
@@ -258,18 +250,18 @@ Dann die klassische Variante mit der `plot` Funktion.
 
 ```r
 # Festlegen der Grafik-Ausgabe
- 
+
 # klassisches Plotten eines sf Objects  erfordert den Zugriff auf die Koordinatenpaare
 # mit Hilfe der Funktion st_coordinates(geo_coord_city) leicht möglich
 # mit Hilfe der Funktion min(st_coordinates(geo_coord_city)[,1]) werden 
 # minimum und maximum Ausdehnung bestimmt 
- plot(st_coordinates(geo_coord_city),
+plot(st_coordinates(geo_coord_city),
      xlim = c(min(st_coordinates(geo_coord_city)[,1]) - 0.5 
-     ,max(st_coordinates(geo_coord_city)[,1]) + 1), 
+              ,max(st_coordinates(geo_coord_city)[,1]) + 1), 
      ylim = c(min(st_coordinates(geo_coord_city)[,2]) - 0.5
-     ,max(st_coordinates(geo_coord_city)[,2]) + 0.5),
+              ,max(st_coordinates(geo_coord_city)[,2]) + 0.5),
      pch=20, cex=1.5, col='darkgreen', xlab='Längengrad', ylab='Breitengrad')
-     text(st_coordinates(geo_coord_city), labels = staedte, cex=1.2, pos=4, col="purple")
+text(st_coordinates(geo_coord_city), labels = staedte, cex=1.2, pos=4, col="purple")
 ```
 
 <img src="{{ site.baseurl }}/assets/images/unit04/points-2-1.png" width="800px" height="600px" />
@@ -283,12 +275,12 @@ Daher transformieren wir zunächst den Datensatz in das amtlich gültige [Refere
 
 ```r
 # Zuerst projizieren wir den Datensatz auf ETRS89/UTM
- proj_coord_city = st_transform(geo_coord_city, crs = 25832)
+proj_coord_city = st_transform(geo_coord_city, crs = 25832)
 
 # nun berechnen wir die Distanzen
- city_distanz = dist(st_coordinates(proj_coord_city))
+city_distanz = dist(st_coordinates(proj_coord_city))
 # mit Hilfe von dist_setNames können wir die Namen der distanzmatrix zuweisen
- dist_setNames(city_distanz, staedte)
+dist_setNames(city_distanz, staedte)
 ```
 
 ```
@@ -1033,10 +1025,10 @@ Wie bereits bekannt ist hängt der Wert von Morans I deutlich von den Annahmen a
 Der Moran-I-Test und der Geary C Test sind übliche Verfahren für die Überprüfung räumlicher Autokorrelation. Das Geary's-C ist invers mit Moran's-I, aber nicht identisch. Moran's-I ist eher ein Maß für die globale räumliche Autokorrelation, während Geary's-C eher auf eine lokale räumliche Autokorrelation reagiert. 
 
 \\[I = \frac{n}{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}
-   \frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(x_i-\bar{x})(x_j-\bar{x})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}\\]
+\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(x_i-\bar{x})(x_j-\bar{x})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}\\]
 
 \\[ C = \frac{(n-1)}{2\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}
-   \frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(x_i-x_j)^2}{\sum_{i=1}^{n}(x_i - \bar{x})^2}\\]
+\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(x_i-x_j)^2}{\sum_{i=1}^{n}(x_i - \bar{x})^2}\\]
 
 
 wobei \\(x_i, i=1, \ldots, n\\)   \\({n}\\) Beobachtungen der interessierenden numerischen Variablen und \\(w_{ij}\\) die räumlichen Gewichte sind.

@@ -1,5 +1,7 @@
 ---
 title: "Sitzung 3: -  Visualisierung räumlicher Daten"
+toc: true
+toc_label: In this example
 ---
 
 
