@@ -32,11 +32,8 @@ Die Lernziele der zweiten Übung sind:
 
 
 ```r
-rootDIR="~/Schreibtisch/spatialstatSoSe2020/"
-
-
 rm(list=ls())
-
+rootDIR="~/Schreibtisch/spatialstatSoSe2020/"
 ## laden der benötigten libraries
 # wir definieren zuerst eine liste mit den Paketnamen und 
 # nutzen dann eine for  schleife die jedes element aus der  liste nimmt 
