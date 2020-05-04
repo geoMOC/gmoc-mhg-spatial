@@ -1,7 +1,7 @@
 ---
 title: "Sitzung 2: -  Region, Distanz und räumlicher Einfluß"
 author: "Chris Reudenbach"
-date: "14 Septemper 2019"
+date: "1 Mai 2020"
 output: 
   html_document: 
     fig_caption: yes
@@ -1118,9 +1118,7 @@ Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden:
 
 * [Spatial Data Analysis](https://rspatial.org/raster/analysis/2-scale_distance.html) von Robert Hijmans. Sehr umfangreich und empfehlenswert. Viel der Beispiele basieren auf seiner Vorlesung und sind für unsere Verhältnisse angepasst.
 
-Die [UseR! 2019 Spatial workshop part II](https://edzer.github.io/UseR2019/part2.html) von Roger Bivand. Roger ist die absolute Referenz hinischtlich räumlicher Ökonometrie mit R. Er hat unzählige Pakete geschrieben und ebensoviel Schulungs-Material.
-
-Natürlich ist es auch immer eine gute Idee, in die Paketdokumentation zu schauen oder im Internet zu suchen.
+* Der [UseR! 2019 Spatial Workshop](https://edzer.github.io/UseR2019/part2.html) von Roger Bivand. Roger ist die absolute Referenz hinischtlich räumlicher Ökonometrie mit R. Er hat unzählige Pakete geschrieben und ebensoviel Schulungs-Material und ist unermüdlich in  der Unterstützung der Community.
 
 
 ## Download Skript
