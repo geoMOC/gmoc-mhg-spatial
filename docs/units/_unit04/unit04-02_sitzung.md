@@ -33,7 +33,7 @@ Die Lernziele der zweiten Übung sind:
 
 ```r
 rm(list=ls())
-rootDIR="~/Schreibtisch/spatialstatSoSe2020/"
+rootDIR="~/Schreibtisch/spatialstat_SoSe2020/"
 ## laden der benötigten libraries
 # wir definieren zuerst eine liste mit den Paketnamen und 
 # nutzen dann eine for  schleife die jedes element aus der  liste nimmt 
@@ -1111,6 +1111,7 @@ moran.plot (residuen_uni_bau, nuts3_gewicht)
 Mit Hilfe der Funktion `poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)` wird eine Nachbarschaftsbeziehung erzeugt. Erzeugen Sie für eine distanzbasierte Nachbarschaft mit einer *Queens-Nachbarschaft*, die das erste Quartil der Distanzverteilung als Schwellwert nutzt analog zum gegebenen Beispiel einen Moran I Monte Carlo Test
 {: .notice--warning}
 
+## Wo gibt's mehr?
 Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 
 
 * [Spatial Data Analysis](https://rspatial.org/raster/analysis/2-scale_distance.html) von Robert Hijmans. Sehr umfangreich und empfehlenswert. Viel der Beispiele basieren auf seiner Vorlesung und sind für unsere Verhältnisse angepasst.
@@ -1121,12 +1122,14 @@ Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden:
 ## Download Skript
 Das Skript kann unter [unit04-02_sitzung.R]({{ site.baseurl }}/assets/scripts/unit04-02_sitzung.R){:target="_blank"} heruntergeladen werden
 
-## Bearbeiten Sie…
-Versuchen Sie sich zu verdeutlichen, dass alle Analysenund röumliche Modelle auf den Grundannahmen dieser Übung basieren. Das heisst es kommt maßgeblich auf Ihre konzepteionellen oder theoriegeleiteten Vorstellungen an welche Nachbarschaft, welches Maß an Nähe und somit auch welche räumlichen Korrelationen zustande kommen:
+## Was ist zu tun?
+Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressions-Analysen und  -Modelle auf den Grundannahmen dieser Übung basieren. Das heisst es kommt maßgeblich auf Ihre konzeptionellen oder theoriegeleiteten Vorstellungen an, welche Nachbarschaft, welches Nähe-Maß und somit auch, welche räumlichen Korrelationen zustande kommen. Bitte beschäftigen Sie sich mitdem Skript. 
 
-* das Skript schrittweise durchzugehen. 
-* nutzen Sie ihre Kenntnisse aus dem Statistikkurs um die die  räumlichen Zusammenhänge und Wirkungen auch visuell nachzuvollziehen.
-* spielen Sie mit den Einstellungen und lernen Sie schrittweise die Handhabung von R
-* Identifizieren Sie die im "Vorbeigehen" gemachten Erläuterungen wie Daten zu plotten sind oder Was es mit Georefrenzieren auf sich hat. Vieles ist in den Kommentarzeilen untergebracht.
+* versuchen sie sich an den *R-Spielereien*. Sie sollen Sie zum aktiven Umgang mit `R` ermuntern.
+* gehen Sie Skript **schrittweise** durch. Lassen Sie es nicht von vorne bis hinten unkontrolliert durchlaufen 
+* gleichen Sie ihre Kenntnisse aus dem Statistikkurs mit diesen praktischen Übungen ab und identifizieren Sie was Raum-Wirskamkeiten sind.
+* *spielen* Sie mit den Einstellungen, lesen Sie Hilfen und lernen Sie schrittweise die Handhabung von R kennen. 
+* Lernen Sie quasi im "*Vorbeigehen*" wie Daten zu plotten sind oder wann Sie ein wenig Acht geben müssen wenn Sie mit Geodaten arbeiten (viele Hinweise und Erläuterungen sind in den Kommentarzeilen untergebracht).
+* **Stellen Sie Fragen im Forum, im Kurs oder per email mit dem Betreff [M&S2020]**
 
 

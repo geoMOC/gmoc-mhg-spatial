@@ -283,7 +283,7 @@ Die Karte kann auch mit Hilfe des Pakets `mapview` interaktiv dargestellt werden
 ## Download Skript
 Das Skript kann unter [unit04-01_sitzung.R]({{ site.baseurl }}/assets/scripts/unit04-01_sitzung.R){:target="_blank"} heruntergeladen werden
 
-## Bearbeiten Sie…
+## Was ist zu tun?
 Versuchen Sie  `R`, `Rstudio` und die notwendigen Pakete zu installieren. Bei Fragen nutzen Sie bitte das Forum. Falls erfolgreich Versuchen Sie bitte folgende Aufgaben zu bearbeiten:
 
 * das Skript schrittweise durchzugehen. Das geht sehr einfach mit Cursor in die Zeile und Alt+Enter näheres siehe unter [Rstudio Hilfe Ausführen von Code](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-and-Executing-Code) bzw. unter `Hilfe->Cheatsheets->Rstudio IDE cheatsheets`.
