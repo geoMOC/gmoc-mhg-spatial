@@ -107,7 +107,7 @@ plot(xy, xlim=c(extent(nuts3_kreise)[1], extent(nuts3_kreise)[3]), ylim=c(extent
 *Abbildung 04-02-01: Die sortierte, aggregierte und räumliche Einkommensverteilung*
 
 
-Gini-Koeffizient und Lorenz-Kurve sind eine brauchbare Einschätzung um die Ungleichheit, bzw. relative Konzentrationen oder Ungleichheit von Verteilungen zu zeigen.
+Gini-Koeffizient und [Lorenz-Kurve](https://wirtschaftslexikon.gabler.de/definition/lorenzkurve-40022) sind eine häufig gebrauchte erste Einschätzung um die Ungleichheit bzw. relative Konzentrationen von Verteilungen zu ermitteln.
 
 
 ```r
@@ -241,6 +241,7 @@ geo_coord_city = do.call("rbind", coord_city)
 # visualize with mapview
 mapview(geo_coord_city,  color='red',legend = FALSE)
 ```
+
 
 {% include media url="/assets/misc/geo_city_city.html" %}
 [Full-Screen Version der Karte]({{ site.baseurl }}/assets/misc/geo_city_city.html){:target="_blank"}
