@@ -68,7 +68,8 @@ setwd(rootDIR)
 # nutzen dann eine for  schleife die jedes element aus der  liste nimmt 
 # und schaut ob es bereits installiert ist utils::installed.packages() 
 # falls nicht wird es installiert 
-libs= c("sf","mapview","tmap","ggplot2","RColorBrewer","jsonlite","tidyverse")
+libs= c("sf","mapview","tmap","ggplot2","RColorBrewer","jsonlite","tidyverse","spdep","spatialreg","ineq","rnaturalearth", "rnaturalearthhires", "tidygeocoder","usedist")
+
 for (lib in libs){
 if(!lib %in% utils::installed.packages()){
   utils::install.packages(lib)
@@ -90,6 +91,8 @@ invisible(lapply(libs, library, character.only = TRUE))
 
 download.file(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/Kreisdaten2010.csv",     destfile = "Kreisdaten2010.csv")
 
+# Aus dem Statistikkurs lesen wir die Kreisdaten ein
+Kreise <- read.table ("Kreisdaten2010.csv",header=T,sep=';')
 
 # von eurostat holen wir die Geometriedaten (also die GI Daten für die NUTS3 Kreise)
 download.file(url = "https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/nuts/download/ref-nuts-2016-01m.geojson.zip",
@@ -167,7 +170,7 @@ mapview(nuts3_kreise,zcol="Anteil.Baugewerbe",breaks=seq(0,0.2, by=0.025))+mapvi
 tm_shape(nuts3_kreise, projection = 25832) + 
   tm_polygons(c("Anteil.Baugewerbe","Anteil.Hochschulabschluss"),    breaks=seq(0,0.2, by=0.025))
 
-
+saveRDS(nuts3_kreise,"nuts3_kreise.rds")
 ```
 ## Download Skript
 Das Skript kann unter [arbeitsblatt_01]({{ site.baseurl }}/assets/scripts/arbeitsblatt_01.R){:target="_blank"} heruntergeladen werden
