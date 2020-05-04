@@ -1128,7 +1128,7 @@ Das Skript kann unter [unit04-02_sitzung.R]({{ site.baseurl }}/assets/scripts/un
 Versuchen Sie sich zu verdeutlichen, dass alle Analysenund röumliche Modelle auf den Grundannahmen dieser Übung basieren. Das heisst es kommt maßgeblich auf Ihre konzepteionellen oder theoriegeleiteten Vorstellungen an welche Nachbarschaft, welches Maß an Nähe und somit auch welche räumlichen Korrelationen zustande kommen:
 
 * das Skript schrittweise durchzugehen. 
-* verscuhen Sie die Inhalte aus dem Statistikkurs in ihrer  räumlichen Wirkung und Visualisierung nachzuvollziehen.
+* versuchen Sie die Inhalte aus dem Statistikkurs in ihrer  räumlichen Wirkung und Visualisierung nachzuvollziehen.
 * spielen Sie mit den Einstellungen und lernen Sie schrittweise die Handhabung von R
 * Identifizieren Sie die im "Vorbeigehen" gemachten Erläuterungen wie Daten zu plotten sind oder Was es mit Georefrenzieren auf sich hat. Vieles ist in den Kommentarzeilen untergebracht.
 
