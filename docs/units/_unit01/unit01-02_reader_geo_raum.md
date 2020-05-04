@@ -24,10 +24,11 @@ Um diesen Zusammenhang an einem Beispiel zu verdeutlichen, betrachten Sie bitte 
 
 
 
-//Abbildung 01-01: Weltkarte des Ptolemäus. Die hier gezeigte Weltkarte ist mit den zwölf Winden illustriert und eine der 32 Karten aus der „Cosmographia“ die von Lienhart Holle aus Ulm am 6. Juli 1482 herausgegeben wurde. Dies war die erste gedruckte Kartenausgabe nördlich der Alpen (Lienhart 1482)
-//
+*Abbildung 01-01: Weltkarte des Ptolemäus. Die hier gezeigte Weltkarte ist mit den zwölf Winden illustriert und eine der 32 Karten aus der „Cosmographia“ die von Lienhart Holle aus Ulm am 6. Juli 1482 herausgegeben wurde. Dies war die erste gedruckte Kartenausgabe nördlich der Alpen (Lienhart 1482)*
 
-Diese kann als frühes, idealtypisches Beispiel für die zuvor definierten Eigenschaften einer Karte betrachtet werden. Dargestellt ist die zu diesem Zeitpunkt gültige europäische Wahrnehmung der Welt. Wenige Jahre später wurde mit Kolumbus und seinen Entdeckungsfahrten diese Weltsicht revolutioniert und umfassend korrigiert. Monmonier sagt in diesem Kontext: “*that maps, like speeches and paintings, are authored collections of information and also subject to distortions arising from ignorance, greed, ideological blindness, or malice* [...]” (Monmonier 1991). Hier wird deutlich, wie sehr die Abstraktion von (räumlicher) Wirklichkeit von der Intention des Senders und der verwendeten Kodierung bzw. Rekodierung durch den Empfänger abhängig ist.
+Diese kann als frühes, idealtypisches Beispiel für die zuvor definierten Eigenschaften einer Karte betrachtet werden. Dargestellt ist die zu diesem Zeitpunkt gültige europäische Wahrnehmung der Welt. Wenige Jahre später wurde mit Kolumbus und seinen Entdeckungsfahrten diese Weltsicht revolutioniert und umfassend korrigiert. 
+
+Monmonier sagt in diesem Kontext: "*that maps, like speeches and paintings, are authored collections of information and also subject to distortions arising from ignorance, greed, ideological blindness, or malice* [...]" (Monmonier 1991). Hier wird deutlich, wie sehr die Abstraktion von (räumlicher) Wirklichkeit von der Intention des Senders und der verwendeten Kodierung bzw. Rekodierung durch den Empfänger abhängig ist.
 
 ## Geographische Abstraktion
 
@@ -39,7 +40,7 @@ Vor diesem Hintergrund bekommt der Begriff Information eine neue Dimension. Um z
 Geographische oder räumliche Repräsentationen sind die Grundlage für eine wissenschaftliche Interpretation von raum-zeitlichen Aspekten der Echtwelt. In der Wissenschaft ist es üblich, dass hierfür als gesichert geltende Regeln (Axiome) verwendet werden. So ist vielleicht eines der bekanntesten von Waldo Tobler formuliert worden: “Everything is related to everything else, but near things are more related than distant things” (Tobler 1970). Es wird häufig als das sogenannte "erste geographische Gesetz" zitiert. Wie sehr es andere Auffassungen geben kann zeigt etwa Benno Werlen in seinem handlungszentrierten Ansatz, er führt aus, dass nicht nur reale Nachbarschaftsbeziehungen von Objekten oder Merkmalsausprägungen Raumkonstrukte ermöglichen, sondern Räume eben auch durch z.B. handelnde Menschen, die nicht notwendigerweise in räumlicher Nachbarschaft agieren, sozial konstruiert werden können (vgl. z.B. Werlen 1993).
 
 <html>
-<a href="https://www.flickr.com/photos/environmentalinformatics-marburg/13911225673" title="Abbildung 01-02: Die Interpretation der perzipierten „realen Welt“ sowie die Entwicklung geeigneter Strategien für den praxistauglichen Umgang (=Abstraktion) mit dieser Welt, findet mit dem Hilfsmittel der Modellbildung statt. (Reudenbach 2009) by Environmental Informatics Marburg, on Flickr"><img src="https://farm8.staticflickr.com/7425/13911225673_23cd595e1d_n.jpg" width="50%" alt="Abbildung 01-02: Die Interpretation der perzipierten „realen Welt“ sowie die Entwicklung geeigneter Strategien für den praxistauglichen Umgang (=Abstraktion) mit dieser Welt, findet mit dem Hilfsmittel der Modellbildung statt. (Reudenbach 2009)"></a>
+<a href="https://www.flickr.com/photos/environmentalinformatics-marburg/13911225673" title="Abbildung 01-02: Die Interpretation der perzipierten „realen Welt“ sowie die Entwicklung geeigneter Strategien für den praxistauglichen Umgang (=Abstraktion) mit dieser Welt, findet mit dem Hilfsmittel der Modellbildung statt. (Reudenbach 2009) by Environmental Informatics Marburg, on Flickr"><img src="https://farm8.staticflickr.com/7425/13911225673_23cd595e1d_n.jpg" width="80%" alt="Abbildung 01-02: Die Interpretation der perzipierten „realen Welt“ sowie die Entwicklung geeigneter Strategien für den praxistauglichen Umgang (=Abstraktion) mit dieser Welt, findet mit dem Hilfsmittel der Modellbildung statt. (Reudenbach 2009)"></a>
 </html>
 
 *Abbildung 01-02: Die Interpretation der perzipierten „realen Welt“ sowie die Entwicklung geeigneter Strategien für den praxistauglichen Umgang (=Abstraktion) mit dieser Welt, findet mit dem Hilfsmittel der Modellbildung statt. (Reudenbach 2009)*
@@ -65,11 +66,11 @@ Wer räumliche Kompetenz erwerben will, muss alle genannten Aspekte und keineswe
 Definieren wir also GI-Systeme als Werkzeuge, die nach den Regeln der Informationsverarbeitung zu bedienen und zu nutzen sind, dann müssen wir einen Weg finden, um geographisch so widerstreitende Raumrepräsentationen auf nachvollziehbare und reproduzierbare Weise zu definieren und integrieren.
 
 ## Bearbeiten Sie…
-Versuchen Sie einzuordnen welche Relevanz GIS in der universitären Ausbildung und Forschungsarbeit im Fach Geographie hat. Besuchen Sie hierzu eine Auswahl von geographischen Instituten im Internet.
+Versuchen Sie einzuordnen welche Relevanz GI in der universitären Ausbildung und Forschungsarbeit im Fach Geographie hat. Besuchen Sie hierzu eine Auswahl von geographischen Instituten im Internet.
 
----
+
 * Versuchen Sie die Bedeutung von GI im Rahmen der oben angeführten Vorüberlegungen konkret für ihren Studiengang  und der angebotenen Kurse einzuordnen.
 * Schauen Sie stichprobenartig wie Raum und Zeit in den Veröffentlichungen der Wissenschaftlerinnen (Berufsgeographinnen) aufgefasst wird. Welche GI-relevanten Inhalte können Sie identifizieren?
 * Wie ist Ihre Wahrnehmung der Integration von GI-Methodik im eigenen Fachbereich?
 * Benennen Sie einige geographische Fragen, die ohne GI-Methoden auskommen.
----
+
