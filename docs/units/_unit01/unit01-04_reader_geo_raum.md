@@ -10,7 +10,7 @@ Geodaten oder geographische Daten (singl. Datum) liefern räumlich fixierte, mas
 
 Die zentrale Fragestellung lautet: Was ist spezifisch geographisch und wie können wir diese geographische Ableitungen der Wirklichkeit durchführen? Ein typisches Beispiel für Geodaten ist in folgender Aussage kodiert:
 
-“**Die Temperatur am Havanna Airport betrug am Donnerstag, den 17.09.2009 um 08:00 lokaler Zeit 23.0°C. Die Koordinaten lauten: 22° 59′ 21″ N, 82° 24′ 33″ W, 64 m ü. MSL.**”
+**Die Temperatur am Havanna Airport betrug am Donnerstag, den 17.09.2009 um 08:00 lokaler Zeit 23.0°C. Die Koordinaten lauten: 22° 59′ 21″ N, 82° 24′ 33″ W, 64 m ü. MSL.**
 
 Analysieren wir diese Aussage so finden wir alle wesentlichen Elemente der geographischen Repräsentation eines Echtweltobjekts. Die Aussage verbindet Raum (Koordinaten und Höhe) mit Zeit (Datum/Zeitangabe) und der Eigenschaft bzw. dem Attribut der Lufttemperatur. Zusätzlich sind dem derart festgelegten Ort weitere Eigenschaften zugeordnet: Havanna und Airport. Aus dieser Aussage kann schließlich folgendes geographisches Datum gebildet werden:
 
@@ -38,25 +38,26 @@ Geodaten sind Merkmalsausprägungen, die hinsichtlich eines spezifischen Zwecks,
 {: .notice--info}
 
 <html>
- <a  href="https://www.flickr.com/photos/environmentalinformatics-marburg/13898323961" title="01-08-Geoobjekt-schema1 by Environmental Informatics Marburg, on Flickr">``<img src="https://farm8.staticflickr.com/7419/13898323961_21d8beca23_n.jpg" width="50%"  alt="01-08-Geoobjekt-schema1"></a>
+ <a  href="https://www.flickr.com/photos/environmentalinformatics-marburg/13898323961" title="01-08-Geoobjekt-schema1 by Environmental Informatics Marburg, on Flickr">``<img src="https://farm8.staticflickr.com/7419/13898323961_21d8beca23_n.jpg" width="80%"  alt="01-08-Geoobjekt-schema1"></a>
 </html>
 
 *Abbildung 01-08: Schematische Strukturierung eines Geoobjekts in räumliche, dynamische und inhaltliche Aspekte (GIS.MA 2009)*
 
-Versuchen Sie diese sehr abstrakte Sichtweise im GIS-Alltag wiederzufinden. Besuchen Sie die Ihnen evtl. schon bekannten Webseiten, nur dass Sie nun ihren Fokus auf die Art der Repräsentation richten. Welche Merkmale/Merkmalsausprägungen werden genannt (evtl. auch welche werden nicht genannt)? Ist die Abstraktion für den von Ihnen vermuteten Zweck (Zielsetzung) sinnvoll? Ist der geographische Aspekt für Sie ersichtlich?
-
-*    [Sanifair Autobahnen](http://www.sanifair.de/standorte/sanifair/fullscreen?offHighwayStandort=1142770&country=de)
-*    [ Aktuelle Pegel Lahn]( http///www.wetterbote.de/wetter/pegel/lahn.htm )
-*    [ Bad Arolsen]( http///www.hlug.de/medien/luft/recherche/recherche.php?station=1115)
-*    [ Cineplex]( http///www.cineplex.de/kino/home/city32/)
 
 ## Bearbeiten Sie…
-Versuchen Sie sich zu verdeutlichen, dass die Repräsentation von Echtweltausschnitten für unseren Alltag allgegenwärtig ist.
+Versuchen Sie diese sehr abstrakte Sichtweise auf räumliche Daten und Informationen im GIS-Alltag wiederzufinden. Besuchen Sie die  folgenden Webseiten. 
+* Welche Merkmale/Merkmalsausprägungen werden genannt (evtl. auch welche werden nicht genannt)? 
 
----
-*  Gibt es formale/inhaltliche Unterschiede in der geographischen Repräsentation der Marburger Lufthygiene-Messstation und des Marburger Cineplex?
-*  Suchen Sie eigene Beispiele einer formalen geographischen Repräsentation in ihrem Alltag. Wie beschreiben Sie z.B. ihrem neuen Mitbewohner den Weg in die Mensa (ins Seminar, zu einem Buch in der Bibliothek….)?
-*  Versuchen Sie zu identifizieren, wie eine derartige Repräsentation formalisiert werden kann (Tabelle, Baumstruktur, Beschreibung, Zahlen, Bilder…)
+Hier die Links:
 
----
+*    [Öffentliche Toilleten in Australien](https://toiletmap.gov.au/Plan)
+*    [Aktuelle Pegel Lahn](http://www.wetterbote.de/wetter/pegel/lahn.htm)
+*    [Bad Arolsen](http://www.hlug.de/medien/luft/recherche/recherche.php?station=1115)
+*    [Cineplex](http://www.cineplex.de/kino/home/city32/)
+
+
+* Ist die Abstraktion für den von Ihnen *vermuteten* Zweck (Zielsetzung) sinnvoll? 
+* Ist der geographische Aspekt für Sie ersichtlich?
+*  Gibt es formale/inhaltliche Unterschiede in der geographischen Repräsentation der Bad Arolsener Lufthygiene-Messstation und des Marburger Cineplex?
+
 
