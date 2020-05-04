@@ -25,7 +25,7 @@ Darüber hinaus wandelt sich das Verständnis der einzelnen Definitionen mit ein
 Open Source-Konzeption der OSGEO4W Gruppe: GIS als Verbund von kommerziellen oder Open Source-Softwarepaketen (Neteler 2009)
 
 <html>
- <a  href="http://apps.p2g.in/images/osgeo_software_stack.png" title="osgeosoftware stack"><img src="http://apps.p2g.in/images/osgeo_software_stack.png" width="50%"  alt="osgeo softwarestack"></a>
+ <a  href="http://apps.p2g.in/images/osgeo_software_stack.png" title="osgeosoftware stack"><img src="http://apps.p2g.in/images/osgeo_software_stack.png" width="75%"  alt="osgeo softwarestack"></a>
 </html>
 
 
@@ -37,13 +37,12 @@ GIS-Software sind umfassende Softwarewerkzeuge, die sowohl kommerziell als auch 
 ## GIS im Studium Geographie als produktiver Workflow
 
 Projektorientierter Einsatz eines GI-Systems dargestellt als Workflow zur Abstraktion der Echtwelt. Quelle Eigener Entwurf nach (Bill 2008)
+
 <html>
- <a  ="https://www.flickr.com/photos/environmentalinformatics-marburg/13898619726" title="01-11-evap_flow by Environmental Informatics Marburg, on Flickr"><img src="https://farm4.staticflickr.com/3720/13898619726_c8e6cd3379.jpg" width="50%"  alt="01-11-evap_flow"></a>
+<a  href="https://www.flickr.com/photos/environmentalinformatics-marburg/13898619726" title="01-11-evap_flow by Environmental Informatics Marburg, on Flickr"> <img src="https://farm4.staticflickr.com/3720/13898619726_c8e6cd3379.jpg" width="100%"  alt="01-11-evap_flow"></a>
 </html>
 
 *Abbildung 01-11: Projektorientierter Einsatz eines GI-Systems dargestellt als Workflow zur Abstraktion der Echtwelt. Quelle Eigener Entwurf nach (Bill 2008)*
 
-## Bearbeiten Sie...
 
-Betrachten Sie das obiges Ablaufdiagramm. Es versucht die verschiedenen Bereiche von GIS als das Schema einer projektorientierten Arbeitsorganisation darzustellen. Realität wird über ein abstraktes Raummodell in eine konkrete Datenmodellierung überführt. Dies findet mit den EVAP-Elementen der Verwaltung, Integration und Analyse von Daten zur zielorientierten Präsentation statt. Versuchen Sie die Integration der einzelnen Definitionen nachzuvollziehen. Das Modul Geoinformatik im Bachelor-Kurs ist in etwa korrespondierend zur Farbgebung in 4 Blöcke unterteilt (vgl. Abb. 01-11). GIS im geographischen Kontext soll Ihre Kompetenzen und Ihr Verständnis in den B ereichen Welt (Block 1; orange), Datenbestand (Block 2; grau), Analyse (Block 3; blau) und Synthese (Block 1 & 4; grün) stärken.
 
