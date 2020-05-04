@@ -247,21 +247,24 @@ saveRDS(nuts3_kreise,"nuts3_kreise.rds")
 
 # 3 - Ergebnisausgabe und Visualisierung 
 #--------------------
+```
+### Darstellung der Daten mit dem Paket `tmap`
+`tmap` ist das derzeit wohl erfolgreichste und vielseitigste Kartographie-Paket in der R-Welt. Hier ein ganz einfaches Beispiel zuer Erzeugung statischer Karten. 
 
-
-
-
-# Plotten der drei Distanzen
+```r
+# Einstellen der Plotausgabe 1 Reihe , zwei Abbildungen Beschriftungen Stil1
 par(mfrow=c(1,2), las=1)
 # Darstellung mit tmap Farbgebung nach Anteil.Baugewerbe
 tm_shape(nuts3_kreise, projection = 25832) + 
   tm_polygons(c("Anteil.Baugewerbe","Anteil.Hochschulabschluss"),    breaks=seq(0,0.2, by=0.025))
 ```
 
-![]({{ site.baseurl }}/assets/images/unit04/setup-1.png)<!-- -->
+![]({{ site.baseurl }}/assets/images/unit04/tmap-1.png)<!-- -->
 
 *Abbildung 04-01-01: Statische Karte a) Anteil Baugewerbe, b) Anteil Hochschulabschluss*
 
+### Darstellung der Daten mit mapview
+Das Paket `mapview` eignet sich besonders für eine schnelle interaktive Visualisierung der Daten auf der Grundlage einer Vielzahl von webbasierten Karten. Gerade für die explorative Interpretation oder aber auch für die visuelle Überprüfung der korrekten Lage der Daten ist dieses Paket ein sehr gute Alltagsunterstützung.
 
 
 ```r
@@ -270,7 +273,6 @@ tm_shape(nuts3_kreise, projection = 25832) +
 nuts3_kreise = readRDS(paste0(rootDIR,"nuts3_kreise.rds"))
 mapview(nuts3_kreise,zcol="Anteil.Baugewerbe",breaks=seq(0,0.2, by=0.025))+mapview(nuts3_kreise,zcol="Anteil.Hochschulabschluss",breaks=seq(0,0.2, by=0.025))
 ```
-
 Die Karte kann auch mit Hilfe des Pakets `mapview` interaktiv dargestellt werden.
 
 {% include media url="/assets/misc/nuts3_kreise.html" %}
@@ -279,7 +281,7 @@ Die Karte kann auch mit Hilfe des Pakets `mapview` interaktiv dargestellt werden
 *Abbildung 04-01-02: Dynamische Webkarte  mit den Layern a) Anteil Baugewerbe, b) Anteil Hochschulabschluss*
 
 ## Download Skript
-Das Skript kann unter [arbeitsblatt_01]({{ site.baseurl }}/assets/scripts/arbeitsblatt_01.R){:target="_blank"} heruntergeladen werden
+Das Skript kann unter [unit04-01_sitzung.R]({{ site.baseurl }}/assets/scripts/unit04-01_sitzung.R){:target="_blank"} heruntergeladen werden
 
 ## Bearbeiten Sie…
 Versuchen Sie  `R`, `Rstudio` und die notwendigen Pakete zu installieren. Bei Fragen nutzen Sie bitte das Forum. Falls erfolgreich Versuchen Sie bitte folgende Aufgaben zu bearbeiten:

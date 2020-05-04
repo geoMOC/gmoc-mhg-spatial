@@ -202,7 +202,6 @@ hist(r9, main='', col=rev(terrain.colors(10)), xlim=c(0,125000), breaks=seq(0, 1
 *Abbildung 04-02-04: 3x3 Matrix der unterschiedlichen Zonen-Histogramme*
 
 
-
 ## Distanz
 
 Als Distanz wird die Entfernung von zwei Positionen bezeichnet. Sie kann zunächst einmal als ein zentrales Konzept der Geographie angenommen werden. Erinnern sie sich an Waldo Toblers ersten Satz zur Geographie, dass "*alles mit allem anderen verwandt ist, aber nahe Dinge mehr verwandt sind als ferne Dinge*".  Die Entfernung ist scheinbar sehr einfach zu bestimmen. Natürlich können wir die Entfernung auf eine isometrischen und isomorhpen Fläche mittels der "*Luftlinie*" (euklidische Distanz) berechnen. Zentrales Problem ist das diese Betrachtung häufig wenn in der Regel nicht relevant ist. Es gibt nicht nur (nationale) Grenzen, Gebirge oder beliebige andere Hindernisse, die Entfernung zwischen A und B kann auch asymmetrisch sein (bergab geht's einfacher und  schneller  als bergauf). Das heißt Distanzen können auch über z.B. *Distanzkosten* gewichtet werden.
@@ -210,9 +209,17 @@ Als Distanz wird die Entfernung von zwei Positionen bezeichnet. Sie kann zunäch
 Üblicherweise werden Distanzen in einer "Distanzmatrix" dargestellt. Eine solche Matrix enthält als Spaltenüberschriften und als Zeilenbeschriftung die Kennung von jedem berechneten Ort. Im jedem Feld wird die Entfernung eingetragen. Für kartesische Koordinaten erfolgt dies einfach über den Satz des Pythagoras.
 
 Betrachten wir diese Zusammenhänge einmal ganz praktisch:
+### Berechnen der Distanz-Matrix
+Wir erstellen für eine Anzahl Punkte eine Distanzmatrix. Wenn die Positionen in Länge/Breite angegeben sind wird es deutlich aufwendiger. In diesem Fall können wir die Funktion `pointDistance` aus dem `raster` Paket verwenden (allerdings nur wenn das Koordinatensystem korrekt angegeben wird). Eleganter ist jedoch die Erzeugung von Punktdaten als `sf` Objekt. Es ist leicht möglich  beliebige reale Punktdaten mit Hilfe des `tidygeocoder` Pakets zu erzeugen.Wir geben lediglich eine Städte oder Adressliste an.
 
-Wir erstellen für eine Anzahl Punkte eine Distanzmatrix. Wenn die Positionen in Länge/Breite angegeben sind wird es deutlich aufwendiger. In diesem Fall können wir die Funktion `pointDistance` aus dem `raster` Paket verwenden (allerdings nur wenn das Koordinatensystem korrekt angegeben wird). Eleganter ist jedoch die Erzeugung von Punktdaten als `sf` Objekt. Es ist leicht möglich  beliebige reale Punktdaten mit Hilfe des `tidygeocoder` Pakets zu erzeugen.Wir geben lediglich eine Städte oder Adressliste an:
 
+#### R-Spielerei
+Erzeugen Sie eine eigene Städteliste.
+{: .notice--warning}
+
+### Erzeugen einer geokodierten Punktliste
+ Zur direkten Überprüfung ob die Punkte richtig geokodiert sind eignet sich nach Erzeugung des Punkte-Objekts die Funktion  `mapview` hervorragend.
+ 
 
 ```r
 # Erzeugen von beliebigen Punkten mit Hilfe von tidygeocoder
@@ -231,41 +238,50 @@ coord_city = lapply(staedte, function(x){
 # Umwandeln der Liste in eine Matrix mit den Stadtnamen und Spalten die Lat Lon benannt sind
 geo_coord_city = do.call("rbind", coord_city)
 
-# plotten der Punkte
+# visualize with mapview
 mapview(geo_coord_city,  color='red',legend = FALSE)
 ```
 
-
-Zuerst die Ausgabe mit dem Paket `mapview`.
-
 {% include media url="/assets/misc/geo_city_city.html" %}
-[Full-screen version of the map]({{ site.baseurl }}/assets/misc/geo_city_city.html){:target="_blank"}
+[Full-Screen Version der Karte]({{ site.baseurl }}/assets/misc/geo_city_city.html){:target="_blank"}
 
 *Abbildung 04-02-05: Webkarte mit den erzeugten Punktdaten. In diesem Falle zehn nicht ganz zufällige Städte Deutschlands*
 
-Dann die klassische Variante mit der `plot` Funktion.
+### Plotten der Daten mit der plot Funktion
+Die klassische Variante mit der `plot` Funktion ist ist zwar für den Alltag sehr einfach zu nutzen aber für das Erstellen anspruchsvollerer Grafiken oder Karten aber im Detail doch sehr aufwändig. Da wir es hier mit einem `R` Vektorobjekt des  Paket `sf` zu tun haben kann die "Veteran-Funktion" `plot()`  nicht direkt mit den Koordinaten umgehen. Hierfür nutzen wir die Funktion `st_coordinates()`  die auf die Koordinatenpaare zugreift und diese als Matrix zurückgibt. Da es sich um einen `data.frame` (also die R-Tabelle) handelt kann mit den eckigen Klammern beliebig auf Spalten zugegriffen werden. 
 
 
 ```r
-# Festlegen der Grafik-Ausgabe
-
 # klassisches Plotten eines sf Objects  erfordert den Zugriff auf die Koordinatenpaare
 # mit Hilfe der Funktion st_coordinates(geo_coord_city) leicht möglich
-# mit Hilfe der Funktion min(st_coordinates(geo_coord_city)[,1]) werden 
-# minimum und maximum Ausdehnung bestimmt 
+# schliesslich wird mit der Funktion text() die Beschriftung hinzugefügt
 plot(st_coordinates(geo_coord_city),
-     xlim = c(min(st_coordinates(geo_coord_city)[,1]) - 0.5 
-              ,max(st_coordinates(geo_coord_city)[,1]) + 1), 
-     ylim = c(min(st_coordinates(geo_coord_city)[,2]) - 0.5
-              ,max(st_coordinates(geo_coord_city)[,2]) + 0.5),
      pch=20, cex=1.5, col='darkgreen', xlab='Längengrad', ylab='Breitengrad')
 text(st_coordinates(geo_coord_city), labels = staedte, cex=1.2, pos=4, col="purple")
 ```
 
 <img src="{{ site.baseurl }}/assets/images/unit04/points-2-1.png" width="800px" height="600px" />
 
+#### R-Spielerei
+Mit Hilfe der Funktion `min(st_coordinates(geo_coord_city)[,1])` kann der Minimum-X-Wert ermittelt werden. Analog gilt das für die übrigen Werte. Das Aufaddieren von 0.5 dient nur der besseren Platzierung der Beschriftung. Bauen sie die unten auskommentierten so in den Plot-Befehl ein, dass die Beschriftung von Berlin sichtbar wird. Besdenken Sie dass die einzelnen Elemente des Plot Befehls wie in einer Liste durch Kommata getrennt werden.
+{: .notice--warning}
+
+
+```r
+## mit Hilfe der Funktion min(st_coordinates(geo_coord_city)[,1]) werden 
+## minimum und maximum Ausdehnung bestimmt 
+## xlim und ylim sind die Minimum und Maximum Koordinaten der Plotausdehnung
+
+# xlim = c(min(st_coordinates(geo_coord_city)[,1])  - 0.5 
+#         ,max(st_coordinates(geo_coord_city)[,1]) + 0.5)
+
+# ylim = c(min(st_coordinates(geo_coord_city)[,2])  - 0.5
+#         ,max(st_coordinates(geo_coord_city)[,2]) + 0.5)
+```
+
 *Abbildung 04-02-06: Klassische Plot-Ausgabe mit den erzeugten Punktdaten. Erneut zehn nicht ganz zufällige Städte Deutschlands*
 
+### Distanzberechnung von Geokoordinaten
 Die Berechnung der Distanzen zwischen den 10 Städten greift einigermaßen tief in Geodaten-Verarbeitung ein. Die Punkte werden über die Funktion `tidygeocoder::geo_osm` mit Hilfe der Stadtnamen erzeugt. Standardisiert werden Kugelkoordinaten (also geographische Koordinaten) erzeugt also Längen und Breitengrade auf Grundlage des WGS84 Datum. Auf einem Ellipsoid ist es deutlich aufwendiger (oder fehlerträchtiger) Entfernungen zu rechnen als in in einem projizierten (also kartesischen) Koordinatensystem da hier sphärische Trigonometrie im Gegensatz zum Satz des Pythagoras zur Anwendung kommt.
 
 Daher transformieren wir zunächst den Datensatz in das amtlich gültige [Referenzsystem](https://de.wikipedia.org/wiki/Europ%C3%A4isches_Terrestrisches_Referenzsystem_1989) für Deutschland nämlich `ETRS89/UTM`. Zur Zuweisung werden viele konkurrierende Systeme verwendet. Im nachstehenden Beispiel nutzen wir die [EPSG](https://de.wikipedia.org/wiki/European_Petroleum_Survey_Group_Geodesy#EPSG-Codes) Konvention. Für das zuvor genannte System ist das der [EPSG-Code 25832](https://epsg.io/25832).
@@ -305,33 +321,21 @@ dist_setNames(city_distanz, staedte)
 ```
 
 ```r
-city_distanz
+round(city_distanz,0)
 ```
 
 ```
-##           1        2        3        4        5        6        7        8
-## 2  504156.6                                                               
-## 3  611337.7 253841.6                                                      
-## 4  456511.6 477393.1 356810.5                                             
-## 5  434329.5 478145.8 370325.9  24607.7                                    
-## 6  489061.8 248686.4 131348.9 249893.3 258162.1                           
-## 7  150928.4 377495.0 460900.6 337014.5 318118.3 338167.6                  
-## 8  190926.8 511243.2 533104.9 288316.8 264173.9 401815.7 157508.4         
-## 9  278029.8 639022.5 635366.9 333440.4 309440.8 505124.9 287407.8 131404.0
-## 10 359924.1 371191.0 315365.1 128538.4 118421.0 186154.7 223271.1 227925.4
-##           9
-## 2          
-## 3          
-## 4          
-## 5          
-## 6          
-## 7          
-## 8          
-## 9          
-## 10 320161.6
+##         1      2      3      4      5      6      7      8      9
+## 2  504157                                                        
+## 3  611338 253842                                                 
+## 4  456512 477393 356811                                          
+## 5  434330 478146 370326  24608                                   
+## 6  489062 248686 131349 249893 258162                            
+## 7  150928 377495 460901 337014 318118 338168                     
+## 8  190927 511243 533105 288317 264174 401816 157508              
+## 9  278030 639023 635367 333440 309441 505125 287408 131404       
+## 10 359924 371191 315365 128538 118421 186155 223271 227925 320162
 ```
-
-
 
 Wir erzeugen aus der Distanz-Matrix `class = dist` eine normale R-Matrix. Leider müssen dann die Namen wieder zugewiesen werden.
 
@@ -345,7 +349,11 @@ colnames(city_distanz)=staedte
 
 
 ```r
-# Ausgabe einer hübscheren Tabelle mit kintr::kable die Notation ist das sogennante pipen aus der tidyverse Welt
+# Ausgabe einer hübscheren Tabelle mit kintr::kable 
+# die Notation mit ist das sogennante "pipen" aus der tidyverse Welt
+# hier werden die Daten und Verarbeitungsschritte von der erstenVariable in
+# die nächste weitergeleitet
+
 knitr::kable(city_distanz) %>%
   kable_styling(bootstrap_options = "striped", full_width = F)
 ```
@@ -939,7 +947,7 @@ plot(kreise_dist_k5, lwd =1, coords, add=TRUE,col="red")
 
 #### Distanz-basierte Nachbarschaft
 
-nachfolgend wird für den Mittelwert, das dritte Quartil und den Maximalwert der Distanzverteilung aller Kreis-Zentroide die Nachbarschaft bestimmt.
+Nachfolgend wird für den Mittelwert, das dritte Quartil und den Maximalwert der Distanzverteilung aller Kreis-Zentroide die Nachbarschaft bestimmt.
 
 
 ```r
@@ -1020,13 +1028,10 @@ plot(nuts3_kreise_rook, coords, col='red', lwd=2, add=TRUE)
 
 Wie bereits bekannt ist hängt der Wert von Morans I deutlich von den Annahmen ab, die in die räumliche Gewichtungsmatrix verwendet werden. Die Idee ist, eine Matrix zu konstruieren, die Ihre Annahmen über das jeweilige räumliche Phänomen passend wiedergibt. Der übliche Ansatz besteht darin, eine Gewichtung von 1 zu geben, wenn zwei *Zonen* Nachbarn sind falls nicht wird eine 0 vergeben. Natürlich variiert die Definition von *Nachbarn* (vgl. Reader räumliche Konzepte und oben). Quasi-kontinuierlich ist der Ansatz eine inverse Distanzfunktion zur Bestimmung der Gewichte zu verwenden. Auch wenn in der Praxis fast nie vorzufinden sollte die Auswahl räumlicher Gewichtungsmatritzen das betreffende Phänomen abbilden. So ist die Benachbartheit entlang von Autobahnen für Warentransporte anders zu gewichten als beispielsweise über ein Gebirge oder einen See.
 
-Der Moran-I-Test und der Geary C Test sind übliche Verfahren für die Überprüfung räumlicher Autokorrelation. Das Geary's-C ist invers mit Moran's-I, aber nicht identisch. Moran's-I ist eher ein Maß für die globale räumliche Autokorrelation, während Geary's-C eher auf eine lokale räumliche Autokorrelation reagiert. 
+Der Moran-I-Test und der Geary C Test sind übliche Verfahren für die Überprüfung räumlicher Autokorrelation. Das Geary's-C ist invers mit Moran's-I, aber nicht identisch. Moran's-I ist eher ein Maß für die globale räumliche Autokorrelation, während Geary's-C eher auf eine lokale räumliche Autokorrelation reagiert. Hier die gängige Formel für Moran's I:
 
 \\[I = \frac{n}{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}
 \frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(x_i-\bar{x})(x_j-\bar{x})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}\\]
-
-\\[ C = \frac{(n-1)}{2\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}
-\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(x_i-x_j)^2}{\sum_{i=1}^{n}(x_i - \bar{x})^2}\\]
 
 
 wobei \\(x_i, i=1, \ldots, n\\)   \\({n}\\) Beobachtungen der interessierenden numerischen Variablen und \\(w_{ij}\\) die räumlichen Gewichte sind.
@@ -1104,6 +1109,9 @@ moran.plot (residuen_uni_bau, nuts3_gewicht)
 
 *Abbildung 04-02-08: Moran-I Plot*
 
+#### R-Spielerei
+Mit Hilfe der Funktion `poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)` wird eine Nachbarschaftsbeziehung erzeugt. Erzeugen Sie für eine distanzbasierte Nachbarschaft mit einer *Queens-Nachbarschaft*, die das erste Quartil der Distanzverteilung als Schwellwert nutzt analog zum gegebenen Beispiel einen Moran I Monte Carlo Test
+{: .notice--warning}
 
 Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 
 
