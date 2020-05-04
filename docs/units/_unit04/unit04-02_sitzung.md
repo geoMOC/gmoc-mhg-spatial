@@ -79,10 +79,10 @@ set.seed(0)
 
 
 # Normalverteilte Erzeugung von zufälligen der Koordinatenpaaren
-# in der Spannweite  der Ausdehnung der nuts3_kreise Daten
+# in der Ausdehnung  der Ausdehnung der nuts3_kreise Daten
 xy <- cbind(x=runif(10000, extent(nuts3_kreise)[1], extent(nuts3_kreise)[3]), y=runif(10000, extent(nuts3_kreise)[2], extent(nuts3_kreise)[4]))
 
-# Normalverteilte Erzeugung Einkommensdaten
+# Normalverteilte Erzeugung von Einkommensdaten
 income <- (runif(10000) * abs((xy[,1] - (extent(nuts3_kreise)[1] - extent(nuts3_kreise)[3])/2) * (xy[,2] - (extent(nuts3_kreise)[2] - extent(nuts3_kreise)[4])/2))) / 500000000
 ```
 
