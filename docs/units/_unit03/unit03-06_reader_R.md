@@ -1,7 +1,7 @@
 ---
 title: "Example: if - else"
 toc: true
-toc_label: In this example
+toc_label: Inhalt
 ---
 
 Entscheidungsstrukturen sind die Kontrollstruktur in einer Analyse. Hier wird entschieden **was** in einem **spezifischen** Fall **wie** weiter abgearbeitet wird. Im folgenden Beispiel wird a mit b über den Operator *kleiner* verglichen:

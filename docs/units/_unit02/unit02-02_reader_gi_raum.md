@@ -1,7 +1,7 @@
 ---
 title: Raumrepräsentation in der GI
 toc: true
-toc_label: In this worksheet
+toc_label: Inhalt
 ---
 ## Raum im GIS
 

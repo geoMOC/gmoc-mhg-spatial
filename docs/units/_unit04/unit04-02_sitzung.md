@@ -1,16 +1,17 @@
 ---
 title: "Sitzung 2: -  Region, Distanz und räumlicher Einfluß"
 toc: true
-toc_label: In this example
+toc_label: Inhalt
 ---
 
 
+Geodaten sind prinzipiell wie gewöhnliche Daten zu betrachten. Allerdings sind die Aspekte der Skala, der Zonierung (aggregierte  Flächeneinheiten), der Topologie (der Lage im Verhältnis zu anderen Entitäten) der Geometrie (Entfernung zueinander) eine Ableitung aus der Grundeigenschaft dass Geodaten eine Position im Raum besitzen. <!--more-->
 
-Geodaten sind prinzipiell wie gewöhnliche Daten. Allerdings sind die Aspekte, die bei der Verwendung von Geodaten zu beachten sind auf Fragen der Skala, der Zonierung (aggregierte  Flächeneinheiten) der Topologie (der Lage im Verhältnis zu anderen Entitäten) und am einfachsten der Entfernung zueinander. <!--more-->
+Im Rahmen der räumlichen Statistik wirft das Fragen der räumlichen Autokorrelation bzw. Inhomogenität auf. Also letztlich Fragen welche Raumkonstruktion auf welcher Skala einen Einfluss auf meine Fragestellung hat.
 
-Dies berührt fragen der der räumlichen Autokorrelation und Inhomogenität, also letztlich der Konzeption auf welcher Skala hat Raum einen Einfluss.
+Die klassischen Bereiche der räumlichen Statistik sind Punktmusteranalyse, Regression und Inferenz mit räumlichen Daten, dann die Geostatistik (Interpolation z.B. mit Kriging) sowie  Methoden zur lokalen und globalen Regression und Klassifikation mit räumlichen Daten. 
 
-Die klassischen Bereiche der räumlichen Statistik sind Punktmusteranalyse, Regression und Inferenz mit räumlichen Daten, dann die Geostatistik (Interpolation z.B. mit Kriging) sowie  Methoden zur lokalen und globalen Regression und Klassifikation mit räumlichen Daten.
+Nahezu alle genannten Bereiche werden üblicherweise auf  und deren Repräsentation in unserem Modell, ist wie im Abschnitt  [Vektordatenmodellen]({{ site.baseurl }}{% link _unit02/unit02-02_reader_gi_raum.md %}) bearbeitet. D.h. Es handelt sich üblicherweise um diskrete Null-, Ein- und Zwei-Dimensionale Objekte.
 
 
 ## Lernziele
@@ -62,8 +63,10 @@ Bei der visuellen Exploration aber auch bei der statistischen Analyse ist es von
 
 Betrachten wir diese Zusammenhänge einmal ganz praktisch mit unserem Datensatz.
 
-Um den Zusammenhang von Zonierung und Aggregation grundsätzlich zu verstehen erzeugen wir einen synthesischen Datensatz, der eine *Region* (angenommen wird die gesamte Ausdehnung Deutschlands) mit 10000 *Haushalten* enthält. Für jeden Haushalt ist der Ort und sein Jahreseinkommen bekannt. In einem nächsten Schritt werden die Daten in unterschiedliche Zonen aggregiert. Zunächst werden die `nuts3_kreise` eingeladen. Sie dienen der Georefrenzierung der Beispiel-Daten. Zunächst wir ein Datensatz von 10k zufällig über dem Gebiet Deutschlands verteilter Koordinaten erzeugt. Diesem werden dann zufällige Einkommensdaten zu-gewürfelt.
+Um den Zusammenhang von Zonierung und Aggregation grundsätzlich zu verstehen erzeugen wir einen synthesischen Datensatz, der eine *Region* (angenommen wird die gesamte Ausdehnung Deutschlands) mit 10000 *Haushalten* enthält. Für jeden Haushalt ist der Ort und sein Jahreseinkommen bekannt. In einem nächsten Schritt werden die Daten in unterschiedliche Zonen aggregiert. Zunächst werden die `nuts3_kreise` eingeladen. Sie dienen der Georefrenzierung der Beispiel-Daten. Zunächst wir ein Datensatz von 10k zufällig über dem Gebiet Deutschlands verteilter Koordinaten erzeugt. Diesem werden dann zufällige Einkommensdaten zugewürfelt.
 
+GI-konzeptionell erzeugen wir jetzt Tabellen die einerseits  (Variable `xy`) Geokoordinaten enthalten, andererseits in der Variablen  `income` eine Merkmalsausprägung in Form von Haushaltseinkommen enthalten. Streng genommen handelt es sich darum bereits um ein vollständigen Datensatz mit [Geodaten]({{ site.baseurl }}{% link _unit01/unit01-04_reader_geo_raum.md %}) bearbeitet.
+{: .notice--primary}
 
 
 ```r
@@ -131,6 +134,9 @@ plot(Lc(income),col="darkred",lwd=2)
 
 Um die Bedeutung unterschiedlicher Regionen in Bezug auf die aggregierten Daten zu zeigen werden mit Hilfe des `raster` Pakets neun unterschiedliche  Regionalisierungen mit der Ausdehnung und Georeferenzierung von Deutschland erzeugt. 
 
+GI-konzeptionell erzeugen wir jetzt ein kontinuierliches Raster das aus einer  Anzahl von Reihen (`nrow`) und Spalten (`ncol`) besteht. Diesem *leeren* Raster wird die Ausdehnung und Georefrenzierung aus unserem bereits als `sf` Geoobjekt exisistierenden `nuts3_kreise` zugewiesen (`xmn=extent(nuts3_kreise)[1]`...). Schliesslich werden die zuvor erzeugten Werte (Variable `income`) an den Positionen  `xy`) in diese leeren Raster einggetragen. Fertig ist ein Geodatensatz im Rasterdatenmodell.
+{: .notice--primary}
+
 
 ```r
 # create different sized and numbered regions
@@ -162,6 +168,7 @@ Die einzelnen Grafiken verdeutlichen wie die räumliche Anordnung der Zonen vert
 par(mfrow=c(3,3), las=1)
 
 # Plotten der 9 Regionen
+# in main wird der Titel für jede Grafik definiert
 plot(r1,main="ncol=1, nrow=4"); plot(r2,main="ncol=4, nrow=1");
 plot(r3,main="ncol=2, nrow=2"); plot(r4,main="ncol=3, nrow=3");
 plot(r5,main="ncol=5, nrow=5"); plot(r6,main="ncol=10,nrow=10");
@@ -207,12 +214,12 @@ Als Distanz wird die Entfernung von zwei Positionen bezeichnet. Sie kann zunäch
 
 Betrachten wir diese Zusammenhänge einmal ganz praktisch:
 ### Berechnen der Distanz-Matrix
-Wir erstellen für eine Anzahl Punkte eine Distanzmatrix. Wenn die Positionen in Länge/Breite angegeben sind wird es deutlich aufwendiger. In diesem Fall können wir die Funktion `pointDistance` aus dem `raster` Paket verwenden (allerdings nur wenn das Koordinatensystem korrekt angegeben wird). Eleganter ist jedoch die Erzeugung von Punktdaten als `sf` Objekt. Es ist leicht möglich  beliebige reale Punktdaten mit Hilfe des `tidygeocoder` Pakets zu erzeugen.Wir geben lediglich eine Städte oder Adressliste an.
+Wir erstellen für eine Anzahl Punkte eine Distanzmatrix. Wenn die Positionen in Länge/Breite angegeben sind wird es deutlich aufwendiger. In diesem Fall können wir die Funktion `pointDistance` aus dem `raster` Paket verwenden (allerdings nur wenn das Koordinatensystem korrekt angegeben wird). Eleganter ist jedoch die Erzeugung von Punktdaten als `sf` Objekt. Es ist leicht möglich  beliebige reale Punktdaten mit Hilfe des `tidygeocoder` Pakets zu erzeugen. Wir geben lediglich eine Städte oder Adressliste an.
+
+GI-konzeptionell erzeugen wir jetzt ein Vektordatenmodell das aus einer  Anzahl von Koordinaten besteht. Anderes als in der Eingangsübung nutzen wir diesmal Städtenamen (Merkmalsausprägung) und einen Webservice der die passenden Koordinaten abfragt (Positionen). In der `lapply` Schleife werden diese abgefragt und als `sf` Objekt zusammengefügt. Fertig ist ein Geodatensatz im Vektordatenmodell.
+{: .notice--primary}
 
 
-#### R-Spielerei
-Erzeugen Sie eine eigene Städteliste.
-{: .notice--warning}
 
 ### Erzeugen einer geokodierten Punktliste
  Zur direkten Überprüfung ob die Punkte richtig geokodiert sind eignet sich nach Erzeugung des Punkte-Objekts die Funktion  `mapview` hervorragend.
@@ -244,6 +251,10 @@ mapview(geo_coord_city,  color='red',legend = FALSE)
 [Full-Screen Version der Karte]({{ site.baseurl }}/assets/misc/geo_city_city.html){:target="_blank"}
 
 *Abbildung 04-02-05: Webkarte mit den erzeugten Punktdaten. In diesem Falle zehn nicht ganz zufällige Städte Deutschlands*
+
+#### R-Spielerei
+Erzeugen Sie eine eigene Städteliste.
+{: .notice--warning}
 
 ### Plotten der Daten mit der plot Funktion
 Die klassische Variante mit der `plot` Funktion ist ist zwar für den Alltag sehr einfach zu nutzen aber für das Erstellen anspruchsvollerer Grafiken oder Karten aber im Detail doch sehr aufwändig. Da wir es hier mit einem `R` Vektorobjekt des  Paket `sf` zu tun haben kann die "Veteran-Funktion" `plot()`  nicht direkt mit den Koordinaten umgehen. Hierfür nutzen wir die Funktion `st_coordinates()`  die auf die Koordinatenpaare zugreift und diese als Matrix zurückgibt. Da es sich um einen `data.frame` (also die R-Tabelle) handelt kann mit den eckigen Klammern beliebig auf Spalten zugegriffen werden. 
@@ -1108,7 +1119,7 @@ moran.plot (residuen_uni_bau, nuts3_gewicht)
 *Abbildung 04-02-08: Moran-I Plot*
 
 #### R-Spielerei
-Mit Hilfe der Funktion `poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)` wird eine Nachbarschaftsbeziehung erzeugt. Erzeugen Sie für eine distanzbasierte Nachbarschaft mit einer *Queens-Nachbarschaft*, die das erste Quartil der Distanzverteilung als Schwellwert nutzt analog zum gegebenen Beispiel einen Moran I Monte Carlo Test
+Mit Hilfe der Funktion `poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)` wird eine Nachbarschaftsbeziehung erzeugt. Erzeugen Sie für eine distanzbasierte Nachbarschaft mit einer *Queens-Nachbarschaft*, die das erste Quartil der Distanzverteilung als Schwellwert nutzt analog zum gegebenen Beispiel einen Moran I Monte Carlo Test.
 {: .notice--warning}
 
 ## Wo gibt's mehr?

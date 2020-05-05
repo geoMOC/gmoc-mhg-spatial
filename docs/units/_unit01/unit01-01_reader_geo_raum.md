@@ -1,7 +1,7 @@
 ---
 title: Raum braucht einen Geltungsbereich
 toc: true
-toc_label: In this worksheet
+toc_label: Inhalt
 ---
 
 

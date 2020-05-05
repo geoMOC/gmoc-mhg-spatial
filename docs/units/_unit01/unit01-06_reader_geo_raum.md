@@ -1,7 +1,7 @@
 ---
 title: Zusammenfassung – Geographischer Raum
 toc: true
-toc_label: In this worksheet
+toc_label: Inhalt
 ---
 
 Sie sind für die erkenntnistheoretischen und wissenschaftlichen Grundideen räumlicher Abstraktionskonzepte in der Geographie sensibilisiert worden. 

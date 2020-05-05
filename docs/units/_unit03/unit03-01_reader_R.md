@@ -1,7 +1,7 @@
 ---
 title: R und Rstudio
 toc: true
-toc_label: In this worksheet
+toc_label: Inhalt
 ---
 
 Die statistische Programmiersprache `R`, die Sie in diesem Kurs verwenden werden (und die von vielen anderen Wissenschaftlern verwendet wird, ist ein nicht nur aus der statistischen Datenanalyse kaum weg zudenkendes Werkzeug sondern es ist eine sehr stark an Bedeutung gewinnende Programmierumgebung für nahezu alle Zwecke. <!--more-->

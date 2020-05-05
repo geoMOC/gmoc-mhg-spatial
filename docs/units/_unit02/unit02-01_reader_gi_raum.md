@@ -1,7 +1,7 @@
 ---
 title: Raumrepräsentation in der GI
 toc: true
-toc_label: In this worksheet
+toc_label: Inhalt
 ---
 
 Wenn wir die reale Welt, im Folgenden auch als Echtwelt oder Realwelt bezeichnet, in Form einer Karte oder in einem Geoinformationssystem abbilden wollen, müssen wir abstrahieren. Das bedeutet, dass wir einzelne Aspekte der Realwelt in den Fokus unserer Abbildung stellen und soweit vereinfachen und generalisieren, dass sie mit den uns zur Verfügung stehenden Methoden tatsächlich abgebildet werden können.<!--more--> Beispielsweise kann man in einer auf Papier gedruckten Karte (2D) kein mit den Händen greifbares Hochhaus (3D) abbilden, aber z. B. eine perspektivische Zeichnung eines Hochhauses einfügen. Das in irgendeiner Form gezeichnete Hochhaus stellt also eine Abbildung des realen Hochhauses dar. Es repräsentiert in unserer Abbildung das Hochhaus, weshalb man auch von Repräsentation bzw. Repräsentation der Echtwelt spricht.

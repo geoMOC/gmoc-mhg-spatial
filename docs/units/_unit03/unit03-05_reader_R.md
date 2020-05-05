@@ -1,7 +1,7 @@
 ---
 title: "Beispiel: For-Schleifen"
 toc: true
-toc_label: In this example
+toc_label: Inhalt
 ---
 
 For Schleifen sind die Grundform um wiederholt die gleichen  Aktionen ausführenzu lassen. Konkret wenn ich für eine bekannte Anzahl von Elementen oder Wiederholungen die gleiche Zeile oder den gleichen Block Programm-Code ausführen möchte nutze ich eine For-Schleife.

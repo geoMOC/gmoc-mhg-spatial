@@ -1,7 +1,7 @@
 ---
 title: "Beispiel: List Basics"
 toc: true
-toc_label: In this example
+toc_label: Inhalt
 ---
 
 

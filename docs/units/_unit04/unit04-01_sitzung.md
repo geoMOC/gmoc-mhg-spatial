@@ -1,7 +1,7 @@
 ---
 title: "Sitzung 1: - Datentabellen und Geometrien"
 toc: true
-toc_label: In this example
+toc_label: Inhalt
 ---
 
 

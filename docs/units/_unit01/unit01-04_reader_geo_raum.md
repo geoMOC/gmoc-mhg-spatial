@@ -1,7 +1,7 @@
 ---
 title: Geographische Daten
 toc: true
-toc_label: In this worksheet
+toc_label: Inhalt
 ---
 
 Trotz der bisherigen Erläuterungen ist die Beantwortung der Frage „Was sind geographische Daten bzw. Geodaten?“ nicht richtig greifbar. Bislang erscheint die Abstraktion willkürlich und nicht nachvollziehbar zu sein.
