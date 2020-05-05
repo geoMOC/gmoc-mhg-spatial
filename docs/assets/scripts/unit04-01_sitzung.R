@@ -1,4 +1,4 @@
-## ----kintr_setup, include=FALSE--------------------------------------------
+## ----kintr_setup, include=FALSE---------------------------------------
 rootDIR="~/Schreibtisch/spatialstat_SoSe2020/"
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(cache.path = paste0(rootDIR,'/cache/'))
@@ -7,7 +7,7 @@ knitr::opts_chunk$set(fig.path='{{ site.baseurl }}/assets/images/unit04/')
 
 
 
-## ----setup, echo=TRUE,message=FALSE, warning=FALSE-------------------------
+## ----setup, echo=TRUE,message=FALSE, warning=FALSE--------------------
 #---------------------------------------------------------
 # merge_LAU_NUTS3.R 
 # Autor: Chris Reudenbach, creuden@gmail.com
@@ -152,7 +152,7 @@ saveRDS(nuts3_kreise,"nuts3_kreise.rds")
 #--------------------
 
 
-## ----mapview, echo=TRUE,message=FALSE, warning=FALSE-----------------------
+## ----tmap, echo=TRUE,message=FALSE, warning=FALSE---------------------
 
 # Einstellen der Plotausgabe 1 Reihe , zwei Abbildungen Beschriftungen Stil1
 par(mfrow=c(1,2), las=1)
@@ -160,4 +160,11 @@ par(mfrow=c(1,2), las=1)
 tm_shape(nuts3_kreise, projection = 25832) + 
   tm_polygons(c("Anteil.Baugewerbe","Anteil.Hochschulabschluss"),    breaks=seq(0,0.2, by=0.025))
 
+
+
+## ----mapview, echo=TRUE,message=FALSE, warning=FALSE,results=FALSE----
+# Interaktive Darstellung mit Mapview Farbgebung nach Anteil.Baugewerbe
+# note you have to switch the layers on the upper left corner
+nuts3_kreise = readRDS(paste0(rootDIR,"nuts3_kreise.rds"))
+mapview(nuts3_kreise,zcol="Anteil.Baugewerbe",breaks=seq(0,0.2, by=0.025))+mapview(nuts3_kreise,zcol="Anteil.Hochschulabschluss",breaks=seq(0,0.2, by=0.025))
 

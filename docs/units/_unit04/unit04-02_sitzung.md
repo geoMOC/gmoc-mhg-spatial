@@ -1,5 +1,5 @@
 ---
-title: "Sitzung 2: -  Region, Distanz und räumlicher Einfluß"
+title: "Sitzung 2: Region, Distanz und räumlicher Einfluß"
 toc: true
 toc_label: Inhalt
 ---
