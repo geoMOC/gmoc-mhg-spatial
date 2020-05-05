@@ -229,20 +229,28 @@ GI-konzeptionell erzeugen wir jetzt ein Vektordatenmodell das aus einer  Anzahl 
  
 
 ```r
-# Erzeugen von beliebigen Punkten mit Hilfe von tidygeocoder
+# Erzeugen von beliebigen Raumkoordinaten 
+# mit Hilfe von tidygeocoder::geo_osm und sf
 # Städteliste
 staedte=c("München","Berlin","Hamburg","Köln","Bonn","Hannover","Nürnberg","Stuttgart","Freiburg","Marburg")
 
 # Abfragen der Geokoordinaten der Städte mit eine lapply Schleife
+# 1) die Stadliste wird in die apply Schleife (eine optimierte for-Schleife) eingelesen
+# 2) für jeden Namen (X) in der Liste wird mit geo_osm die
+# Koordinate ermittelt Die in eckigen Klammern angegebne Position 2
+# ist die Latitude  (geo_osm(x)[2]) [1] enstprechend die Longitude
+# 3) Umwandlung in numerische Werte
+# 4) Jedes latlon Paar wird in einen sf-Punkt konvertiert und
+# gleichzeitig das korrekte Georefrenzierungssystem zugewiesen (cres = 4326)
+# 5) Zuletzt werden an die Koordinatenpaare die Städtenamen angehangen
 coord_city = lapply(staedte, function(x){
   latlon = c(geo_osm(x)[2],geo_osm(x)[1])
   class(latlon) = "numeric"
   p = st_sfc(st_point(latlon), crs = 4326)
   st_sf(name = x,p)
-  #st_sf(p)
 })
 
-# Umwandeln der Liste in eine Matrix mit den Stadtnamen und Spalten die Lat Lon benannt sind
+# Umwandeln der aus der lapply Schleife zurückgegebnen Liste in eine Matrix 
 geo_coord_city = do.call("rbind", coord_city)
 
 # visualize with mapview
