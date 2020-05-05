@@ -1,7 +1,5 @@
 ---
 title: "Inhalt"
-toc: true
-toc_label: Inhalt
 ---
 
 

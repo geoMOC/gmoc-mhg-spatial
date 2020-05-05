@@ -28,10 +28,5 @@ Einige Einstiegsseiten für RStudio:
 
 Um eine *Hau-Ruck-Einführung* in RStudio zu erhalten, ist nachfolgendes  Video ihre erste Wahl:
 * Einführung in die IDE RStudio 
-<style>
-.responsive-wrap iframe{ max-width: 100%;}
-</style>
-<div class="responsive-wrap">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tyvEHQszZJs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<!-- Google embed ends -->
-</div>
+
+{% include video id="tyvEHQszZJs" provider="youtube" %}
