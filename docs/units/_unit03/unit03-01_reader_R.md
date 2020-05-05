@@ -23,8 +23,15 @@ Einige Einstiegsseiten für R:
 Einige Einstiegsseiten für RStudio:
   * Um mit RStudio zu beginnen, [laden Sie es von rstudio.com](https://www.rstudio.com/){:target="_blank"}.
   * Um Hilfe zu erhalten, fragen Sie im Internet nach oder schauen Sie sich die Videos an, die von [RStudios Webinaren](https://resources.rstudio.com/webinars){:target="_blank"} zur Verfügung gestellt werden.
+  * Einen guten Überblick bietet auch folgnde Seite:
+  [RStudios Webinaren](https://education.rstudio.com/learn/beginner/)
 
 Um eine *Hau-Ruck-Einführung* in RStudio zu erhalten, ist nachfolgendes  Video ihre erste Wahl:
-
-<p><a href="https://resources.rstudio.com/wistia-rstudio-essentials-2/rstudioessentialsprogrammingpart1-2?wvideo=k8kz4e0p2v"><img src="https://embedwistia-a.akamaihd.net/deliveries/85f90f89c20cf329c8e6091508fe44c045e70167.jpg?image_play_button_size=2x&amp;image_crop_resized=960x585&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" width="400" height="243.75" style="width: 400px; height: 243.75px;"></a></p><p><a href="https://resources.rstudio.com/wistia-rstudio-essentials-2/rstudioessentialsprogrammingpart1-2?wvideo=k8kz4e0p2v">RStudio Essentials Programming Part 1</a></p>
-
+* Einführung in die IDE RStudio 
+<style>
+.responsive-wrap iframe{ max-width: 100%;}
+</style>
+<div class="responsive-wrap">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tyvEHQszZJs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!-- Google embed ends -->
+</div>
