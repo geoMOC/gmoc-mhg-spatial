@@ -21,10 +21,10 @@ Einige Einstiegsseiten für R:
 
 ## RStudio
 Einige Einstiegsseiten für RStudio:
-  * Um mit RStudio zu beginnen, [laden Sie es von rstudio.com](https://www.rstudio.com/){:target="_blank"}.
+  * Um mit RStudio zu beginnen, laden Sie es von [rstudio.com](https://www.rstudio.com/){:target="_blank"} und installieren es auf Ihrem Rechner.
   * Um Hilfe zu erhalten, fragen Sie im Internet nach oder schauen Sie sich die Videos an, die von [RStudios Webinaren](https://resources.rstudio.com/webinars){:target="_blank"} zur Verfügung gestellt werden.
-  * Einen guten Überblick bietet auch folgnde Seite:
-  [RStudios Webinaren](https://education.rstudio.com/learn/beginner/)
+  * Einen guten Einstieg bietet folgende Seite:
+  [RStudios Education](https://education.rstudio.com/learn/beginner/)
 
 Um eine *Hau-Ruck-Einführung* in RStudio zu erhalten, ist nachfolgendes  Video ihre erste Wahl:
 * Einführung in die IDE RStudio 
