@@ -1,5 +1,5 @@
 ---
-title: "Sitzung 2 - Region, Distanz und räumlicher Einfluß"
+title: 'Sitzung 2: Region, Distanz und räumlicher Einfluß'
 toc: true
 toc_label: Inhalt
 ---
@@ -65,7 +65,7 @@ Betrachten wir diese Zusammenhänge einmal ganz praktisch mit unserem Datensatz.
 
 Um den Zusammenhang von Zonierung und Aggregation grundsätzlich zu verstehen erzeugen wir einen synthesischen Datensatz, der eine *Region* (angenommen wird die gesamte Ausdehnung Deutschlands) mit 10000 *Haushalten* enthält. Für jeden Haushalt ist der Ort und sein Jahreseinkommen bekannt. In einem nächsten Schritt werden die Daten in unterschiedliche Zonen aggregiert. Zunächst werden die `nuts3_kreise` eingeladen. Sie dienen der Georefrenzierung der Beispiel-Daten. Zunächst wir ein Datensatz von 10k zufällig über dem Gebiet Deutschlands verteilter Koordinaten erzeugt. Diesem werden dann zufällige Einkommensdaten zugewürfelt.
 
-GI-konzeptionell erzeugen wir jetzt Tabellen die einerseits die Variable `xy` als Geokoordinate andererseits in der Variablen  `income` eine Merkmalsausprägung in Form von Haushaltseinkommen enthalten. Da wir die Ausdehnung des nuts3_kreise Datensatz benutzen sind diese Daten auf Deutschland geokodiert. Streng genommen handelt es sich darum bereits um ein vollständigen [Geodaten-Datensatz]({{ site.baseurl }}{% link _unit01/unit01-04_reader_geo_raum.md %}).
+GI-konzeptionell erzeugen wir jetzt Tabellen die einerseits die Variable `xy` als Geokoordinate andererseits in der Variablen  `haushalts_einkommen` eine Merkmalsausprägung in Form von Haushaltseinkommen enthalten. Da wir die Ausdehnung des nuts3_kreise Datensatz benutzen sind diese Daten auf Deutschland geokodiert. Streng genommen handelt es sich darum bereits um ein vollständigen [Geodaten-Datensatz]({{ site.baseurl }}{% link _unit01/unit01-04_reader_geo_raum.md %}).
 {: .notice--primary}
 
 
@@ -76,17 +76,17 @@ nuts3_kreise = readRDS(file.path(rootDIR,"nuts3_kreise.rds"))
 
 # für die Reproduzierbarkeit der Ergebnisse muss ein beliebiger `seed` gesetzt werden
 set.seed(0) 
-
+nhh = 1000
 
 # Normalverteilte Erzeugung von zufälligen Koordinatenpaaren
 # in der Ausdehnung der nuts3_kreise Daten
 # mit cbind() wird die einzelne Zahl des Breiten und des
 # Längengrads in zwei verbundene Spalten geschrieben
 # runif(10000,) erzeugt 10000 Zahlen innerhalb der Werte extent()
-xy <- cbind(x=runif(10000, extent(nuts3_kreise)[1], extent(nuts3_kreise)[3]), y=runif(10000, extent(nuts3_kreise)[2], extent(nuts3_kreise)[4]))
+xy <- cbind(x=runif(nhh , extent(nuts3_kreise)[1], extent(nuts3_kreise)[3]), y=runif(nhh, extent(nuts3_kreise)[2], extent(nuts3_kreise)[4]))
 
 # Normalverteilte Erzeugung von Einkommensdaten
-income <- (runif(10000) * abs((xy[,1] - (extent(nuts3_kreise)[1] - extent(nuts3_kreise)[3])/2) * (xy[,2] - (extent(nuts3_kreise)[2] - extent(nuts3_kreise)[4])/2))) / 500000000
+haushalts_einkommen  =  runif(1000) * 10*runif(1000)
 ```
 
 Nachdem die Daten erzeugt wurden, schauen wir und die akkumulierte, klassifizierte und räumliche Verteilung der Daten an.
@@ -96,13 +96,13 @@ Nachdem die Daten erzeugt wurden, schauen wir und die akkumulierte, klassifizier
 # Festlegen der Grafik-Ausgabe
 par(mfrow=c(1,3), las=1)
 # Plot der sortieren Einkommen
-plot(sort(income), col=rev(terrain.colors(500)), pch=20, cex=.75, ylab='income')
+plot(sort(haushalts_einkommen), col=rev(terrain.colors(nhh)), pch=20, cex=.75, ylab='Einkommen/Haushalt',xlab='Haushalte')
 
 # Histogramm der Einkommensverteilung 
-hist(income, main='', col=rev(terrain.colors(10)),  xlim=c(0,150000), breaks=seq(0,150000,10000))
+hist(haushalts_einkommen, main='', col=rev(terrain.colors(10)),  xlim=c(0,max(haushalts_einkommen)), breaks=seq(0,max(haushalts_einkommen)+1,1),xlab="Einkommen/Haushalt",ylab="Anzahl")
 
 # Räumlicher Plot der Haushalte, Farbe und Größe markieren das Einkommen
-plot(xy, xlim=c(extent(nuts3_kreise)[1], extent(nuts3_kreise)[3]), ylim=c(extent(nuts3_kreise)[2], extent(nuts3_kreise)[4]), cex=income/100000, col=rev(terrain.colors(50))[(income+1)/1200], xlab="Rechtwert",ylab="Hochwert" )
+plot(xy, xlim=c(extent(nuts3_kreise)[1], extent(nuts3_kreise)[3]), ylim=c(extent(nuts3_kreise)[2], extent(nuts3_kreise)[4]), cex=haushalts_einkommen/2, col=rev(terrain.colors(10)[round(haushalts_einkommen,0) + 1]), xlab="Rechtwert",ylab="Hochwert" )
 ```
 
 <img src="{{ site.baseurl }}/assets/images/unit04/zone_result-1.png" width="1000px" height="550px" />
@@ -115,19 +115,17 @@ Gini-Koeffizient und [Lorenz-Kurve](https://wirtschaftslexikon.gabler.de/definit
 
 ```r
 # Berechnung Gini Koeffizient
-ineq(income,type="Gini")
+ineq(haushalts_einkommen,type="Gini")
 ```
 
 ```
-## [1] 0.3993752
+## [1] 0.4992696
 ```
 
 ```r
-## [1] 0.3993752
-
 # Plot der Lorenz Kurve
 par(mfrow=c(1,1), las=1)
-plot(Lc(income),col="darkred",lwd=2)
+plot(Lc(haushalts_einkommen),col="darkred",lwd=2)
 ```
 
 <img src="{{ site.baseurl }}/assets/images/unit04/lorenz-1.png" width="400px" height="400px" />
@@ -137,30 +135,30 @@ plot(Lc(income),col="darkred",lwd=2)
 
 Um die Bedeutung unterschiedlicher Regionen in Bezug auf die aggregierten Daten zu zeigen werden mit Hilfe des `raster` Pakets neun unterschiedliche  Regionalisierungen mit der Ausdehnung und Georeferenzierung von Deutschland erzeugt. 
 
-GI-konzeptionell erzeugen wir jetzt ein kontinuierliches Raster das aus einer  Anzahl von Reihen (`nrow`) und Spalten (`ncol`) besteht. Diesem *leeren* Raster wird die Ausdehnung und Georefrenzierung aus unserem bereits als `sf` Geoobjekt exisistierenden `nuts3_kreise` zugewiesen (`xmn=extent(nuts3_kreise)[1]`...). Schliesslich werden die zuvor erzeugten Werte (Variable `income`) an den Positionen  `xy`) in diese leeren Raster einggetragen. Fertig ist ein Geodatensatz im Rasterdatenmodell.
+GI-konzeptionell erzeugen wir jetzt ein kontinuierliches Raster das aus einer  Anzahl von Reihen (`nrow`) und Spalten (`ncol`) besteht. Diesem *leeren* Raster wird die Ausdehnung und Georefrenzierung aus unserem bereits als `sf` Geoobjekt exisistierenden `nuts3_kreise` zugewiesen (`xmn=extent(nuts3_kreise)[1]`...). Schliesslich werden die zuvor erzeugten Werte (Variable `haushalts_einkommen`) an den Positionen  `xy`) in diese leeren Raster einggetragen. Fertig ist ein Geodatensatz im Rasterdatenmodell.
 {: .notice--primary}
 
 
 ```r
-# create different sized and numbered regions
-r1 <- raster(ncol=1, nrow=4, xmn=extent(nuts3_kreise)[1], xmx=extent(nuts3_kreise)[3], ymn=extent(nuts3_kreise)[2], ymx=extent(nuts3_kreise)[4], crs=NA)
-r1 <- rasterize(xy, r1, income, mean)
-r2 <- raster(ncol=4, nrow=1, xmn=extent(nuts3_kreise)[1], xmx=extent(nuts3_kreise)[3], ymn=extent(nuts3_kreise)[2], ymx=extent(nuts3_kreise)[4], crs=NA)
-r2 <- rasterize(xy, r2, income, mean)
-r3 <- raster(ncol=2, nrow=2, xmn=extent(nuts3_kreise)[1], xmx=extent(nuts3_kreise)[3], ymn=extent(nuts3_kreise)[2], ymx=extent(nuts3_kreise)[4], crs=NA)
-r3 <- rasterize(xy, r3, income, mean)
-r4 <- raster(ncol=3, nrow=3, xmn=extent(nuts3_kreise)[1], xmx=extent(nuts3_kreise)[3], ymn=extent(nuts3_kreise)[2], ymx=extent(nuts3_kreise)[4], crs=NA)
-r4 <- rasterize(xy, r4, income, mean)
-r5 <- raster(ncol=5, nrow=5, xmn=extent(nuts3_kreise)[1], xmx=extent(nuts3_kreise)[3], ymn=extent(nuts3_kreise)[2], ymx=extent(nuts3_kreise)[4], crs=NA)
-r5 <- rasterize(xy, r5, income, mean)
-r6 <- raster(ncol=10, nrow=10, xmn=extent(nuts3_kreise)[1], xmx=extent(nuts3_kreise)[3], ymn=extent(nuts3_kreise)[2], ymx=extent(nuts3_kreise)[4], crs=NA)
-r6 <- rasterize(xy, r6, income, mean)
-r7 <- raster(ncol=20, nrow=20, xmn=extent(nuts3_kreise)[1], xmx=extent(nuts3_kreise)[3], ymn=extent(nuts3_kreise)[2], ymx=extent(nuts3_kreise)[4], crs=NA)
-r7 <- rasterize(xy, r7, income, mean)
-r8 <- raster(ncol=50, nrow=50, xmn=extent(nuts3_kreise)[1], xmx=extent(nuts3_kreise)[3], ymn=extent(nuts3_kreise)[2], ymx=extent(nuts3_kreise)[4], crs=NA)
-r8 <- rasterize(xy, r8, income, mean)
-r9 <- raster(ncol=100, nrow=100, xmn=extent(nuts3_kreise)[1], xmx=extent(nuts3_kreise)[3], ymn=extent(nuts3_kreise)[2], ymx=extent(nuts3_kreise)[4], crs=NA)
-r9 <- rasterize(xy, r9, income, mean)
+# erzeugen von 9 künstlichen geometischen Regionen
+# festlegen der Ausdehnung auf die Ausdehnung des nuts_3kreise Geoobjekts
+xmn=extent(nuts3_kreise)[1] 
+xmx=extent(nuts3_kreise)[3]
+ymn=extent(nuts3_kreise)[2] 
+ymx=extent(nuts3_kreise)[4]
+# Definition der Region als Zeilen und Spalten Matrizen 
+regio_matrix = rbind(c(1,4),c(4,1),c(2,2),c(5,5),c(10,10),c(20,20),c(50,50),c(100,100),c(200,200))
+
+# für 1 bis Anzahl der Elemente in regio_matrix wiederhole
+rr=lapply(1:nrow(regio_matrix),function(x){
+  # erezuge Raster mit der Anzahl von Zeilen und Spalten 
+  # sowie der Ausdehnung nuts3_kreise
+  r = raster(ncol=regio_matrix[x,][1], nrow=regio_matrix[x,][2], xmn=xmn, xmx=xmx, ymn=ymn, ymx=ymx)
+  # weise dem Raster seine Georefrenzierung zu
+  crs(r) = sp::CRS("+init=epsg:25832")
+  # lese die Einkommenswerte in Raster wenn notwendig mittle die Werte
+  r = rasterize(xy, r, haushalts_einkommen, mean)        
+})
 ```
 
 Die einzelnen Grafiken verdeutlichen wie die räumliche Anordnung der Zonen verteilt ist. Es handelt sich um 2 Streifenzonierungen und  7 unterschiedlich aufgelöste Gitter von  4x4, 5x5, 10x10, 20x20, 50x50 und 100x100 Regionen.
@@ -169,14 +167,11 @@ Die einzelnen Grafiken verdeutlichen wie die räumliche Anordnung der Zonen vert
 ```r
 # Festlegen der Grafik-Ausgabe
 par(mfrow=c(3,3), las=1)
-
 # Plotten der 9 Regionen
 # in main wird der Titel für jede Grafik definiert
-plot(r1,main="ncol=1, nrow=4"); plot(r2,main="ncol=4, nrow=1");
-plot(r3,main="ncol=2, nrow=2"); plot(r4,main="ncol=3, nrow=3");
-plot(r5,main="ncol=5, nrow=5"); plot(r6,main="ncol=10,nrow=10");
-plot(r7,main="ncol=20, nrow=20");plot(r8,main="ncol=50, nrow=50");
-plot(r9,main="ncol=100, nrow=100")
+for (i in 1:length(rr)){
+plot(rr[[i]],main=paste0("ncol=",regio_matrix[i][1]," nrow=",regio_matrix[i][1]))
+}
 ```
 
 <img src="{{ site.baseurl }}/assets/images/unit04/plot_zone_raster-1.png" width="1100px" height="900px" />
@@ -193,15 +188,10 @@ Wenn man nun die korrespondierenden zonalen Histogramme anschaut, wird deutlich 
 par(mfrow=c(3,3), las=1)
 
 # Plotten der zugehörigen Histogramme
-hist(r1, main='', col=rev(terrain.colors(10)), xlim=c(0,125000), breaks=seq(0, 125000, 12500))
-hist(r2, main='', col=rev(terrain.colors(10)), xlim=c(0,125000), breaks=seq(0, 125000, 12500))
-hist(r3, main='', col=rev(terrain.colors(10)), xlim=c(0,125000), breaks=seq(0, 125000, 12500))
-hist(r4, main='', col=rev(terrain.colors(10)), xlim=c(0,125000), breaks=seq(0, 125000, 12500))
-hist(r5, main='', col=rev(terrain.colors(10)), xlim=c(0,125000), breaks=seq(0, 125000, 12500))
-hist(r6, main='', col=rev(terrain.colors(10)), xlim=c(0,125000), breaks=seq(0, 125000, 12500))
-hist(r7, main='', col=rev(terrain.colors(10)), xlim=c(0,125000), breaks=seq(0, 125000, 12500))
-hist(r8, main='', col=rev(terrain.colors(10)), xlim=c(0,125000), breaks=seq(0, 125000, 12500))
-hist(r9, main='', col=rev(terrain.colors(10)), xlim=c(0,125000), breaks=seq(0, 125000, 12500))
+for (i in 1:length(rr)){
+  hist(rr[[i]],main=paste0("ncol=",regio_matrix[i][1]," nrow=",regio_matrix[i][1]),
+       col=rev(terrain.colors(10)), xlim=c(0,max(haushalts_einkommen)), breaks=seq(0,max(haushalts_einkommen)+1,1),xlab="Einkommen/Haushalt",ylab="Anzahl")
+}
 ```
 
 ![]({{ site.baseurl }}/assets/images/unit04/zone_hist-1.png)<!-- -->
