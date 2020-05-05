@@ -65,7 +65,7 @@ Betrachten wir diese Zusammenhänge einmal ganz praktisch mit unserem Datensatz.
 
 Um den Zusammenhang von Zonierung und Aggregation grundsätzlich zu verstehen erzeugen wir einen synthesischen Datensatz, der eine *Region* (angenommen wird die gesamte Ausdehnung Deutschlands) mit 10000 *Haushalten* enthält. Für jeden Haushalt ist der Ort und sein Jahreseinkommen bekannt. In einem nächsten Schritt werden die Daten in unterschiedliche Zonen aggregiert. Zunächst werden die `nuts3_kreise` eingeladen. Sie dienen der Georefrenzierung der Beispiel-Daten. Zunächst wir ein Datensatz von 10k zufällig über dem Gebiet Deutschlands verteilter Koordinaten erzeugt. Diesem werden dann zufällige Einkommensdaten zugewürfelt.
 
-GI-konzeptionell erzeugen wir jetzt Tabellen die einerseits  (Variable `xy`) Geokoordinaten enthalten, andererseits in der Variablen  `income` eine Merkmalsausprägung in Form von Haushaltseinkommen enthalten. Streng genommen handelt es sich darum bereits um ein vollständigen Datensatz mit [Geodaten]({{ site.baseurl }}{% link _unit01/unit01-04_reader_geo_raum.md %}) bearbeitet.
+GI-konzeptionell erzeugen wir jetzt Tabellen die einerseits die Variable `xy` als Geokoordinate andererseits in der Variablen  `income` eine Merkmalsausprägung in Form von Haushaltseinkommen enthalten. Da wir die Ausdehnung des nuts3_kreise Datensatz benutzen sind diese Daten auf Deutschland geokodiert. Streng genommen handelt es sich darum bereits um ein vollständigen [Geodaten-Datensatz]({{ site.baseurl }}{% link _unit01/unit01-04_reader_geo_raum.md %}).
 {: .notice--primary}
 
 
@@ -78,8 +78,11 @@ nuts3_kreise = readRDS(file.path(rootDIR,"nuts3_kreise.rds"))
 set.seed(0) 
 
 
-# Normalverteilte Erzeugung von zufälligen der Koordinatenpaaren
-# in der Ausdehnung  der Ausdehnung der nuts3_kreise Daten
+# Normalverteilte Erzeugung von zufälligen Koordinatenpaaren
+# in der Ausdehnung der nuts3_kreise Daten
+# mit cbind() wird die einzelne Zahl des Breiten und des
+# Längengrads in zwei verbundene Spalten geschrieben
+# runif(10000,) erzeugt 10000 Zahlen innerhalb der Werte extent()
 xy <- cbind(x=runif(10000, extent(nuts3_kreise)[1], extent(nuts3_kreise)[3]), y=runif(10000, extent(nuts3_kreise)[2], extent(nuts3_kreise)[4]))
 
 # Normalverteilte Erzeugung von Einkommensdaten
@@ -252,8 +255,8 @@ mapview(geo_coord_city,  color='red',legend = FALSE)
 
 *Abbildung 04-02-05: Webkarte mit den erzeugten Punktdaten. In diesem Falle zehn nicht ganz zufällige Städte Deutschlands*
 
-#### R-Spielerei
-Erzeugen Sie eine eigene Städteliste.
+#### R-Training
+Erzeugen Sie aus dem `xy` Datensatz des ersten Beipiels ein `sf` Objekt.
 {: .notice--warning}
 
 ### Plotten der Daten mit der plot Funktion
@@ -271,7 +274,7 @@ text(st_coordinates(geo_coord_city), labels = staedte, cex=1.2, pos=4, col="purp
 
 <img src="{{ site.baseurl }}/assets/images/unit04/points-2-1.png" width="800px" height="600px" />
 
-#### R-Spielerei
+#### R-Training
 Mit Hilfe der Funktion `min(st_coordinates(geo_coord_city)[,1])` kann der Minimum-X-Wert ermittelt werden. Analog gilt das für die übrigen Werte. Das Aufaddieren von 0.5 dient nur der besseren Platzierung der Beschriftung. Bauen sie die unten auskommentierten so in den Plot-Befehl ein, dass die Beschriftung von Berlin sichtbar wird. Besdenken Sie dass die einzelnen Elemente des Plot Befehls wie in einer Liste durch Kommata getrennt werden.
 {: .notice--warning}
 
@@ -1118,7 +1121,7 @@ moran.plot (residuen_uni_bau, nuts3_gewicht)
 
 *Abbildung 04-02-08: Moran-I Plot*
 
-#### R-Spielerei
+#### R-Training
 Mit Hilfe der Funktion `poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)` wird eine Nachbarschaftsbeziehung erzeugt. Erzeugen Sie für eine distanzbasierte Nachbarschaft mit einer *Queens-Nachbarschaft*, die das erste Quartil der Distanzverteilung als Schwellwert nutzt analog zum gegebenen Beispiel einen Moran I Monte Carlo Test.
 {: .notice--warning}
 
@@ -1136,7 +1139,7 @@ Das Skript kann unter [unit04-02_sitzung.R]({{ site.baseurl }}/assets/scripts/un
 ## Was ist zu tun?
 Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressions-Analysen und  -Modelle auf den Grundannahmen dieser Übung basieren. Das heisst es kommt maßgeblich auf Ihre konzeptionellen oder theoriegeleiteten Vorstellungen an, welche Nachbarschaft, welches Nähe-Maß und somit auch, welche räumlichen Korrelationen zustande kommen. Bitte beschäftigen Sie sich mitdem Skript. 
 
-* versuchen sie sich an den *R-Spielereien*. Sie sollen Sie zum aktiven Umgang mit `R` ermuntern.
+* versuchen sie sich an den *R-Trainings*. Sie sollen Sie zum aktiven Umgang mit `R` ermuntern.
 * gehen Sie Skript **schrittweise** durch. Lassen Sie es nicht von vorne bis hinten unkontrolliert durchlaufen 
 * gleichen Sie ihre Kenntnisse aus dem Statistikkurs mit diesen praktischen Übungen ab und identifizieren Sie was Raum-Wirskamkeiten sind.
 * *spielen* Sie mit den Einstellungen, lesen Sie Hilfen und lernen Sie schrittweise die Handhabung von R kennen. 
