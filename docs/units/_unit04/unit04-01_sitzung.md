@@ -284,9 +284,7 @@ Die Karte kann auch mit Hilfe des Pakets `mapview` interaktiv dargestellt werden
 Das Skript kann unter [unit04-01_sitzung.R]({{ site.baseurl }}/assets/scripts/unit04-01_sitzung.R){:target="_blank"} heruntergeladen werden
 
 ## Was ist zu tun?
-Versuchen Sie  `R`, `Rstudio` und die notwendigen Pakete zu installieren. Bei Fragen nutzen Sie bitte das Forum. Falls erfolgreich Versuchen Sie bitte folgende Aufgaben zu bearbeiten:
+Versuchen Sie  `R`, `RStudio` und die notwendigen Pakete zu installieren. Bei Fragen nutzen Sie bitte das Forum oder senden eine email. Falls Sie das erfolgreich absolvieren konnten, versuchen Sie bitte folgende Aufgaben zu bearbeiten:
 
-* das Skript schrittweise durchzugehen. Das geht sehr einfach mit Cursor in die Zeile und Alt+Enter näheres siehe unter [Rstudio Hilfe Ausführen von Code](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-and-Executing-Code) bzw. unter `Hilfe->Cheatsheets->Rstudio IDE cheatsheets`.
-* nutzen Sie Rstudio um die Variableninhalte zu betrachten [Data Viewer](https://support.rstudio.com/hc/en-us/articles/205175388-Using-the-Data-Viewer)
-* Versuchen Sie sich mit der Datenvisualisierung vertraut zu machen. Hierzu können Sie die Vignetten von `tmap` und `mapview` nutzen. [tmap](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html), [mapview](https://r-spatial.github.io/mapview/articles/articles/mapview_01-basics.html)
-
+* gehen Sie das Skript schrittweise durch. Es kommt nicht darauf an dass Sie den Code bereits vollständig verstehen. Sie sollennur eine Idee bekommen was im Großen und Ganzen abläuft. Für den schrittweisen Aufruf können Sie einfach mit dem Cursor in die jeweilige Zeile gehen (nichts markieren) und dann Alt+Enter drücken s.a. [RStudio Hilfe Ausführen von Code](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-and-Executing-Code) bzw. unter `Hilfe->Cheatsheets->Rstudio IDE cheatsheets`.
+* nutzen Sie RStudio um die Variableninhalte zu betrachten [Data Viewer](https://support.rstudio.com/hc/en-us/articles/205175388-Using-the-Data-Viewer)
