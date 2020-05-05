@@ -11,7 +11,7 @@ Im Rahmen der räumlichen Statistik wirft das Fragen der räumlichen Autokorrela
 
 Die klassischen Bereiche der räumlichen Statistik sind Punktmusteranalyse, Regression und Inferenz mit räumlichen Daten, dann die Geostatistik (Interpolation z.B. mit Kriging) sowie  Methoden zur lokalen und globalen Regression und Klassifikation mit räumlichen Daten. 
 
-Nahezu alle genannten Bereiche werden üblicherweise auf  und deren Repräsentation in unserem Modell, ist wie im Abschnitt  [Vektordatenmodellen]({{ site.baseurl }}{% link _unit02/unit02-02_reader_gi_raum.md %}) bearbeitet. D.h. Es handelt sich üblicherweise um diskrete Null-, Ein- und Zwei-Dimensionale Objekte.
+Nahezu alle dieser Bereiche basieren auf Daten die als [Vektordatenmodell]({{ site.baseurl }}{% link _unit02/unit02-02_reader_gi_raum.md %}) vorliegen. Das heisst es handelt sich um diskrete Geoobjekte die Null-, Ein- bzw. Zwei-dimensional Raumeigenschaften aufweisen.
 
 
 ## Lernziele
@@ -1152,6 +1152,9 @@ Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressi
 * gleichen Sie ihre Kenntnisse aus dem Statistikkurs mit diesen praktischen Übungen ab und identifizieren Sie was Raum-Wirskamkeiten sind.
 * *spielen* Sie mit den Einstellungen, lesen Sie Hilfen und lernen Sie schrittweise die Handhabung von R kennen. 
 * lernen Sie quasi im "*Vorbeigehen*" wie Daten zu plotten sind oder wann Sie ein wenig Acht geben müssen wenn Sie mit Geodaten arbeiten (viele Hinweise und Erläuterungen sind in den Kommentarzeilen untergebracht).
+* Versuchen Sie sich mit der Datenvisualisierung vertraut zu machen. Hierzu können Sie die Vignetten von `tmap` und `mapview` nutzen. [tmap](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html), [mapview](https://r-spatial.github.io/mapview/articles/articles/mapview_01-basics.html)
+
+
 * **stellen Sie Fragen im Forum, im Kurs oder per email mit dem Betreff [M&S2020]**
 
 
