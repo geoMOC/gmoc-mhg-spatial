@@ -1040,11 +1040,11 @@ Wie bereits bekannt ist hängt der Wert von Morans I deutlich von den Annahmen a
 
 Der Moran-I-Test und der Geary C Test sind übliche Verfahren für die Überprüfung räumlicher Autokorrelation. Das Geary's-C ist invers mit Moran's-I, aber nicht identisch. Moran's-I ist eher ein Maß für die globale räumliche Autokorrelation, während Geary's-C eher auf eine lokale räumliche Autokorrelation reagiert. Hier die gängige Formel für Moran's I:
 
-\\[I = \frac{n}{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}
-\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(x_i-\bar{x})(x_j-\bar{x})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}\\]
+$$
+\\[I = \frac{n}{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(x_i-\bar{x})(x_j-\bar{x})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}\\]
+$$
 
-
-wobei \\(x_i, i=1, \ldots, n\\)   \\({n}\\) Beobachtungen der interessierenden numerischen Variablen und \\(w_{ij}\\) die räumlichen Gewichte sind.
+wobei $\\(x_i, i=1, \ldots, n\\)$   $\\({n}\\)$ Beobachtungen der interessierenden numerischen Variablen und $\\(w_{ij}\\)$ die räumlichen Gewichte sind.
 
 Im wesentlichen ist dies eine erweiterte Version der Formel zur Berechnung des Korrelationskoeffizienten mit einer Matrix an räumlichen Gewichten.
 
@@ -1086,7 +1086,7 @@ summary(lm_uni_bau)
 
 ```r
 # Extraktion der Residuen
-residuen_uni_bau <- lm (lm ( nuts3_kreise$Anteil.Hochschulabschluss ~ nuts3_kreise$Anteil.Baugewerbe, data=nuts3_kreise))$resid
+residuen_uni_bau <- lm( nuts3_kreise$Anteil.Hochschulabschluss ~ nuts3_kreise$Anteil.Baugewerbe, data=nuts3_kreise)$resid
 
 # Moran I test rondomisiert und nicht randomisiert
 m_nr_residuen_uni_bau = moran.test(residuen_uni_bau, nuts3_gewicht,randomisation=FALSE)
@@ -1123,18 +1123,20 @@ moran.plot (residuen_uni_bau, nuts3_gewicht)
 Mit Hilfe der Funktion `poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)` wird eine Nachbarschaftsbeziehung erzeugt. Erzeugen Sie für eine distanzbasierte Nachbarschaft mit einer *Queens-Nachbarschaft*, die das erste Quartil der Distanzverteilung als Schwellwert nutzt analog zum gegebenen Beispiel einen Moran I Monte Carlo Test.
 {: .notice--warning}
 
-## Wo gibt's mehr?
-Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 
-
-* [Spatial Data Analysis](https://rspatial.org/raster/analysis/2-scale_distance.html) von Robert Hijmans. Sehr umfangreich und empfehlenswert. Viel der Beispiele basieren auf seiner Vorlesung und sind für unsere Verhältnisse angepasst.
-
-* Der [UseR! 2019 Spatial Workshop](https://edzer.github.io/UseR2019/part2.html) von Roger Bivand. Roger ist die absolute Referenz hinischtlich räumlicher Ökonometrie mit R. Er hat unzählige Pakete geschrieben und ebensoviel Schulungs-Material und ist unermüdlich in  der Unterstützung der Community.
-
 
 ## Download Skript
 Das Skript kann unter [unit04-02_sitzung.R]({{ site.baseurl }}/assets/scripts/unit04-02_sitzung.R){:target="_blank"} heruntergeladen werden
 
-## Was ist zu tun?
+## Aufgabenstellung
+
+Bitte bearbeiten Sie folgende Aufgabenstellung:
+1 Berechnen Sie auf der Grundlage der `nuts3_kreise` eine [distanzbasierte Nachbarschaft]({{ site.baseurl }}/unit04/unit04-02_sitzung.html#berechnen-der-distanz-matrix) mit dem maximalen Distanzmaß des ersten Quartils. 
+1 Berechnen Sie für diese distanzbasierte Nachbarschaft eine neue Gewichtungsmatrix (analog zu `nuts3_gewicht`)
+1 Berechnen Sie mit dieser neu erstellten Gewichtungsmatrix und den `residuen_uni_bau ` aus obigem linearen Modell mit Hilfe von Moran I die Autokorrelation mit Hilfe der Monte Carlo Variante. und vergleichen Sie die dieses Ergebnis mit dem Beispielergebnis aus dieser Übung
+1 Erzeugen Sie zum Abschluss eine Karte mit den Residuen des verwendenten linearen Modells. Gehen Sie hierzu analog zum [tmap / mapview]({{ site.baseurl }}/unit04/unit04-01_sitzung.html#darstellung-der-daten-mit-dem-paket-tmap) Beispiel vor.
+{: .notice--success}
+
+## Was ist sonst noch zu tun?
 Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressions-Analysen und  -Modelle auf den Grundannahmen dieser Übung basieren. Das heisst es kommt maßgeblich auf Ihre konzeptionellen oder theoriegeleiteten Vorstellungen an, welche Nachbarschaft, welches Nähe-Maß und somit auch, welche räumlichen Korrelationen zustande kommen. Bitte beschäftigen Sie sich mitdem Skript. 
 
 * versuchen sie sich an den *R-Trainings*. Sie sollen Sie zum aktiven Umgang mit `R` ermuntern.
@@ -1147,4 +1149,10 @@ Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressi
 
 * **stellen Sie Fragen im Forum, im Kurs oder per email mit dem Betreff [M&S2020]**
 
+## Wo gibt's mehr Informationen?
+Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 
+
+* [Spatial Data Analysis](https://rspatial.org/raster/analysis/2-scale_distance.html) von Robert Hijmans. Sehr umfangreich und empfehlenswert. Viel der Beispiele basieren auf seiner Vorlesung und sind für unsere Verhältnisse angepasst.
+
+* Der [UseR! 2019 Spatial Workshop](https://edzer.github.io/UseR2019/part2.html) von Roger Bivand. Roger ist die absolute Referenz hinischtlich räumlicher Ökonometrie mit R. Er hat unzählige Pakete geschrieben und ebensoviel Schulungs-Material und ist unermüdlich in  der Unterstützung der Community.
 
