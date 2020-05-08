@@ -1,5 +1,5 @@
 ---
-title: "Sitzung 1 - Datentabellen und Geometrien"
+title: "Sitzung 1: Datentabellen und Geometrien"
 toc: true
 toc_label: Inhalt
 ---
@@ -43,7 +43,7 @@ erklärt. Vor allem die beiden "*Arbeitspferde*" für Wiederholungen `for` und B
 #
 # Ausgabe:  Simple Feature(sf) Objekt mit allen Tabelleninhalten
 #
-# Anmerkungen: Die Daten werden im Skript heruntergeladen und eingelesen. Da diese mit statischen URLs und Dateinamen versehen sind müssen etwaige Veränderungen angepasst werden.
+# Anmerkungen: Die Daten wurden zuvor heruntergeladen und eingelesen. Sie sind als RDS Daten im Repository des Kurses zu finden.
 # Das nachfolgende Script verbindet die Daten der Datei Kreise2010.csv mit 
 # von von Eurostat zur Verfügung gestellten NUTS3 Geometriedaten (Vektordaten der Kreise)
 # Um diese Verbinden zu können bedarf es in dem vorliegenden Fall einer weiteren Tabelle
@@ -53,8 +53,6 @@ erklärt. Vor allem die beiden "*Arbeitspferde*" für Wiederholungen `for` und B
 # Im letzten Schritt wird die gesäuberte Datentabelle über die NUTS3 Codes an die Geometrie an gehangen und mit 
 # mapview und tmap visualisiert
 #---------------------------------------------------------
-
-
 # 0 - Umgebung einrichten, 
 #     Pakete und Funktionen laden
 #     Variablen definieren
@@ -64,8 +62,8 @@ erklärt. Vor allem die beiden "*Arbeitspferde*" für Wiederholungen `for` und B
 rm(list=ls())
 ## festlegen des Arbeitsverzeichnisses
 # rootDIR enthält nur den Dateipfad
-rootDIR="~/Schreibtisch/spatialstat_SoSe2020/"
-setwd(rootDIR)
+#rootDIR="~/Schreibtisch/spatialstat_SoSe2020/"
+#setwd(rootDIR)
 # die Tilde ~ steht dabei für das Nutzer-Home-Verzeichnis unter Windows 
 # üblicherweise Nutzer/Dokumente
 
@@ -74,13 +72,12 @@ setwd(rootDIR)
 # nutzen dann eine for  schleife die jedes element aus der  liste nimmt 
 # und schaut ob es bereits installiert ist utils::installed.packages() 
 # falls nicht wird es installiert 
-libs= c("sf","mapview","tmap","ggplot2","RColorBrewer","jsonlite","tidyverse","spdep","spatialreg","ineq","rnaturalearth", "rnaturalearthhires", "tidygeocoder","usedist","downloader")
-
+libs= c("sf","mapview","tmap","RColorBrewer","usedist","downloader")
 for (lib in libs){
 if(!lib %in% utils::installed.packages()){
   utils::install.packages(lib)
 }}
-# nicht wundern lapply()ist eine integrierte for Schleife die alle im vector libs
+# lapply()ist eine integrierte for Schleife die alle im vector libs
 # enthaltenen packages lädt indem sie den package namen als character string an die 
 # function library übergibt
 invisible(lapply(libs, library, character.only = TRUE))
@@ -90,66 +87,36 @@ invisible(lapply(libs, library, character.only = TRUE))
 #--------------------
 
 
-##- Laden und Einlesen der Rohdaten
+##- Laden der Rohdaten
 #--------------------
 
-files = list.files(rootDIR,pattern ="xlxs|geojson|csv|zip|xml|pdf|txt",full.names = TRUE,recursive = TRUE)
-file.remove(files)
-```
-
-```
-##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-## [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-## [31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-## [46] TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-```
-
-```r
 # Aus dem Statistik-Kurs lesen wir die Kreisdaten ein
 # Sie sind aus Bequemlichkeitsgründen auf github verfügbar
 
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/Kreisdaten2010.csv",     destfile = paste0(rootDIR,"Kreisdaten2010.csv"))
+download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/Kreisdaten2010.csv",     destfile = "Kreisdaten2010.csv")
 
 # Aus dem Statistikkurs lesen wir die Kreisdaten ein
 Kreise <- read.table ("Kreisdaten2010.csv",header=T,sep=';')
 
-# von eurostat holen wir die Geometriedaten (also die GI Daten für die NUTS3 Kreise)
+# LAden der Geometriedaten (also die GI Daten für die NUTS3 Kreise)
+download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/nuts3.rds",     destfile = "nuts3.rds")
 
-download(url = "https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/nuts/download/ref-nuts-2016-01m.geojson.zip",destfile = paste0(rootDIR,"ref-nuts-2016-01m.geojson.zip")) 
-# entpacken des Archivs
-unzip(paste0(rootDIR,"ref-nuts-2016-01m.geojson.zip"))
+# Einlesen der nuts3 Daten
+nuts3 = readRDS("nuts3.rds")
 
-# mit dem Paket sf und der Funktion sf_read lesen wir sie in eine Variable
-nuts3 = st_read("NUTS_RG_01M_2016_3857_LEVL_3.geojson")
-```
-
-```
-## Reading layer `NUTS_RG_01M_2016_3857_LEVL_3' from data source `/home/creu/Schreibtisch/spatialstat_SoSe2020/NUTS_RG_01M_2016_3857_LEVL_3.geojson' using driver `GeoJSON'
-## Simple feature collection with 1522 features and 9 fields
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: -7029958 ymin: -2438305 xmax: 6215611 ymax: 11465540
-## projected CRS:  WGS 84 / Pseudo-Mercator
-```
-
-```r
 # Um nur Deutschland Kreise zu erhalten filtern wir sie 
 # auf den Wert "DE" in der Spalte CNTR_CODE
 # Achtung wir legen eine neue Variable für Deutschland an
 nuts3_de = nuts3[nuts3$CNTR_CODE=="DE",]
 
-# herunter laden der offiziellen Zuweisungstabellen für Lokale Verwaltungseinheiten (LAU) <-> NUTS3 Konversion
-# https://ec.europa.eu/eurostat/de/web/nuts/local-administrative-units
-# https://ec.europa.eu/eurostat/documents/345175/501971/EU-28-LAU-2019-NUTS-2016.xlsx
+# laden der offiziellen Zuweisungstabellen für Lokale Verwaltungseinheiten (LAU) <-> NUTS3 Konversion
 
-download(url = "https://ec.europa.eu/eurostat/documents/345175/501971/EU-28-LAU-2019-NUTS-2016.xlsx",destfile =paste0(rootDIR,"EU-28-LAU-2019-NUTS-2016.xlsx"))
+# LAden der Geometriedaten (also die GI Daten für die NUTS3 Kreise)
+download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/lau_nuts3.rds",     destfile = "lau_nuts3.rds")
 
-# wir lesen es direkt aus der xlsx Exceldatei ein. Da die Deutschlanddaten im
-# Datenblatt "DE" abgespeichert sind lesen wir nur dieses sheet ein
-lau_nuts3 = readxl::read_xlsx(paste0(rootDIR,"EU-28-LAU-2019-NUTS-2016-1.xlsx"),sheet = "DE")
+# Einlesen der nuts3 Daten
+lau_nuts3 = readRDS("lau_nuts3.rds")
 
-##-  Säubern und Vorbereiten der Daten
-#------------------------------------
 
 # die unten eingeladene LAU-Kodierung enthält 8 Stellen wobei die letzten beiden lokale Untergruppen darstellen
 # daher muss bei 4 Ziffern der Kreise Tabelle eine führende Null vorangestellt werden
@@ -180,78 +147,21 @@ nuts3_kreise = st_transform(nuts3_kreise, "+init=EPSG:25832")
 # löschen nach Spaltennamen
 nuts3_kreise[,c("id","FID","MOUNT_TYPE","LAU NAME NATIONAL","LEVL_CODE","LAU NAME LATIN","COAST_TYPE","COAST change compared to last year","CITY_ID","CITY_ID change compared to last year","CITY_NAME", "GREATER_CITY_ID","GREATER_CITY_ID change compared to last year","GREATER_CITY_NAME","FUA_ID" ,"FUA_ID change compared to last year",  "FUA_NAME","CHANGE (Y/N)","DEG change compared to last year")]= NULL
 # umgruppieren nach Spaltenindex
-nuts3_kreise[,c(1,2,3,14,4,5,6,7,8,9,10,11,12,15,16,17)]
-```
+nuts3_kreise = nuts3_kreise[,c(1,2,3,14,4,5,6,7,8,9,10,11,12,15,16,17)]
 
-```
-## Simple feature collection with 400 features and 15 fields
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: 280468 ymin: 5235855 xmax: 921238.6 ymax: 6101419
-## projected CRS:  ETRS89 / UTM zone 32N
-## First 10 features:
-##    NUTS_ID CNTR_CODE             NUTS_NAME TOTAL AREA (km2) URBN_TYPE Kreis
-## 1    DE111        DE Stuttgart, Stadtkreis           207.33         1 08111
-## 2    DE112        DE             Böblingen            26.56         1 08115
-## 3    DE113        DE             Esslingen             3.34         1 08116
-## 4    DE114        DE             Göppingen             9.49         1 08117
-## 5    DE115        DE           Ludwigsburg            10.15         1 08118
-## 6    DE116        DE       Rems-Murr-Kreis            68.52         1 08119
-## 7    DE117        DE Heilbronn, Stadtkreis            99.89         2 08121
-## 8    DE118        DE  Heilbronn, Landkreis             9.66         2 08125
-## 9    DE119        DE        Hohenlohekreis            64.68         3 08126
-## 10   DE11A        DE       Schwäbisch Hall            90.17         3 08127
-##    Beschaeftigte Beschaeftigte.Baugewerbe Anteil.Baugewerbe
-## 1         344319                    11999        0.03484850
-## 2         155017                     5097        0.03288026
-## 3         178699                     9543        0.05340265
-## 4          77103                     6306        0.08178670
-## 5         165875                     8532        0.05143632
-## 6         126212                     7869        0.06234748
-## 7          61732                     1966        0.03184734
-## 8         107661                     5529        0.05135564
-## 9          46135                     2406        0.05215130
-## 10         68472                     5050        0.07375277
-##    Anteil.Hochschulabschluss Einkommen.Median Universitaeten.Mittel  Patente
-## 1                 0.26424914             3631              438564.0 365.1500
-## 2                 0.20488075             3801                   0.0 195.7210
-## 3                 0.15511559             3147               31206.0 248.1260
-## 4                 0.09536594             2870                8242.0  60.8690
-## 5                 0.15887265             3063               25341.0 411.8070
-## 6                 0.11638355             2896                   0.0 178.6590
-## 7                 0.11166008             2858               22018.5  33.1814
-## 8                 0.11916107             3057                   0.0 101.9680
-## 9                 0.07861710             2962                6855.5  43.7738
-## 10                0.08042704             2739                 603.0  40.0052
-##    DEGURBA COASTAL AREA (yes/no)                       geometry
-## 1        1                    no MULTIPOLYGON (((517913.6 54...
-## 2        2                    no MULTIPOLYGON (((504766.1 54...
-## 3        2                    no MULTIPOLYGON (((536978.7 54...
-## 4        3                    no MULTIPOLYGON (((546037.5 54...
-## 5        2                    no MULTIPOLYGON (((529190.5 54...
-## 6        2                    no MULTIPOLYGON (((536577.5 54...
-## 7        1                    no MULTIPOLYGON (((508327.4 54...
-## 8        2                    no MULTIPOLYGON (((532201 5468...
-## 9        2                    no MULTIPOLYGON (((562114.7 54...
-## 10       3                    no MULTIPOLYGON (((580702.7 54...
-```
-
-```r
-# abspeichern des Ergebnis nuts3_kreise als rds (r data stream)
-saveRDS(nuts3_kreise,"nuts3_kreise.rds")
+##-  Säubern und Vorbereiten der Daten
+#------------------------------------
 
 # 2 - Analyse
 #--------------------
 # findet in diesem Beispiel nicht statt
-
-
-# 3 - Ergebnisausgabe und Visualisierung 
-#--------------------
 ```
 ### Darstellung der Daten mit dem Paket `tmap`
 `tmap` ist das derzeit wohl erfolgreichste und vielseitigste Kartographie-Paket in der R-Welt. Hier ein ganz einfaches Beispiel zuer Erzeugung statischer Karten. 
 
 ```r
+# 3 - Ergebnisausgabe und Visualisierung 
+#--------------------
 # Einstellen der Plotausgabe 1 Reihe , zwei Abbildungen Beschriftungen Stil1
 par(mfrow=c(1,2), las=1)
 # Darstellung mit tmap Farbgebung nach Anteil.Baugewerbe
@@ -270,7 +180,6 @@ Das Paket `mapview` eignet sich besonders für eine schnelle interaktive Visuali
 ```r
 # Interaktive Darstellung mit Mapview Farbgebung nach Anteil.Baugewerbe
 # note you have to switch the layers on the upper left corner
-nuts3_kreise = readRDS(paste0(rootDIR,"nuts3_kreise.rds"))
 mapview(nuts3_kreise,zcol="Anteil.Baugewerbe",breaks=seq(0,0.2, by=0.025))+mapview(nuts3_kreise,zcol="Anteil.Hochschulabschluss",breaks=seq(0,0.2, by=0.025))
 ```
 Die Karte kann auch mit Hilfe des Pakets `mapview` interaktiv dargestellt werden.

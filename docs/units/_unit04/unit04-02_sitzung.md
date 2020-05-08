@@ -20,9 +20,8 @@ Die Lernziele der zweiten Übung sind:
 
 ---
 
-* Verständnis für die konzeptionellen Hintergründe der Begriffe Region, Distanz und räumlicher Einfluss bezogen auf die jeweilig verfügbaren Datenmodelle
-* Datenmanipulation und Nutzen von R 
-* Erstellen und Nutzung von räumlichen Datenmodellen (Raster- und Vektordaten) für die Alltagsarbeit
+* Berechnen von Gewichtungsmatritzen für unterschiedliche Nachbarschaften
+* Visualisierung der Ergebnisse
 
 
 ---
@@ -40,7 +39,7 @@ rootDIR="~/Schreibtisch/spatialstat_SoSe2020/"
 # nutzen dann eine for  schleife die jedes element aus der  liste nimmt 
 # und schaut ob es bereits installiert ist utils::installed.packages() 
 # falls nicht wird es installiert 
-libs= c("sf","mapview","tmap","ggplot2","RColorBrewer","jsonlite","tidyverse","spdep","spatialreg","ineq","rnaturalearth", "rnaturalearthhires", "tidygeocoder","usedist","raster","kableExtra")
+libs= c("sf","mapview","tmap","spdep","ineq", "tidygeocoder","usedist","raster","kableExtra","downloader")
 for (lib in libs){
   if(!lib %in% utils::installed.packages()){
     utils::install.packages(lib)
@@ -52,6 +51,31 @@ invisible(lapply(libs, library, character.only = TRUE))
 ```
 
 
+```r
+#---------------------------------------------------------
+# nuts3_autocorr.R 
+# Autor: Chris Reudenbach, creuden@gmail.com
+# Urheberrecht: Chris Reudenbach 2020 GPL (>= 3)
+#
+# Beschreibung: Skript berechnet unterschiedliche Autokorrelationen aus den Kreisdaten
+#  
+#--------------------
+##- Laden der Kreisdaten
+#--------------------
+
+# Aus dem Statistik-Kurs lesen wir die Kreisdaten ein
+# Sie sind aus Bequemlichkeitsgründen auf github verfügbar
+
+download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/nuts3_kreise.rds",     destfile = "nuts3_kreise.rds")
+
+# Einlesen der nuts3 Daten
+nuts3_kreise = readRDS("nuts3_kreise.rds")
+
+download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/geo_coord_city.rds",     destfile = "geo_coord_city.rds")
+
+# Einlesen der nuts3 Daten
+geo_coord_city = readRDS("geo_coord_city.rds")
+```
 
 
 ## Regionalisierung oder Aggregationsräume
@@ -61,143 +85,7 @@ Die Analyse der räumlichen Daten erfolgt oft in regionaler oder Aggregierung. A
 Bei der visuellen Exploration aber auch bei der statistischen Analyse ist es von erheblichem Einfluss wie die Gebiete zur Aggregation der Daten geschnitten sind. Da dieser Zusammenhang eher willkürlich (auch oft historisch oder durch wissenschaftlich begründet) ist, sind die Muster, die wir sehen äußerst subjektiv. Dieses sogenannte *Problem der veränderbaren Gebietseinheit* (Modifiable Areal Unit Problem, MAUP) bezeichnet. Der Effekt von höheren Einheiten auf niedrigere zu schließen ist hingegen als *ökologische Inferenz* (Ecological Inference) bekannt.
 
 
-Betrachten wir diese Zusammenhänge einmal ganz praktisch mit unserem Datensatz.
-
-Um den Zusammenhang von Zonierung und Aggregation grundsätzlich zu verstehen erzeugen wir einen synthesischen Datensatz, der eine *Region* (angenommen wird die gesamte Ausdehnung Deutschlands) mit 10000 *Haushalten* enthält. Für jeden Haushalt ist der Ort und sein Jahreseinkommen bekannt. In einem nächsten Schritt werden die Daten in unterschiedliche Zonen aggregiert. Zunächst werden die `nuts3_kreise` eingeladen. Sie dienen der Georefrenzierung der Beispiel-Daten. Zunächst wir ein Datensatz von 10k zufällig über dem Gebiet Deutschlands verteilter Koordinaten erzeugt. Diesem werden dann zufällige Einkommensdaten zugewürfelt.
-
-GI-konzeptionell erzeugen wir jetzt Tabellen die einerseits die Variable `xy` als Geokoordinate andererseits in der Variablen  `haushalts_einkommen` eine Merkmalsausprägung in Form von Haushaltseinkommen enthalten. Da wir die Ausdehnung des nuts3_kreise Datensatz benutzen sind diese Daten auf Deutschland geokodiert. Streng genommen handelt es sich darum bereits um ein vollständigen [Geodaten-Datensatz]({{ site.baseurl }}{% link _unit01/unit01-04_reader_geo_raum.md %}).
-{: .notice--primary}
-
-
-```r
-rootDIR="~/Schreibtisch/spatialstatSoSe2020/"
-# einlesen der nuts3_kreise 
-nuts3_kreise = readRDS(file.path(rootDIR,"nuts3_kreise.rds"))
-
-# für die Reproduzierbarkeit der Ergebnisse muss ein beliebiger `seed` gesetzt werden
-set.seed(0) 
-nhh = 1000
-
-# Normalverteilte Erzeugung von zufälligen Koordinatenpaaren
-# in der Ausdehnung der nuts3_kreise Daten
-# mit cbind() wird die einzelne Zahl des Breiten und des
-# Längengrads in zwei verbundene Spalten geschrieben
-# runif(10000,) erzeugt 10000 Zahlen innerhalb der Werte extent()
-xy <- cbind(x=runif(nhh , extent(nuts3_kreise)[1], extent(nuts3_kreise)[3]), y=runif(nhh, extent(nuts3_kreise)[2], extent(nuts3_kreise)[4]))
-
-# Normalverteilte Erzeugung von Einkommensdaten
-haushalts_einkommen  =  runif(1000) * 10*runif(1000)
-```
-
-Nachdem die Daten erzeugt wurden, schauen wir und die akkumulierte, klassifizierte und räumliche Verteilung der Daten an.
-
-
-```r
-# Festlegen der Grafik-Ausgabe
-par(mfrow=c(1,3), las=1)
-# Plot der sortieren Einkommen
-plot(sort(haushalts_einkommen), col=rev(terrain.colors(nhh)), pch=20, cex=.75, ylab='Einkommen/Haushalt',xlab='Haushalte')
-
-# Histogramm der Einkommensverteilung 
-hist(haushalts_einkommen, main='', col=rev(terrain.colors(10)),  xlim=c(0,max(haushalts_einkommen)), breaks=seq(0,max(haushalts_einkommen)+1,1),xlab="Einkommen/Haushalt",ylab="Anzahl")
-
-# Räumlicher Plot der Haushalte, Farbe und Größe markieren das Einkommen
-plot(xy, xlim=c(extent(nuts3_kreise)[1], extent(nuts3_kreise)[3]), ylim=c(extent(nuts3_kreise)[2], extent(nuts3_kreise)[4]), cex=haushalts_einkommen/2, col=rev(terrain.colors(10)[round(haushalts_einkommen,0) + 1]), xlab="Rechtwert",ylab="Hochwert" )
-```
-
-<img src="{{ site.baseurl }}/assets/images/unit04/zone_result-1.png" width="1000px" height="550px" />
-
-*Abbildung 04-02-01: Die sortierte, aggregierte und räumliche Einkommensverteilung*
-
-
-Gini-Koeffizient und [Lorenz-Kurve](https://wirtschaftslexikon.gabler.de/definition/lorenzkurve-40022) sind eine häufig gebrauchte erste Einschätzung um die Ungleichheit bzw. relative Konzentrationen von Verteilungen zu ermitteln.
-
-
-```r
-# Berechnung Gini Koeffizient
-ineq(haushalts_einkommen,type="Gini")
-```
-
-```
-## [1] 0.4992696
-```
-
-```r
-# Plot der Lorenz Kurve
-par(mfrow=c(1,1), las=1)
-plot(Lc(haushalts_einkommen),col="darkred",lwd=2)
-```
-
-<img src="{{ site.baseurl }}/assets/images/unit04/lorenz-1.png" width="400px" height="400px" />
-
-*Abbildung 04-02-02: Lorenz-Kurve der Einkommensverteilung*
-
-
-Um die Bedeutung unterschiedlicher Regionen in Bezug auf die aggregierten Daten zu zeigen werden mit Hilfe des `raster` Pakets neun unterschiedliche  Regionalisierungen mit der Ausdehnung und Georeferenzierung von Deutschland erzeugt. 
-
-GI-konzeptionell erzeugen wir jetzt ein kontinuierliches Raster das aus einer  Anzahl von Reihen (`nrow`) und Spalten (`ncol`) besteht. Diesem *leeren* Raster wird die Ausdehnung und Georefrenzierung aus unserem bereits als `sf` Geoobjekt exisistierenden `nuts3_kreise` zugewiesen (`xmn=extent(nuts3_kreise)[1]`...). Schliesslich werden die zuvor erzeugten Werte (Variable `haushalts_einkommen`) an den Positionen  `xy`) in diese leeren Raster einggetragen. Fertig ist ein Geodatensatz im Rasterdatenmodell.
-{: .notice--primary}
-
-
-```r
-# erzeugen von 9 künstlichen geometischen Regionen
-# festlegen der Ausdehnung auf die Ausdehnung des nuts_3kreise Geoobjekts
-xmn=extent(nuts3_kreise)[1] 
-xmx=extent(nuts3_kreise)[3]
-ymn=extent(nuts3_kreise)[2] 
-ymx=extent(nuts3_kreise)[4]
-# Definition der Region als Zeilen und Spalten Matrizen 
-regio_matrix = rbind(c(1,4),c(4,1),c(2,2),c(5,5),c(10,10),c(20,20),c(50,50),c(100,100),c(200,200))
-
-# für 1 bis Anzahl der Elemente in regio_matrix wiederhole
-rr=lapply(1:nrow(regio_matrix),function(x){
-  # erezuge Raster mit der Anzahl von Zeilen und Spalten 
-  # sowie der Ausdehnung nuts3_kreise
-  r = raster(ncol=regio_matrix[x,][1], nrow=regio_matrix[x,][2], xmn=xmn, xmx=xmx, ymn=ymn, ymx=ymx)
-  # weise dem Raster seine Georefrenzierung zu
-  crs(r) = sp::CRS("+init=epsg:25832")
-  # lese die Einkommenswerte in Raster wenn notwendig mittle die Werte
-  r = rasterize(xy, r, haushalts_einkommen, mean)        
-})
-```
-
-Die einzelnen Grafiken verdeutlichen wie die räumliche Anordnung der Zonen verteilt ist. Es handelt sich um 2 Streifenzonierungen und  7 unterschiedlich aufgelöste Gitter von  4x4, 5x5, 10x10, 20x20, 50x50 und 100x100 Regionen.
-
-
-```r
-# Festlegen der Grafik-Ausgabe
-par(mfrow=c(3,3), las=1)
-# Plotten der 9 Regionen
-# in main wird der Titel für jede Grafik definiert
-for (i in 1:length(rr)){
-plot(rr[[i]],main=paste0("ncol=",regio_matrix[i][1]," nrow=",regio_matrix[i][1]))
-}
-```
-
-<img src="{{ site.baseurl }}/assets/images/unit04/plot_zone_raster-1.png" width="1100px" height="900px" />
-
-*Abbildung 04-02-03: 3x3 Matrix der unterschiedlichen Zonen-Anordnungen*
-
-
-Wenn man nun die korrespondierenden zonalen Histogramme anschaut, wird deutlich wie sehr eine Zonierung die Verteilung der Ergebnisse im Raum beeinflusst.
-
-
-
-```r
-# Festlegen der Grafik-Ausgabe
-par(mfrow=c(3,3), las=1)
-
-# Plotten der zugehörigen Histogramme
-for (i in 1:length(rr)){
-  hist(rr[[i]],main=paste0("ncol=",regio_matrix[i][1]," nrow=",regio_matrix[i][1]),
-       col=rev(terrain.colors(10)), xlim=c(0,max(haushalts_einkommen)), breaks=seq(0,max(haushalts_einkommen)+1,1),xlab="Einkommen/Haushalt",ylab="Anzahl")
-}
-```
-
-![]({{ site.baseurl }}/assets/images/unit04/zone_hist-1.png)<!-- -->
-
-*Abbildung 04-02-04: 3x3 Matrix der unterschiedlichen Zonen-Histogramme*
-
+Betrachten wir diese Zusammenhänge einmal gan
 
 ## Distanz
 
@@ -205,43 +93,15 @@ Als Distanz wird die Entfernung von zwei Positionen bezeichnet. Sie kann zunäch
 
 Üblicherweise werden Distanzen in einer "Distanzmatrix" dargestellt. Eine solche Matrix enthält als Spaltenüberschriften und als Zeilenbeschriftung die Kennung von jedem berechneten Ort. Im jedem Feld wird die Entfernung eingetragen. Für kartesische Koordinaten erfolgt dies einfach über den Satz des Pythagoras.
 
-Betrachten wir diese Zusammenhänge einmal ganz praktisch:
-### Berechnen der Distanz-Matrix
-Wir erstellen für eine Anzahl Punkte eine Distanzmatrix. Wenn die Positionen in Länge/Breite angegeben sind wird es deutlich aufwendiger. In diesem Fall können wir die Funktion `pointDistance` aus dem `raster` Paket verwenden (allerdings nur wenn das Koordinatensystem korrekt angegeben wird). Eleganter ist jedoch die Erzeugung von Punktdaten als `sf` Objekt. Es ist leicht möglich  beliebige reale Punktdaten mit Hilfe des `tidygeocoder` Pakets zu erzeugen. Wir geben lediglich eine Städte oder Adressliste an.
 
-GI-konzeptionell erzeugen wir jetzt ein Vektordatenmodell das aus einer  Anzahl von Koordinaten besteht. Anderes als in der Eingangsübung nutzen wir diesmal Städtenamen (Merkmalsausprägung) und einen Webservice der die passenden Koordinaten abfragt (Positionen). In der `lapply` Schleife werden diese abgefragt und als `sf` Objekt zusammengefügt. Fertig ist ein Geodatensatz im Vektordatenmodell.
-{: .notice--primary}
+###  Distanz-Matrix
+Wir nutzen für die geroreferenzierten Positionen von 10 deutschen Städten für die Berechnung einer Distanzmatrix. Wenn die Positionen in Länge/Breite angegeben sind ist die Distanzbeechnung etwas aufwendiger. In diesem Fall können wir die Funktion `pointDistance` aus dem `raster` Paket verwenden (allerdings nur wenn das Koordinatensystem korrekt angegeben wird). Eleganter ist jedoch die Konvertierung von Punktdaten in ein Geodatenformat z.B. als  `sf` Objekt. 
 
-
-
-### Erzeugen einer geokodierten Punktliste
- Zur direkten Überprüfung ob die Punkte richtig geokodiert sind eignet sich nach Erzeugung des Punkte-Objekts die Funktion  `mapview` hervorragend.
+Zur direkten Überprüfung ob die Punkte richtig geokodiert sind eignet sich nach Erzeugung des Punkte-Objekts die Funktion  `mapview` hervorragend.
  
 
 ```r
-# Erzeugen von beliebigen Raumkoordinaten 
-# mit Hilfe von tidygeocoder::geo_osm und sf
-# Städteliste
-staedte=c("München","Berlin","Hamburg","Köln","Bonn","Hannover","Nürnberg","Stuttgart","Freiburg","Marburg")
-
-# Abfragen der Geokoordinaten der Städte mit eine lapply Schleife
-# 1) die Stadliste wird in die apply Schleife (eine optimierte for-Schleife) eingelesen
-# 2) für jeden Namen (X) in der Liste wird mit geo_osm die
-# Koordinate ermittelt Die in eckigen Klammern angegebne Position 2
-# ist die Latitude  (geo_osm(x)[2]) [1] enstprechend die Longitude
-# 3) Umwandlung in numerische Werte
-# 4) Jedes latlon Paar wird in einen sf-Punkt konvertiert und
-# gleichzeitig das korrekte Georefrenzierungssystem zugewiesen (cres = 4326)
-# 5) Zuletzt werden an die Koordinatenpaare die Städtenamen angehangen
-coord_city = lapply(staedte, function(x){
-  latlon = c(geo_osm(x)[2],geo_osm(x)[1])
-  class(latlon) = "numeric"
-  p = st_sfc(st_point(latlon), crs = 4326)
-  st_sf(name = x,p)
-})
-
-# Umwandeln der aus der lapply Schleife zurückgegebnen Liste in eine Matrix 
-geo_coord_city = do.call("rbind", coord_city)
+geo_coord_city = readRDS("geo_coord_city.rds")
 
 # visualize with mapview
 mapview(geo_coord_city,  color='red',legend = FALSE)
@@ -253,51 +113,16 @@ mapview(geo_coord_city,  color='red',legend = FALSE)
 
 *Abbildung 04-02-05: Webkarte mit den erzeugten Punktdaten. In diesem Falle zehn nicht ganz zufällige Städte Deutschlands*
 
-#### R-Training
-Erzeugen Sie aus dem `xy` Datensatz des ersten Beipiels ein `sf` Objekt.
-{: .notice--warning}
-
-### Plotten der Daten mit der plot Funktion
-Die klassische Variante mit der `plot` Funktion ist ist zwar für den Alltag sehr einfach zu nutzen aber für das Erstellen anspruchsvollerer Grafiken oder Karten aber im Detail doch sehr aufwändig. Da wir es hier mit einem `R` Vektorobjekt des  Paket `sf` zu tun haben kann die "Veteran-Funktion" `plot()`  nicht direkt mit den Koordinaten umgehen. Hierfür nutzen wir die Funktion `st_coordinates()`  die auf die Koordinatenpaare zugreift und diese als Matrix zurückgibt. Da es sich um einen `data.frame` (also die R-Tabelle) handelt kann mit den eckigen Klammern beliebig auf Spalten zugegriffen werden. 
-
-
-```r
-# klassisches Plotten eines sf Objects  erfordert den Zugriff auf die Koordinatenpaare
-# mit Hilfe der Funktion st_coordinates(geo_coord_city) leicht möglich
-# schliesslich wird mit der Funktion text() die Beschriftung hinzugefügt
-plot(st_coordinates(geo_coord_city),
-     pch=20, cex=1.5, col='darkgreen', xlab='Längengrad', ylab='Breitengrad')
-text(st_coordinates(geo_coord_city), labels = staedte, cex=1.2, pos=4, col="purple")
-```
-
-<img src="{{ site.baseurl }}/assets/images/unit04/points-2-1.png" width="800px" height="600px" />
-
-#### R-Training
-Mit Hilfe der Funktion `min(st_coordinates(geo_coord_city)[,1])` kann der Minimum-X-Wert ermittelt werden. Analog gilt das für die übrigen Werte. Das Aufaddieren von 0.5 dient nur der besseren Platzierung der Beschriftung. Bauen sie die unten auskommentierten so in den Plot-Befehl ein, dass die Beschriftung von Berlin sichtbar wird. Besdenken Sie dass die einzelnen Elemente des Plot Befehls wie in einer Liste durch Kommata getrennt werden.
-{: .notice--warning}
-
-
-```r
-## mit Hilfe der Funktion min(st_coordinates(geo_coord_city)[,1]) werden 
-## minimum und maximum Ausdehnung bestimmt 
-## xlim und ylim sind die Minimum und Maximum Koordinaten der Plotausdehnung
-
-# xlim = c(min(st_coordinates(geo_coord_city)[,1])  - 0.5 
-#         ,max(st_coordinates(geo_coord_city)[,1]) + 0.5)
-
-# ylim = c(min(st_coordinates(geo_coord_city)[,2])  - 0.5
-#         ,max(st_coordinates(geo_coord_city)[,2]) + 0.5)
-```
-
-*Abbildung 04-02-06: Klassische Plot-Ausgabe mit den erzeugten Punktdaten. Erneut zehn nicht ganz zufällige Städte Deutschlands*
-
 ### Distanzberechnung von Geokoordinaten
-Die Berechnung der Distanzen zwischen den 10 Städten greift einigermaßen tief in Geodaten-Verarbeitung ein. Die Punkte werden über die Funktion `tidygeocoder::geo_osm` mit Hilfe der Stadtnamen erzeugt. Standardisiert werden Kugelkoordinaten (also geographische Koordinaten) erzeugt also Längen und Breitengrade auf Grundlage des WGS84 Datum. Auf einem Ellipsoid ist es deutlich aufwendiger (oder fehlerträchtiger) Entfernungen zu rechnen als in in einem projizierten (also kartesischen) Koordinatensystem da hier sphärische Trigonometrie im Gegensatz zum Satz des Pythagoras zur Anwendung kommt.
 
-Daher transformieren wir zunächst den Datensatz in das amtlich gültige [Referenzsystem](https://de.wikipedia.org/wiki/Europ%C3%A4isches_Terrestrisches_Referenzsystem_1989) für Deutschland nämlich `ETRS89/UTM`. Zur Zuweisung werden viele konkurrierende Systeme verwendet. Im nachstehenden Beispiel nutzen wir die [EPSG](https://de.wikipedia.org/wiki/European_Petroleum_Survey_Group_Geodesy#EPSG-Codes) Konvention. Für das zuvor genannte System ist das der [EPSG-Code 25832](https://epsg.io/25832).
+Die Berechnung der Distanzen zwischen den 10 Städten greift einigermaßen tief in Geodaten-Verarbeitung ein. Die Punkte liegen als geographische Koordinaten, also als Längen und Breitengrade auf Grundlage des WGS84 Datum vor. Auf einem Ellipsoid ist es deutlich aufwendiger (oder fehlerträchtiger) Entfernungen zu rechnen als in in einem projizierten (also kartesischen) Koordinatensystem.
+
+Daher transformieren wir zunächst den Datensatz in das amtlich gültige [Referenzsystem](https://de.wikipedia.org/wiki/Europ%C3%A4isches_Terrestrisches_Referenzsystem_1989) für Deutschland nämlich `ETRS89/UTM`. Im nachstehenden Beispiel nutzen wir die [EPSG](https://de.wikipedia.org/wiki/European_Petroleum_Survey_Group_Geodesy#EPSG-Codes) Konvention. Für das zuvor genannte System ist das der [EPSG-Code 25832](https://epsg.io/25832).
 
 
 ```r
+staedte=c("München","Berlin","Hamburg","Köln","Bonn","Hannover","Nürnberg","Stuttgart","Freiburg","Marburg")
+
 # Zuerst projizieren wir den Datensatz auf ETRS89/UTM
 proj_coord_city = st_transform(geo_coord_city, crs = 25832)
 
@@ -357,349 +182,21 @@ rownames(city_distanz)=staedte
 colnames(city_distanz)=staedte
 ```
 
-
-```r
-# Ausgabe einer hübscheren Tabelle mit kintr::kable 
-# die Notation mit ist das sogennante "pipen" aus der tidyverse Welt
-# hier werden die Daten und Verarbeitungsschritte von der erstenVariable in
-# die nächste weitergeleitet
-
-knitr::kable(city_distanz) %>%
-  kable_styling(bootstrap_options = "striped", full_width = F)
-```
-
-<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> München </th>
-   <th style="text-align:right;"> Berlin </th>
-   <th style="text-align:right;"> Hamburg </th>
-   <th style="text-align:right;"> Köln </th>
-   <th style="text-align:right;"> Bonn </th>
-   <th style="text-align:right;"> Hannover </th>
-   <th style="text-align:right;"> Nürnberg </th>
-   <th style="text-align:right;"> Stuttgart </th>
-   <th style="text-align:right;"> Freiburg </th>
-   <th style="text-align:right;"> Marburg </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> München </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 504156.6 </td>
-   <td style="text-align:right;"> 611337.7 </td>
-   <td style="text-align:right;"> 456511.6 </td>
-   <td style="text-align:right;"> 434329.5 </td>
-   <td style="text-align:right;"> 489061.8 </td>
-   <td style="text-align:right;"> 150928.4 </td>
-   <td style="text-align:right;"> 190926.8 </td>
-   <td style="text-align:right;"> 278029.8 </td>
-   <td style="text-align:right;"> 359924.1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Berlin </td>
-   <td style="text-align:right;"> 504156.6 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 253841.6 </td>
-   <td style="text-align:right;"> 477393.1 </td>
-   <td style="text-align:right;"> 478145.8 </td>
-   <td style="text-align:right;"> 248686.4 </td>
-   <td style="text-align:right;"> 377495.0 </td>
-   <td style="text-align:right;"> 511243.2 </td>
-   <td style="text-align:right;"> 639022.5 </td>
-   <td style="text-align:right;"> 371191.0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Hamburg </td>
-   <td style="text-align:right;"> 611337.7 </td>
-   <td style="text-align:right;"> 253841.6 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 356810.5 </td>
-   <td style="text-align:right;"> 370325.9 </td>
-   <td style="text-align:right;"> 131348.9 </td>
-   <td style="text-align:right;"> 460900.6 </td>
-   <td style="text-align:right;"> 533104.9 </td>
-   <td style="text-align:right;"> 635366.9 </td>
-   <td style="text-align:right;"> 315365.1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Köln </td>
-   <td style="text-align:right;"> 456511.6 </td>
-   <td style="text-align:right;"> 477393.1 </td>
-   <td style="text-align:right;"> 356810.5 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 24607.7 </td>
-   <td style="text-align:right;"> 249893.3 </td>
-   <td style="text-align:right;"> 337014.5 </td>
-   <td style="text-align:right;"> 288316.8 </td>
-   <td style="text-align:right;"> 333440.4 </td>
-   <td style="text-align:right;"> 128538.4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Bonn </td>
-   <td style="text-align:right;"> 434329.5 </td>
-   <td style="text-align:right;"> 478145.8 </td>
-   <td style="text-align:right;"> 370325.9 </td>
-   <td style="text-align:right;"> 24607.7 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 258162.1 </td>
-   <td style="text-align:right;"> 318118.3 </td>
-   <td style="text-align:right;"> 264173.9 </td>
-   <td style="text-align:right;"> 309440.8 </td>
-   <td style="text-align:right;"> 118421.0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Hannover </td>
-   <td style="text-align:right;"> 489061.8 </td>
-   <td style="text-align:right;"> 248686.4 </td>
-   <td style="text-align:right;"> 131348.9 </td>
-   <td style="text-align:right;"> 249893.3 </td>
-   <td style="text-align:right;"> 258162.1 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 338167.6 </td>
-   <td style="text-align:right;"> 401815.7 </td>
-   <td style="text-align:right;"> 505124.9 </td>
-   <td style="text-align:right;"> 186154.7 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Nürnberg </td>
-   <td style="text-align:right;"> 150928.4 </td>
-   <td style="text-align:right;"> 377495.0 </td>
-   <td style="text-align:right;"> 460900.6 </td>
-   <td style="text-align:right;"> 337014.5 </td>
-   <td style="text-align:right;"> 318118.3 </td>
-   <td style="text-align:right;"> 338167.6 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 157508.4 </td>
-   <td style="text-align:right;"> 287407.8 </td>
-   <td style="text-align:right;"> 223271.1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Stuttgart </td>
-   <td style="text-align:right;"> 190926.8 </td>
-   <td style="text-align:right;"> 511243.2 </td>
-   <td style="text-align:right;"> 533104.9 </td>
-   <td style="text-align:right;"> 288316.8 </td>
-   <td style="text-align:right;"> 264173.9 </td>
-   <td style="text-align:right;"> 401815.7 </td>
-   <td style="text-align:right;"> 157508.4 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 131404.0 </td>
-   <td style="text-align:right;"> 227925.4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Freiburg </td>
-   <td style="text-align:right;"> 278029.8 </td>
-   <td style="text-align:right;"> 639022.5 </td>
-   <td style="text-align:right;"> 635366.9 </td>
-   <td style="text-align:right;"> 333440.4 </td>
-   <td style="text-align:right;"> 309440.8 </td>
-   <td style="text-align:right;"> 505124.9 </td>
-   <td style="text-align:right;"> 287407.8 </td>
-   <td style="text-align:right;"> 131404.0 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 320161.6 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Marburg </td>
-   <td style="text-align:right;"> 359924.1 </td>
-   <td style="text-align:right;"> 371191.0 </td>
-   <td style="text-align:right;"> 315365.1 </td>
-   <td style="text-align:right;"> 128538.4 </td>
-   <td style="text-align:right;"> 118421.0 </td>
-   <td style="text-align:right;"> 186154.7 </td>
-   <td style="text-align:right;"> 223271.1 </td>
-   <td style="text-align:right;"> 227925.4 </td>
-   <td style="text-align:right;"> 320161.6 </td>
-   <td style="text-align:right;"> 0.0 </td>
-  </tr>
-</tbody>
-</table>
-
 ## Räumlicher Einfluss
 
-Die beiden Aspekte zuvor haben die räumlichen Verhältnisse in Form von Raumabgrenzung und Distanz beschrieben. In der räumlichen Analyse ist es jedoch von zentraler Bedeutung den räumlichen **Einfluss** zwischen geographischen Objekten zu schätzen bzw. zu messen. Dies kann prozessorientiert funktional erfolgen, der oberliegende Teil eines Baches fließt in den unterliegenden. In der datengetriebenen Betrachtungsweise ist dies in der Regel eine Funktion der *Nachbarschaft* oder der *(inversen) Entfernung*. Um damit in statistischen Modellen arbeiten zu können werden diese Konzepte als *räumliche Gewichtungsmatrix* ausgedrückt. 
+Die beiden Aspekte zuvor haben die räumlichen Verhältnisse in Form von Raumabgrenzung und Distanz beschrieben. In der räumlichen Analyse ist es jedoch von zentraler Bedeutung den räumlichen **Einfluss** zwischen geographischen Objekten zu schätzen bzw. zu messen. Das generelle Problem ist, dass der räumliche Einfluss sehr komplex ist und faktisch nie gemessen werden kann. Daher gibt es zahllose Arten ihn zu schätzen. 
 
-Das generelle und schwerwiegende Problem ist, dass der räumliche Einfluss sehr komplex ist und faktisch nie gemessen werden kann. Daher gibt es zahllose Arten ihn zu schätzen. 
+Dich beiden wichtigsten Ansätze sind dies prozessorientiert (funktional) durchzuführen (der oberliegende Teil eines Baches fließt in den unterliegenden) oder datengetrieben dann wird mit statistischen Verfahren die räumliche Autokorrelation ermittelt. Für den datengetriebnen Ansatz ist dieser Einfluss in der Regel eine Funktion der *Nachbarschaft* oder der *(inversen) Entfernung*. Um damit in statistischen Modellen arbeiten zu können werden diese Nachbarschaftskonzepte als *räumliche Gewichtungsmatrix* ausgedrückt. 
+
 
 Zum Beispiel kann der räumliche Einfluss von Polygonen aufeinander (z.B, NUTS3 Verwaltungsbezirke) so ausgedrückt werden, dass sie eine/keine gemeinsame Grenze, sie kann als euklidische Distanz zwischen ihren Schwerpunkten bestimmt werden oder über die Länge gemeinsamer Grenzen gewichtet werden und so fort.
 
-### Nachbarschaft
+## Nachbarschaft
 
 Die Nachbarschaft ist das vielleicht wichtigste Konzept. höherdimensionale Geoobjekte können als benachbart betrachtet werden wenn sie sich *berühren*, z.B. benachbarte Länder. Bei null-dimensionalen Objekten (Punkte) ist der gebräuchlichste Ansatz die Entfernung in Kombination mit einer Anzahl von Punkten für die Ermittlung der Nachbarschaft zu nutzen.
 
-Betrachten wir diese Zusammenhänge einmal ganz praktisch:
 
-Wir erstellen eine Nachbarschaftsmatrix für die oben erzeugten Punktdaten. Punkte seien *benachbart*, wenn sie innerhalb eines Abstands von z.B. 25 Kilometer liegen.
-
-
-```r
-# Distanzmatrix für Entfernungen > 250 km
-cd = city_distanz  < 250000
-```
-
-
-```r
-# Ausgabe einer hübscheren Tabelle mit kintr::kable die Notation ist das sogenannte pipen aus der tidyverse Welt
-knitr::kable(cd) %>%
-  kable_styling(bootstrap_options = "striped", full_width = F)
-```
-
-<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> München </th>
-   <th style="text-align:left;"> Berlin </th>
-   <th style="text-align:left;"> Hamburg </th>
-   <th style="text-align:left;"> Köln </th>
-   <th style="text-align:left;"> Bonn </th>
-   <th style="text-align:left;"> Hannover </th>
-   <th style="text-align:left;"> Nürnberg </th>
-   <th style="text-align:left;"> Stuttgart </th>
-   <th style="text-align:left;"> Freiburg </th>
-   <th style="text-align:left;"> Marburg </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> München </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Berlin </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Hamburg </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Köln </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Bonn </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Hannover </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Nürnberg </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Stuttgart </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Freiburg </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Marburg </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> TRUE </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:left;"> TRUE </td>
-  </tr>
-</tbody>
-</table>
-
-
-
-### Gewichtungs-Matrix für Punkte
+### Distanzbasierte Gewichtungs-Matrix für Punkte
 
 Anstatt den räumlichen Einfluss als binären Wert (also topologisch benachbart ja/nein) auszudrücken, kann er als kontinuierlicher Wert ausgedrückt werden. Der einfachste Ansatz ist die Verwendung des inversen Abstands (je weiter entfernt, desto niedriger der Wert).
 
@@ -714,163 +211,6 @@ gewichtungs_matrix =  (1 / city_distanz)
 # inverse Distanz zum Quadrat
 gewichtungs_matrix_q =  (1 / city_distanz ** 2)
 ```
-
-
-```r
-# Ausgabe einer hübscheren Tabelle mit kintr::kable die Notation ist das sogenannte pipen aus der tidyverse Welt
-knitr::kable(gewichtungs_matrix) %>%
-  kable_styling(bootstrap_options = "striped", full_width = F)
-```
-
-<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> München </th>
-   <th style="text-align:right;"> Berlin </th>
-   <th style="text-align:right;"> Hamburg </th>
-   <th style="text-align:right;"> Köln </th>
-   <th style="text-align:right;"> Bonn </th>
-   <th style="text-align:right;"> Hannover </th>
-   <th style="text-align:right;"> Nürnberg </th>
-   <th style="text-align:right;"> Stuttgart </th>
-   <th style="text-align:right;"> Freiburg </th>
-   <th style="text-align:right;"> Marburg </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> München </td>
-   <td style="text-align:right;"> Inf </td>
-   <td style="text-align:right;"> 2.0e-06 </td>
-   <td style="text-align:right;"> 1.6e-06 </td>
-   <td style="text-align:right;"> 2.20e-06 </td>
-   <td style="text-align:right;"> 2.30e-06 </td>
-   <td style="text-align:right;"> 2.0e-06 </td>
-   <td style="text-align:right;"> 6.6e-06 </td>
-   <td style="text-align:right;"> 5.2e-06 </td>
-   <td style="text-align:right;"> 3.6e-06 </td>
-   <td style="text-align:right;"> 2.8e-06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Berlin </td>
-   <td style="text-align:right;"> 2.0e-06 </td>
-   <td style="text-align:right;"> Inf </td>
-   <td style="text-align:right;"> 3.9e-06 </td>
-   <td style="text-align:right;"> 2.10e-06 </td>
-   <td style="text-align:right;"> 2.10e-06 </td>
-   <td style="text-align:right;"> 4.0e-06 </td>
-   <td style="text-align:right;"> 2.6e-06 </td>
-   <td style="text-align:right;"> 2.0e-06 </td>
-   <td style="text-align:right;"> 1.6e-06 </td>
-   <td style="text-align:right;"> 2.7e-06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Hamburg </td>
-   <td style="text-align:right;"> 1.6e-06 </td>
-   <td style="text-align:right;"> 3.9e-06 </td>
-   <td style="text-align:right;"> Inf </td>
-   <td style="text-align:right;"> 2.80e-06 </td>
-   <td style="text-align:right;"> 2.70e-06 </td>
-   <td style="text-align:right;"> 7.6e-06 </td>
-   <td style="text-align:right;"> 2.2e-06 </td>
-   <td style="text-align:right;"> 1.9e-06 </td>
-   <td style="text-align:right;"> 1.6e-06 </td>
-   <td style="text-align:right;"> 3.2e-06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Köln </td>
-   <td style="text-align:right;"> 2.2e-06 </td>
-   <td style="text-align:right;"> 2.1e-06 </td>
-   <td style="text-align:right;"> 2.8e-06 </td>
-   <td style="text-align:right;"> Inf </td>
-   <td style="text-align:right;"> 4.06e-05 </td>
-   <td style="text-align:right;"> 4.0e-06 </td>
-   <td style="text-align:right;"> 3.0e-06 </td>
-   <td style="text-align:right;"> 3.5e-06 </td>
-   <td style="text-align:right;"> 3.0e-06 </td>
-   <td style="text-align:right;"> 7.8e-06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Bonn </td>
-   <td style="text-align:right;"> 2.3e-06 </td>
-   <td style="text-align:right;"> 2.1e-06 </td>
-   <td style="text-align:right;"> 2.7e-06 </td>
-   <td style="text-align:right;"> 4.06e-05 </td>
-   <td style="text-align:right;"> Inf </td>
-   <td style="text-align:right;"> 3.9e-06 </td>
-   <td style="text-align:right;"> 3.1e-06 </td>
-   <td style="text-align:right;"> 3.8e-06 </td>
-   <td style="text-align:right;"> 3.2e-06 </td>
-   <td style="text-align:right;"> 8.4e-06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Hannover </td>
-   <td style="text-align:right;"> 2.0e-06 </td>
-   <td style="text-align:right;"> 4.0e-06 </td>
-   <td style="text-align:right;"> 7.6e-06 </td>
-   <td style="text-align:right;"> 4.00e-06 </td>
-   <td style="text-align:right;"> 3.90e-06 </td>
-   <td style="text-align:right;"> Inf </td>
-   <td style="text-align:right;"> 3.0e-06 </td>
-   <td style="text-align:right;"> 2.5e-06 </td>
-   <td style="text-align:right;"> 2.0e-06 </td>
-   <td style="text-align:right;"> 5.4e-06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Nürnberg </td>
-   <td style="text-align:right;"> 6.6e-06 </td>
-   <td style="text-align:right;"> 2.6e-06 </td>
-   <td style="text-align:right;"> 2.2e-06 </td>
-   <td style="text-align:right;"> 3.00e-06 </td>
-   <td style="text-align:right;"> 3.10e-06 </td>
-   <td style="text-align:right;"> 3.0e-06 </td>
-   <td style="text-align:right;"> Inf </td>
-   <td style="text-align:right;"> 6.3e-06 </td>
-   <td style="text-align:right;"> 3.5e-06 </td>
-   <td style="text-align:right;"> 4.5e-06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Stuttgart </td>
-   <td style="text-align:right;"> 5.2e-06 </td>
-   <td style="text-align:right;"> 2.0e-06 </td>
-   <td style="text-align:right;"> 1.9e-06 </td>
-   <td style="text-align:right;"> 3.50e-06 </td>
-   <td style="text-align:right;"> 3.80e-06 </td>
-   <td style="text-align:right;"> 2.5e-06 </td>
-   <td style="text-align:right;"> 6.3e-06 </td>
-   <td style="text-align:right;"> Inf </td>
-   <td style="text-align:right;"> 7.6e-06 </td>
-   <td style="text-align:right;"> 4.4e-06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Freiburg </td>
-   <td style="text-align:right;"> 3.6e-06 </td>
-   <td style="text-align:right;"> 1.6e-06 </td>
-   <td style="text-align:right;"> 1.6e-06 </td>
-   <td style="text-align:right;"> 3.00e-06 </td>
-   <td style="text-align:right;"> 3.20e-06 </td>
-   <td style="text-align:right;"> 2.0e-06 </td>
-   <td style="text-align:right;"> 3.5e-06 </td>
-   <td style="text-align:right;"> 7.6e-06 </td>
-   <td style="text-align:right;"> Inf </td>
-   <td style="text-align:right;"> 3.1e-06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Marburg </td>
-   <td style="text-align:right;"> 2.8e-06 </td>
-   <td style="text-align:right;"> 2.7e-06 </td>
-   <td style="text-align:right;"> 3.2e-06 </td>
-   <td style="text-align:right;"> 7.80e-06 </td>
-   <td style="text-align:right;"> 8.40e-06 </td>
-   <td style="text-align:right;"> 5.4e-06 </td>
-   <td style="text-align:right;"> 4.5e-06 </td>
-   <td style="text-align:right;"> 4.4e-06 </td>
-   <td style="text-align:right;"> 3.1e-06 </td>
-   <td style="text-align:right;"> Inf </td>
-  </tr>
-</tbody>
-</table>
 
 Wie auch die *räumliche Gewichtung* wird die Matrix oft *zeilennormiert*, das heißt dass die Summe der Gewichte für jede Zeile (Position oder Wert der Position) in der Matrix gleich ist. 
 
@@ -892,79 +232,20 @@ zeilen_summe
 ## 3.481930e-05 3.715831e-05 2.915882e-05 4.222911e-05
 ```
 
-### Gewichtungs-Matrix für Polygone
 
-#### Binäre 4-er Nachbarschaft
-
-Die Gewichtungsmatrix für Polygone zu bestimmen ist natürlich etwas komplexer dafür gibt es allerdings mit `spdep` ein bewährtes Paket.
-
-Die Funktion `poly2nb` kann unter anderem um eine *Rook* Nachbarschaftsliste erzeugen. Sie dient als Grundlage einer Nachbarschaftsmatrix.
-
-
-```r
-rook = poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)
-rook_ngb_matrix = nb2mat(rook, style='B', zero.policy = TRUE)
-
-# Berechne die Anzahl der Nachbarn für jedes Gebiet
-anzahl_nachbarn <- rowSums(rook_ngb_matrix)
-
-# als prozentsatz
-prozentzahl_nachbarn  = round(100 * table(anzahl_nachbarn) / length(anzahl_nachbarn), 1)
-
-plot(st_geometry(nuts3_kreise), border="grey", reset=FALSE,
-     main=paste("Binary neighbours", sep=""))
-coords <- coordinates(as(nuts3_kreise,"Spatial"))
-plot(rook, coords, col='red', lwd=2, add=TRUE)
-```
-
-<img src="{{ site.baseurl }}/assets/images/unit04/binary_ngb-1.png" width="1000px" height="1000px" />
-
-*Abbildung 04-02-05: Binäre 4-er Nachbarschaft für die Landkreise Deutschlands*
-
-
-
-
-#### Nearest-Distance Nachbarn
-
-Nachfolgend werden exemplarisch die 3 bzw. 5 nächsten Nachbarn zu einem Kreis ausgewiesen.
-
-
-```r
-rn <- row.names(nuts3_kreise)
-
-# Berechne die 3 und 5 Nachbarschaften
-kreise_dist_k3 <- knn2nb(knearneigh(coords, k=3, RANN=FALSE))
-kreise_dist_k5 <- knn2nb(knearneigh(coords, k=5, RANN=FALSE))
-##
-par(mfrow=c(1,2),las=1)
-plot(st_geometry(nuts3_kreise), border="grey", reset=FALSE,
-     main=paste("Drei Nachbarkreise", sep=""))
-
-plot(kreise_dist_k3, lwd = 1, coords, add=TRUE,col="blue")
-
-plot(st_geometry(nuts3_kreise), border="grey", reset=FALSE,
-     main=paste("Fünf Nachbarkreise", sep=""))
-
-plot(kreise_dist_k5, lwd =1, coords, add=TRUE,col="red")
-```
-
-<img src="{{ site.baseurl }}/assets/images/unit04/neareast_ngb-1.png" height="1000px" />
-
-*Abbildung 04-02-06:Nächste 3-er/5-er Nachbarschaft für die Landkreise Deutschlands*
-
-
-
-
-#### Distanz-basierte Nachbarschaft
+### Erweiterung Distanz-basierte Nachbarschaft für Flächen
 
 Nachfolgend wird für den Mittelwert, das dritte Quartil und den Maximalwert der Distanzverteilung aller Kreis-Zentroide die Nachbarschaft bestimmt.
 
 
 ```r
+# Extraktion der Koordinaten aus nut3_kreise
+coords <- coordinates(as(nuts3_kreise,"Spatial"))
+
 # berechne alle Distanzen für die Flächenschwerpunkte der Kreise
 knn2nb = knn2nb(knearneigh(coords))
 
-# erzeuge die Kreisdistanzen
+# erzeuge die Distanzen für die LAnd-Kreise
 kreise_dist <- unlist(nbdists(knn2nb, coords))
 summary(kreise_dist)
 ```
@@ -975,6 +256,7 @@ summary(kreise_dist)
 ```
 
 ```r
+# Extraktion der Kreisnamen
 rn <- row.names(nuts3_kreise)
 
 # berechne die Nachbarschaften für alle Kreise < mean 3. Quartil und Max Wert
@@ -1006,57 +288,99 @@ plot(nachbarschaft_mean, lwd =3, coords, add=TRUE,col="blue")
 *Abbildung 04-02-07: Distanzbasierte Nachbarschaften für die Landkreise Deutschlands, a) Nachbarschaften innerhalb der Maximaldistanz der Distanzmatrix, b) Nachbarschaften innerhalb der 3. Quartils der Distanzmatrix, c) b) Nachbarschaften innerhalb der Mittelwerts der Distanzmatrix*
 
 
+### Binäre 4-er Nachbarschaft
+
+
+Die Funktion `poly2nb` kann verwendet werden um binäre (=Nachbar ja/nein) Nachbarschaftslisten erzeugen. Sie dient als Grundlage einer Nachbarschaftsmatrix.
+
+
+```r
+# Berchnen einer binären Nachbarschaftsliste mit der vierer Nachbarschaft "rook" (=wueen="FALSE")
+rook = poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)
+
+# Ableiten der Nachbarschaftsmatrix aus der zuvor erzeugten Liste
+rook_ngb_matrix = nb2mat(rook, style='B', zero.policy = TRUE)
+
+# Berechne die Anzahl der Nachbarn für jedes Gebiet
+anzahl_nachbarn <- rowSums(rook_ngb_matrix)
+
+# Berechne die Anzahl der Nachbarn als Prozentsatz
+prozentzahl_nachbarn  = round(100 * table(anzahl_nachbarn) / length(anzahl_nachbarn), 1)
+
+# Plotten der Ergebnisse
+plot(st_geometry(nuts3_kreise), border="grey", reset=FALSE,
+     main=paste("Binary neighbours", sep=""))
+coords <- coordinates(as(nuts3_kreise,"Spatial"))
+plot(rook, coords, col='red', lwd=2, add=TRUE)
+```
+
+<img src="{{ site.baseurl }}/assets/images/unit04/binary_ngb-1.png" width="1000px" height="1000px" />
+
+*Abbildung 04-02-05: Binäre 4-er Nachbarschaft für die Landkreise Deutschlands*
+
+
+
+
+#### Nächste Nachbarn
+
+Natürlich können auch nicht nur die vier oder acht angenzenden Nachbarn ermittelt werden sondern beliebig viele. Nachfolgend werden exemplarisch die 3 bzw. 5 nächsten Nachbarn zu einem Kreis ausgewiesen.
+
+
+```r
+rn <- row.names(nuts3_kreise)
+
+# Berechne die 3 und 5 Nachbarschaften
+kreise_dist_k3 <- knn2nb(knearneigh(coords, k=3, RANN=FALSE))
+kreise_dist_k5 <- knn2nb(knearneigh(coords, k=5, RANN=FALSE))
+
+# Plotten der Ergebnisse
+par(mfrow=c(1,2),las=1)
+plot(st_geometry(nuts3_kreise), border="grey", reset=FALSE,
+     main=paste("Drei Nachbarkreise", sep=""))
+
+plot(kreise_dist_k3, lwd = 1, coords, add=TRUE,col="blue")
+
+plot(st_geometry(nuts3_kreise), border="grey", reset=FALSE,
+     main=paste("Fünf Nachbarkreise", sep=""))
+
+plot(kreise_dist_k5, lwd =1, coords, add=TRUE,col="red")
+```
+
+<img src="{{ site.baseurl }}/assets/images/unit04/neareast_ngb-1.png" height="1000px" />
+
+*Abbildung 04-02-06:Nächste 3-er/5-er Nachbarschaft für die Landkreise Deutschlands*
+
+
 
 ## Räumliche Autokorrelation
 
-Das Konzept der räumlichen Autokorrelation komplizierter als das der zeitlichen Autokorrelation räumliche Objekte haben in der Regel zwei Dimensionen und komplexe Formen aufweisen und daher Nähe unterschiedlich dimensional zusammenhängen kann.
+Nachdem wir nun beliebige Nachbarschaften berechnen können sollten wir uns um die räumliche Autokorrelation der in disen Nachbarschaften ausgeprägten Merkmale Gedanken machen.  Die räumliche Autokorrelation die nach Tobler den Einfluß der nachbarschaftlichen Nähe beschreibt, ist komplizierter als das die zeitliche Autokorrelation. Räumliche Objekte haben in der Regel zwei Dimensionen und weisen komplexe Formen auf was zu einer mindestens zweidimensionalen Beeinflussung durch *Nähe* führt.
 
-Grundsätzlich beschreiben die räumlichen Autokorrelationsmaße die Ähnlichkeit, der  beobachteten Werte zueinander. Räumliche Autokorrelation entstehen durch Beobachtungen und Beobachtungen und Positionen/Objekte im Raum.
+Grundsätzlich beschreiben die räumlichen Autokorrelationsmaße die Ähnlichkeit der beobachteten Werte zueinander. Räumliche Autokorrelation entstehen durch Beobachtungen und Beobachtungen und Positionen/Objekte im Raum.
 
 Die räumliche Autokorrelation in einer Variable kann exogen (sie wird durch eine andere räumlich autokorrelierte Variable verursacht, z.B. Niederschlag) oder endogen (sie wird durch den Prozess verursacht, der im Spiel ist, z.B. die Ausbreitung einer Krankheit) sein.
 
 Eine häufig verwendete Statistik ist Moran's I und invers dazu  Geary's C. Binäre Daten werden mit dem Join-Count-Index getestet.
 
-### Beispiel - Binäre Nachbarschaft
-
-
-```r
-nuts3_kreise_rook = poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)
-
-coords <- coordinates(as(nuts3_kreise,"Spatial"))
-
-plot(st_geometry(nuts3_kreise), border="grey", reset=FALSE,
-     main=paste("Binary neighbours", sep=""))
-plot(nuts3_kreise_rook, coords, col='red', lwd=2, add=TRUE)
-```
-
-![]({{ site.baseurl }}/assets/images/unit04/moran_setup-1.png)<!-- -->
-
-*Abbildung 04-02-08: Binäre 4-er Nachbarschaft für die Landkreise Deutschlands - Hier für die Berechnung der räumlichen Autokorrelation*
-
-### Moran's-I und Geary-C Test
-
 Wie bereits bekannt ist hängt der Wert von Morans I deutlich von den Annahmen ab, die in die räumliche Gewichtungsmatrix verwendet werden. Die Idee ist, eine Matrix zu konstruieren, die Ihre Annahmen über das jeweilige räumliche Phänomen passend wiedergibt. Der übliche Ansatz besteht darin, eine Gewichtung von 1 zu geben, wenn zwei *Zonen* Nachbarn sind falls nicht wird eine 0 vergeben. Natürlich variiert die Definition von *Nachbarn* (vgl. Reader räumliche Konzepte und oben). Quasi-kontinuierlich ist der Ansatz eine inverse Distanzfunktion zur Bestimmung der Gewichte zu verwenden. Auch wenn in der Praxis fast nie vorzufinden sollte die Auswahl räumlicher Gewichtungsmatritzen das betreffende Phänomen abbilden. So ist die Benachbartheit entlang von Autobahnen für Warentransporte anders zu gewichten als beispielsweise über ein Gebirge oder einen See.
 
-Der Moran-I-Test und der Geary C Test sind übliche Verfahren für die Überprüfung räumlicher Autokorrelation. Das Geary's-C ist invers mit Moran's-I, aber nicht identisch. Moran's-I ist eher ein Maß für die globale räumliche Autokorrelation, während Geary's-C eher auf eine lokale räumliche Autokorrelation reagiert. Hier die gängige Formel für Moran's I:
+Der Moran-I-Test und der Geary C Test sind übliche Verfahren für die Überprüfung räumlicher Autokorrelation. Das Geary's-C ist invers mit Moran's-I, aber nicht identisch. Moran's-I ist eher ein Maß für die globale räumliche Autokorrelation, während Geary's-C eher auf eine lokale räumliche Autokorrelation reagiert. 
 
-$$
-\\[I = \frac{n}{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(x_i-\bar{x})(x_j-\bar{x})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}\\]
-$$
-
-wobei $\\(x_i, i=1, \ldots, n\\)$   $\\({n}\\)$ Beobachtungen der interessierenden numerischen Variablen und $\\(w_{ij}\\)$ die räumlichen Gewichte sind.
-
-Im wesentlichen ist dies eine erweiterte Version der Formel zur Berechnung des Korrelationskoeffizienten mit einer Matrix an räumlichen Gewichten.
+### Berechnung der räumlichen Autokorrelation für eine binäre Vierer-Nachbarschaft
 
 
 ```r
+# Berechnung der Nachbarschaft
 nuts3_kreise_rook = poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)
+# Extraktion der Koordinaten
+coords <- coordinates(as(nuts3_kreise,"Spatial"))
+
 w_nuts3_kreise_rook =  nb2listw(nuts3_kreise_rook, style='B',zero.policy = TRUE)
 m_nuts3_kreise_rook =   nb2mat(nuts3_kreise_rook, style='B', zero.policy = TRUE)
 nuts3_gewicht <- mat2listw(as.matrix(m_nuts3_kreise_rook))
 
 
-# lineares Modell
+# lineares Modell Anteil Hochschulabschluss / ANteil Baugewerbe
 lm_uni_bau = lm(nuts3_kreise$Anteil.Hochschulabschluss ~ nuts3_kreise$Anteil.Baugewerbe, data=nuts3_kreise)
 summary(lm_uni_bau)
 ```
@@ -1083,7 +407,6 @@ summary(lm_uni_bau)
 ## F-statistic: 179.3 on 1 and 398 DF,  p-value: < 2.2e-16
 ```
 
-
 ```r
 # Extraktion der Residuen
 residuen_uni_bau <- lm( nuts3_kreise$Anteil.Hochschulabschluss ~ nuts3_kreise$Anteil.Baugewerbe, data=nuts3_kreise)$resid
@@ -1107,7 +430,12 @@ m_r_residuen_uni_bau
 ## Moran I statistic       Expectation          Variance 
 ##      0.3451598142     -0.0025062657      0.0009392513
 ```
-Anstelle des normalen Moran I  sollte eine Monte-Carlo-Simulation verwendet werden. Das ist eigentlich die einzige gute Methode um festzustellen, wie wahrscheinlich es ist, dass die beobachteten Werte als zufällige Ziehung angesehen werden können.
+
+*Abbildung 04-02-08: Berechnung der räumlichen Autokorrelation für Binäre 4-er Nachbarschaft für die Landkreise Deutschlands - Hier für die das lineare Modell lm(Anteil.Hochschulabschluss ~ Anteil.Baugewerbe)*
+
+
+```
+Anstelle des üblichen einfachen  Moran I  Tests sollte eine Monte-Carlo-Simulation verwendet werden, da es eigentlich die einzige gute Methode ist festzustellen, wie wahrscheinlich die beobachteten Werte als zufällige Ziehung angesehen werden können.
 
 
 
@@ -1119,10 +447,6 @@ moran.plot (residuen_uni_bau, nuts3_gewicht)
 
 *Abbildung 04-02-08: Moran-I Plot*
 
-#### R-Training
-Mit Hilfe der Funktion `poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)` wird eine Nachbarschaftsbeziehung erzeugt. Erzeugen Sie für eine distanzbasierte Nachbarschaft mit einer *Queens-Nachbarschaft*, die das erste Quartil der Distanzverteilung als Schwellwert nutzt analog zum gegebenen Beispiel einen Moran I Monte Carlo Test.
-{: .notice--warning}
-
 
 ## Download Skript
 Das Skript kann unter [unit04-02_sitzung.R]({{ site.baseurl }}/assets/scripts/unit04-02_sitzung.R){:target="_blank"} heruntergeladen werden
@@ -1130,21 +454,19 @@ Das Skript kann unter [unit04-02_sitzung.R]({{ site.baseurl }}/assets/scripts/un
 ## Aufgabenstellung
 
 Bitte bearbeiten Sie folgende Aufgabenstellung:
-1 Berechnen Sie auf der Grundlage der `nuts3_kreise` eine [distanzbasierte Nachbarschaft]({{ site.baseurl }}/unit04/unit04-02_sitzung.html#berechnen-der-distanz-matrix) mit dem maximalen Distanzmaß des ersten Quartils. 
-1 Berechnen Sie für diese distanzbasierte Nachbarschaft eine neue Gewichtungsmatrix (analog zu `nuts3_gewicht`)
-1 Berechnen Sie mit dieser neu erstellten Gewichtungsmatrix und den `residuen_uni_bau ` aus obigem linearen Modell mit Hilfe von Moran I die Autokorrelation mit Hilfe der Monte Carlo Variante. und vergleichen Sie die dieses Ergebnis mit dem Beispielergebnis aus dieser Übung
-1 Erzeugen Sie zum Abschluss eine Karte mit den Residuen des verwendenten linearen Modells. Gehen Sie hierzu analog zum [tmap / mapview]({{ site.baseurl }}/unit04/unit04-01_sitzung.html#darstellung-der-daten-mit-dem-paket-tmap) Beispiel vor.
+* Berechnen Sie auf der Grundlage der `nuts3_kreise` eine [distanzbasierte Nachbarschaft]({{ site.baseurl }}/unit04/unit04-02_sitzung.html#berechnen-der-distanz-matrix) mit dem maximalen Distanzmaß des ersten Quartils. 
+* Berechnen Sie für diese distanzbasierte Nachbarschaft eine neue Gewichtungsmatrix (analog zu `nuts3_gewicht`)
+* Berechnen Sie mit dieser neu erstellten Gewichtungsmatrix und den `residuen_uni_bau ` aus obigem linearen Modell mit Hilfe von Moran I die Autokorrelation mit Hilfe der Monte Carlo Variante. und vergleichen Sie die dieses Ergebnis mit dem Beispielergebnis aus dieser Übung
+* Erzeugen Sie zum Abschluss eine Karte mit den Residuen des verwendenten linearen Modells. Gehen Sie hierzu analog zum [tmap / mapview]({{ site.baseurl }}/unit04/unit04-01_sitzung.html#darstellung-der-daten-mit-dem-paket-tmap) Beispiel vor.
 {: .notice--success}
 
 ## Was ist sonst noch zu tun?
 Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressions-Analysen und  -Modelle auf den Grundannahmen dieser Übung basieren. Das heisst es kommt maßgeblich auf Ihre konzeptionellen oder theoriegeleiteten Vorstellungen an, welche Nachbarschaft, welches Nähe-Maß und somit auch, welche räumlichen Korrelationen zustande kommen. Bitte beschäftigen Sie sich mitdem Skript. 
 
-* versuchen sie sich an den *R-Trainings*. Sie sollen Sie zum aktiven Umgang mit `R` ermuntern.
 * gehen Sie die Skripte **schrittweise** durch. Lassen Sie es nicht von vorne bis hinten unkontrolliert durchlaufen 
 * gleichen Sie ihre Kenntnisse aus dem Statistikkurs mit diesen praktischen Übungen ab und identifizieren Sie was Raum-Wirskamkeiten sind.
 * *spielen* Sie mit den Einstellungen, lesen Sie Hilfen und lernen Sie schrittweise die Handhabung von R kennen. 
 * lernen Sie quasi im "*Vorbeigehen*" wie Daten zu plotten sind oder wann Sie ein wenig Acht geben müssen wenn Sie mit Geodaten arbeiten (viele Hinweise und Erläuterungen sind in den Kommentarzeilen untergebracht).
-* Versuchen Sie sich mit der Datenvisualisierung vertraut zu machen. Hierzu können Sie die Vignetten von `tmap` und `mapview` nutzen. [tmap](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html), [mapview](https://r-spatial.github.io/mapview/articles/articles/mapview_01-basics.html)
 
 
 * **stellen Sie Fragen im Forum, im Kurs oder per email mit dem Betreff [M&S2020]**
