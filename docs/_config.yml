@@ -112,9 +112,9 @@ collections:
   unit04:
     output: true
     permalink: /:collection/:title.html
-#  unit05:
-#    output: true
-#    permalink: /:collection/:title.html
+  unit05:
+    output: true
+    permalink: /:collection/:title.html
 worksheets:
     output: true
     permalink: /:collection/:title.html
@@ -148,7 +148,7 @@ defaults:
       path: ""
       type: unit01
     values:
-      category: "Reader Geographische Raumkonzepte"
+      category: "Geographische Raumkonzepte"
       tags: "Unit|01"
       layout: single
       sidebar:
@@ -160,7 +160,7 @@ defaults:
       path: ""
       type: unit02
     values:
-      category: "Reader GI Raumkonzepte"
+      category: "Geoinformatik Raumkonzepte"
       tags: "Unit|02"
       layout: single
       sidebar:
@@ -170,7 +170,7 @@ defaults:
       path: ""
       type: unit03
     values:
-      category: " Reader Intro in R"
+      category: "R-Basics"
       tags: "Unit|03"
       layout: single
       sidebar:
@@ -180,8 +180,18 @@ defaults:
       path: ""
       type: unit04
     values:
-      category: "Sitzungen"
+      category: "R-Praxis"
       tags: "Unit|04"
+      layout: single
+      sidebar:
+        nav: "units"         
+  # unit05
+  - scope:
+      path: ""
+      type: unit05
+    values:
+      category: "Sitzungen"
+      tags: "Unit|05"
       layout: single
       sidebar:
         nav: "units" 
