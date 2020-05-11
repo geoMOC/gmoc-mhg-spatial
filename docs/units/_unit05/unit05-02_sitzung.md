@@ -434,7 +434,7 @@ m_r_residuen_uni_bau
 *Abbildung 04-02-08: Berechnung der räumlichen Autokorrelation für Binäre 4-er Nachbarschaft für die Landkreise Deutschlands - Hier für die das lineare Modell lm(Anteil.Hochschulabschluss ~ Anteil.Baugewerbe)*
 
 
-```
+
 Anstelle des üblichen einfachen  Moran I  Tests sollte eine Monte-Carlo-Simulation verwendet werden, da es eigentlich die einzige gute Methode ist festzustellen, wie wahrscheinlich die beobachteten Werte als zufällige Ziehung angesehen werden können.
 
 
