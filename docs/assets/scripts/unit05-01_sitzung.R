@@ -1,35 +1,13 @@
----
-title: "Sitzung 1: Datentabellen und Geometrien"
-toc: true
-toc_label: Inhalt
----
+## ----kintr_setup, include=FALSE-------------------------------------
+rootDIR="~/Schreibtisch/spatialstat_SoSe2020/"
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(cache.path = paste0(rootDIR,'/cache/'))
+knitr::opts_chunk$set(root.dir = rootDIR)
+knitr::opts_chunk$set(fig.path='{{ site.baseurl }}/assets/images/unit04/')
 
 
 
-Datenanalyse und Datenvisualisierung ist in der Regel begleitet von einer umfangreichen Vorbereitung der Daten. Üblicherweise kann dies von Hand mit einem Editor oder automatisiert durch entsprechende Scripte erfolgen. <!--more-->Insbesondere für die Reproduzierbarkeit und die einfache Anpassung weiterer Vorverarbeitungsschritte ist es oft sinnvoll sich mit einer automatischen Datenvorprozessirrung zu beschäftigen. Dies kann oft sehr mühevoll sein. Ungeachtet der Herausforderungen die sich einem Anfänger entgegenstellen ist es der Mühe wert da nicht nur im wissenschaftlichen Sinne Reproduzierbarkeit des vollständigen Arbeitsablaufs höchste Priorität hat sondern die gesamte Analyse von den Rohdaten bis zu den Ergebnissen transparent nachvollziehbar bleibt. 
-
-
-## Lernziele
-
-Die Lernziele der ersten Übung sind:
-
----
-
-  * Installation von R Rstudio und den notwendigen Libraries
-  * Erste Schritte mit R
-  * Aufbereitung und Darstellung eines zusammengesetzten Datensatzes 
- 
----
-
-In den nachfolgenden Skript Schnipseln werden einige wichtige Techniken der R-Programmiersprache benutzt und ausführlich erläutert. Einige kennen Sie bereits, andere sind im Reader [R-Intro]({{ site.baseurl }}{% link _unit03/unit03-01_reader_R.md %}
-erklärt. Vor allem die beiden "*Arbeitspferde*" für Wiederholungen `for` und Bedingungen `if` werden eingeführt. Bitte schauen sie für die grundsätzliche Funktionsweise in die R-Reader.
-
-
-## Einrichten der Umgebung
-
-
-
-```r
+## ----setup, echo=TRUE,message=FALSE, warning=FALSE------------------
 #---------------------------------------------------------
 # merge_LAU_NUTS3.R 
 # Autor: Chris Reudenbach, creuden@gmail.com
@@ -155,11 +133,11 @@ nuts3_kreise = nuts3_kreise[,c(1,2,3,14,4,5,6,7,8,9,10,11,12,15,16,17)]
 # 2 - Analyse
 #--------------------
 # findet in diesem Beispiel nicht statt
-```
-### Darstellung der Daten mit dem Paket `tmap`
-`tmap` ist das derzeit wohl erfolgreichste und vielseitigste Kartographie-Paket in der R-Welt. Hier ein ganz einfaches Beispiel zuer Erzeugung statischer Karten. 
 
-```r
+
+
+## ----tmap, echo=TRUE,message=FALSE, warning=FALSE-------------------
+
 # 3 - Ergebnisausgabe und Visualisierung 
 #--------------------
 # Einstellen der Plotausgabe 1 Reihe , zwei Abbildungen Beschriftungen Stil1
@@ -167,33 +145,12 @@ par(mfrow=c(1,2), las=1)
 # Darstellung mit tmap Farbgebung nach Anteil.Baugewerbe
 tm_shape(nuts3_kreise, projection = 25832) + 
   tm_polygons(c("Anteil.Baugewerbe","Anteil.Hochschulabschluss"),    breaks=seq(0,0.2, by=0.025))
-```
-
-![]({{ site.baseurl }}/assets/images/unit04/tmap-1.png)<!-- -->
-
-*Abbildung 04-01-01: Statische Karte a) Anteil Baugewerbe, b) Anteil Hochschulabschluss*
-
-### Darstellung der Daten mit mapview
-Das Paket `mapview` eignet sich besonders für eine schnelle interaktive Visualisierung der Daten auf der Grundlage einer Vielzahl von webbasierten Karten. Gerade für die explorative Interpretation oder aber auch für die visuelle Überprüfung der korrekten Lage der Daten ist dieses Paket ein sehr gute Alltagsunterstützung.
 
 
-```r
+
+
+## ----mapview, echo=TRUE,message=FALSE, warning=FALSE,results=FALSE----
 # Interaktive Darstellung mit Mapview Farbgebung nach Anteil.Baugewerbe
 # note you have to switch the layers on the upper left corner
 mapview(nuts3_kreise,zcol="Anteil.Baugewerbe",breaks=seq(0,0.2, by=0.025))+mapview(nuts3_kreise,zcol="Anteil.Hochschulabschluss",breaks=seq(0,0.2, by=0.025))
-```
-Die Karte kann auch mit Hilfe des Pakets `mapview` interaktiv dargestellt werden.
 
-{% include media url="/assets/misc/nuts3_kreise.html" %}
-[Full-screen version of the map]({{ site.baseurl }}/assets/misc/nuts3_kreise.html){:target="_blank"}
-
-*Abbildung 04-01-02: Dynamische Webkarte  mit den Layern a) Anteil Baugewerbe, b) Anteil Hochschulabschluss*
-
-## Download Skript
-Das Skript kann unter [unit04-01_sitzung.R]({{ site.baseurl }}/assets/scripts/unit05-01_sitzung.R){:target="_blank"} heruntergeladen werden
-
-## Was ist zu tun?
-Versuchen Sie  `R`, `RStudio` und die notwendigen Pakete zu installieren. Bei Fragen nutzen Sie bitte das Forum oder senden eine email. Falls Sie das erfolgreich absolvieren konnten, versuchen Sie bitte folgende Aufgaben zu bearbeiten:
-
-* gehen Sie das Skript schrittweise durch. Es kommt nicht darauf an dass Sie den Code bereits vollständig verstehen. Sie sollennur eine Idee bekommen was im Großen und Ganzen abläuft. Für den schrittweisen Aufruf können Sie einfach mit dem Cursor in die jeweilige Zeile gehen (nichts markieren) und dann Alt+Enter drücken s.a. [RStudio Hilfe Ausführen von Code](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-and-Executing-Code) bzw. unter `Hilfe->Cheatsheets->Rstudio IDE cheatsheets`.
-* nutzen Sie RStudio um die Variableninhalte zu betrachten [Data Viewer](https://support.rstudio.com/hc/en-us/articles/205175388-Using-the-Data-Viewer)

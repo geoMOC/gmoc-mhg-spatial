@@ -449,7 +449,7 @@ moran.plot (residuen_uni_bau, nuts3_gewicht)
 
 
 ## Download Skript
-Das Skript kann unter [unit04-02_sitzung.R]({{ site.baseurl }}/assets/scripts/unit04-02_sitzung.R){:target="_blank"} heruntergeladen werden
+Das Skript kann unter [unit05-02_sitzung.R]({{ site.baseurl }}/assets/scripts/unit04-02_sitzung.R){:target="_blank"} heruntergeladen werden
 
 ## Aufgabenstellung
 
