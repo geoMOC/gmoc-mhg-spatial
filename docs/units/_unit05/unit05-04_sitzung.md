@@ -1,5 +1,5 @@
 ---
-title: "Sitzung 4 - Lineare  räumlicher Daten Vertiefung"
+title: "Sitzung 4 - Räumliche Regression Workflow"
 toc: true
 toc_label: Inhalt
 ---
@@ -112,7 +112,7 @@ nuts3_gewicht <- mat2listw(as.matrix(m_nuts3_kreise_qd))
 ```
 
 
-### Lagrange-Multiplikator-Test
+## Lagrange-Multiplikator-Test
 Der Moran I weißt auf räumliche Autokorrelation hin gibt uns aber keinen Hinweis zur Auswahl alternativer Modelle. Hier bietet der Lagrange-Multiplikator-Test (LM) einen Hinweis auf die zu bevorzugende Variante. Er bietet als Alternativen das Vorhandensein einer räumlichen Lags und das Vorhandensein einer räumlichen Lags im Fehlerterm. Beide Tests sowie ihre robusten Formen sind in der Funktion `lm.LMtests` enthalten. Um sie aufzurufen, verwenden wir die Option `test="all"`. Auch hier müssen ein Regressionsobjekt und ein räumliches listw-Objekt als Argumente übergeben werden:
 
 

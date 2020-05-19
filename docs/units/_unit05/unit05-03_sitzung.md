@@ -1,5 +1,5 @@
 ---
-title: "Sitzung 3 - Visualisierung räumlicher Daten Einführung"
+title: "Sitzung 3 - Datenvisualisierung Einführung"
 toc: true
 toc_label: Inhalt
 ---
