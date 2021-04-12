@@ -75,6 +75,7 @@ author:
 ##### Site configuration ######################################################
 title_separator: "|"
 excerpt_separator: <!--more-->
+locale                   : "de-DE"
 
 # Build settings
 markdown: kramdown
