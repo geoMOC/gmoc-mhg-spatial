@@ -137,7 +137,7 @@ defaults:
       type: unit00
     values:
       category: "Formales"
-      tags: "Unit|00"
+      tags: "Unit 00"
       layout: single
       sidebar:
         nav: "units" 
@@ -149,10 +149,10 @@ defaults:
       type: unit01
     values:
       category: "Geographische Raumkonzepte"
-      tags: "Unit|01"
+      tags: "Unit 01"
       layout: single
       sidebar:
-        nav: "units" 
+        nav: "course_unit" 
       toc: true
       toc_label: On this page      
   # unit02
@@ -161,10 +161,10 @@ defaults:
       type: unit02
     values:
       category: "Geoinformatik Raumkonzepte"
-      tags: "Unit|02"
+      tags: "Unit 02"
       layout: single
       sidebar:
-        nav: "units" 
+        nav: "course_unit" 
   # unit03
   - scope:
       path: ""
@@ -210,7 +210,6 @@ defaults:
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-  - jekyll-admin
   - jekyll-paginate
   - jekyll-gist
   - jemoji
@@ -230,4 +229,4 @@ plugins:
 #   - vendor/ruby/
 
 
-theme: jekyll-theme-minimal
+#theme: jekyll-theme-minimal

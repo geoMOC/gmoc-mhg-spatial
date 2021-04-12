@@ -49,6 +49,7 @@ en: &DEFAULT_EN
   search_placeholder_text    : "Enter your search term..."
   results_found              : "Result(s) found"
   back_to_top                : "Back to top"
+  back_to_units              : "Back to course units"
 en-US:
   <<: *DEFAULT_EN
 en-CA:
@@ -515,6 +516,7 @@ de: &DEFAULT_DE
   search_label_text          :
   search_placeholder_text    : "Suchbegriff eingeben..."
   results_found              : "Ergebnis(se) gefunden"
+  back_to_units              : "Zurück zu Kurseinheiten"
 de-DE:
   <<: *DEFAULT_DE
 de-AT:
