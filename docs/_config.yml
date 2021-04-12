@@ -27,8 +27,8 @@ url: https://geomoer.github.io/
 baseurl: "/moer-mhg-spatial/"
 
 ##### Title ###################################################################
-title: Lab of Environmental Informatics
-name: &name "Lab of Environmental Informatics" # &name is a YAML anchor which can be *referenced later
+title: Environmental Informatics Research Group
+name: &name "Environmental Informatics Research Group" # &name is a YAML anchor which can be *referenced later
 email: reudenbach@geo.uni-marburg.de
 description: >- # this means to ignore newlines until next item
   course course-materials geography remote-sensing marburg-open-educational-resource 
@@ -175,7 +175,7 @@ defaults:
       tags: "Unit|03"
       layout: single
       sidebar:
-        nav: "units" 
+        nav: "course_unit" 
   # unit04
   - scope:
       path: ""
@@ -185,7 +185,7 @@ defaults:
       tags: "Unit|04"
       layout: single
       sidebar:
-        nav: "units"         
+        nav: "course_unit"         
   # unit05
   - scope:
       path: ""
@@ -195,7 +195,7 @@ defaults:
       tags: "Unit|05"
       layout: single
       sidebar:
-        nav: "units" 
+        nav: "course_unit" 
       toc: true
       toc_label: On this page          
   # pages
