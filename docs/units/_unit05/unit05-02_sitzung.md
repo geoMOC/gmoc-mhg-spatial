@@ -360,7 +360,9 @@ Bitte bearbeiten Sie folgende Aufgabenstellung:
 * Visualisieren Sie diese Daten mit mapview 
 
 
+
 ## Was ist sonst noch zu tun?
+
 Sobald wir unsere Tabellendaten als Geotabellendaten vorliegen haben (z.B. Gemeindeflächendaten als sf Objekt) können wir auf mächtige Pakete zur Visualisieurng und on-the-fly Analyse zurückgreifen. Beispielhaft sollen `tmap` und `mapview` gezeigt werden.
 
 * versuchen sie sich an der verlinkten Hilfe auf der Geocomuptation with R Ressource. Sie sollen Sie zum aktiven Umgang mit `R` ermuntern.
@@ -373,6 +375,11 @@ Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden:
 * [Geocomputation with R](https://geocompr.robinlovelace.net) von Robin Lovelace, Jakub Nowosad und Jannes Muenchow ist die herausragende Referenz für alles rund um  raumzeitliche Datenanalyse und -verarbeitung mit R. 
 * [Making Maps with R](https://geocompr.robinlovelace.net/adv-map.html) bietet eine sehr gelungen Einstieg in das Thema. 
 
-## Download Skript
-Das Skript kann unter [skript_sitzung_2_0.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_0.R ){:target="_blank"} heruntergeladen werden
+## Download Skripte
+Die Skripte können unter folgenden Links herunter geladen werden:
+* [skript_sitzung_2_0.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_0.R ){:target="_blank"} Basisskript für Downloads und Datensäuberung
+* [skript_sitzung_2_1.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_0.R ){:target="_blank"} Analyse und Visualisierung für Zensus und Gemeindedaten
+* [skript_sitzung_2_2.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_0.R ){:target="_blank"} Einfache Analyse und  Visualisierung von Bertelsmann Gemeindedaten
 
+## Download Daten
+Die Daten der Beispiele (ACHTUNG > 10 GB) finden sie auch unter [Datendownload](https://137.248.191.215:8989/sharing/J4g5s2x3d) von einem Uni-Server laden (Unsichere VErbindung bestätigen). 
