@@ -7,7 +7,8 @@ toc_label: Inhalt
   
   Geodaten sind prinzipiell wie gewöhnliche Daten zu betrachten. Allerdings sind die Aspekte der Skala, der Zonierung (aggregierte  Flächeneinheiten), der Topologie (der Lage im Verhältnis zu anderen Entitäten) der Geometrie (Entfernung zueinander) eine Ableitung aus der Grundeigenschaft dass Geodaten eine Position im Raum besitzen. <!--more-->
   
-  Im Rahmen der räumlichen Statistik wirft das Fragen der räumlichen Autokorrelation bzw. Inhomogenität auf. Also letztlich Fragen welche Raumkonstruktion auf welcher Skala einen Einfluss auf meine Fragestellung hat.
+  
+  
 
 Die klassischen Bereiche der räumlichen Statistik sind Punktmusteranalyse, Regression und Inferenz mit räumlichen Daten, dann die Geostatistik (Interpolation z.B. mit Kriging) sowie  Methoden zur lokalen und globalen Regression und Klassifikation mit räumlichen Daten. 
 
@@ -20,7 +21,7 @@ Die Lernziele der zweiten Übung sind:
   
   ---
   
-  * Berechnen von Gewichtungsmatritzen für unterschiedliche Nachbarschaften
+* Berechnen von Gewichtungsmatritzen für unterschiedliche Nachbarschaften
 * Visualisierung der Ergebnisse
 
 
@@ -80,29 +81,58 @@ geo_coord_city = readRDS("geo_coord_city.rds")
 
 ## Regionalisierung oder Aggregationsräume
 
-Die Analyse der räumlichen Daten erfolgt oft in regionaler oder Aggregierung. Auch wenn alle am Liebsten Daten auf einer möglichst hoch aufgelösten Ebene verfügbar hätten (im besten Fall Einzelpersonen, Haushalte, Grundstücke, Briefkästen etc.) ist der Regelfall, dass es sich um räumlich (und zeitlich) aggregierte  Daten handelt. Statt tägliche Daten über den Cornfllakes-Kosum in jeden Haushalt haben wir den  Jahresmittelwert aller verkauften Zerealien in einem Bundesland. So geht das mit den meisten Daten, die zudem oft unterschiedlich aggregiert sind wo in Europa z.B. nationale und subnationale Einheiten (z.B. NUTS1, NUTS3, NUTS3, AMR etc.) vorliegen. Häufig gibt es auch räumliche Datensätze die in Form von Rasterzellenwerten quasi-kontinuierlich vorliegen.
+Auch wenn Daten auf einer möglichst hoch aufgelösten Ebene bevorzugt würden (im besten Fall Einzelpersonen, Haushalte, Grundstücke, Briefkästen etc.) ist der Regelfall, dass es sich um räumlich (und zeitlich) aggregierte  Daten handelt. Statt tägliche Daten über den Cornfllakes-Kosum in jeden Haushalt haben wir den  Jahresmittelwert aller verkauften Zerealien in einem Bundesland. So geht das mit den meisten Daten, die zudem oft unterschiedlich aggregiert sind wo in Europa z.B. nationale und subnationale Einheiten (z.B. NUTS1, NUTS3, NUTS3, AMR etc.) vorliegen. Häufig gibt es auch räumliche Datensätze die in Form von Rasterzellenwerten quasi-kontinuierlich vorliegen.
 
-Bei der visuellen Exploration aber auch bei der statistischen Analyse ist es von erheblichem Einfluss wie die Gebiete zur Aggregation der Daten geschnitten sind. Da dieser Zusammenhang eher willkürlich (auch oft historisch oder durch wissenschaftlich begründet) ist, sind die Muster, die wir sehen äußerst subjektiv. Dieses sogenannte *Problem der veränderbaren Gebietseinheit* (Modifiable Areal Unit Problem, MAUP) bezeichnet. Der Effekt von höheren Einheiten auf niedrigere zu schließen ist hingegen als *ökologische Inferenz* (Ecological Inference) bekannt.
+  Die tradionelle räumliche Ökonometrie betrachtet Standorte und Entfernungen als exogenwodurch die Modellierung der ökonomischen Variablen und auch etwaiger  Standortentscheidungen bzw. räumlicher Abhängigkeiten kaum innerhalb einestheretischen Konzepts durchführbar wird. Raum wird so zur impliziten zur abgeleiteten Größe. 
+  
+Die explizite Betrachtung des Raumes führt durch eine mikro-ökonomische Betrachtungsgrundlage auf der Basis regionaler oder sogar lokaler Daten zu charakterisch abweichenden Merkmale auf. Direkt erschließbar sind größerer Realismus und größerer Informationsgehalt und durch die besser aufgelöste Datengrundlage Disaggregation und Heterogenität der zugrunde liegenden Handlungsund Beziehungsgeflechte was grundständig die Analyse und Modellierun gvon Dynamiken ermöglicht. So kann behauptet werden, dass ein räumlicher mikroökonometrischer Ansatz die Möglichkeit bietet, realistischere Modelle zu identifizieren da in der Regel dietheoretischen Rahmen auf Grundlage empirisch beobachteter oder behaupteter individuellen Entscheidungen der Wirtschaftsakteure ableiten. Man könnte sogar postulieren das die bekannte Inkonsistenz zwischen 
+mikroökonomischen Theorien und makroökonomischen Zusammenhängen durch granulare hochaufgelöste Daten zumindest gemildert werden kann. 
+
+  
+Das Aggregationsproblem von räumlichen daten ist einsehr relevantesProblem bei der Analyse regionaler Daten. Räumlich aggregierte Daten basieren auf "willkürlichen" Definitionen der räumlichen Beobachtungseinheiten und führen so zu statistische Verzerrung. Dieses Problem wird als "modifizierbares Flächeneinheitenproblem" oder MAUP bezeichnet (Arbia, 1989). Das MAUP wirkt als Skalenproblem, (Unbestimmtheit der Statistik hinsichtlich des Aggregationsniveaus) und als Aggregationsproblem (Unbestimmtheit hinischtlich des  Aggregationskriteriums) auf. Die wichtigsten Effekte sind, dass die Schätzer von Regressionsparameter bei Verwendung aggregierter statt individueller Daten eine größere Varianzaufweisen was zu falschen inferentiellen Schlussfolgerungen und zur Akzeptanz von Modellen führt, die verworfen werden sollten. So impliziert eine (falschlicherweise angenommene) positive räumliche Korrelation eine Aggregation zwischen ähnlichen Werten, wodurch die Variabilität erhalten bleibt, während eine negative räumliche Korrelation eine Aggregation zwischen sehr unterschiedlichen Werten impliziert. Im Rahmen der räumlichen Statistik wirft das Fragen der räumlichen Autokorrelation bzw. Inhomogenität auf. Also letztlich Fragen welche Raumkonstruktion auf welcher Skala einen Einfluss auf die Fragestellung hat.
 
 
-Betrachten wir diese Zusammenhänge einmal gan
+Bei der visuellen Exploration aber auch bei der statistischen Analyse ist es von erheblichem Einfluss wie die Gebiete zur Aggregation der Daten geschnitten sind. Da wie bereits gesagt,  dieser Zusammenhang willkürlich (auch oft historisch oder politisch begründet) ist, sind die Muster, die wir sehen äußerst subjektiv. Sowohl das MAup (Aggregationsproblem als auch die *ökologische Inferenz* (Ecological Inference) also der Effekt von höheren Einheiten auf niedrigere zu schließen sind grundsätzliche methodische Problem. .
+
+
 
 ## Distanz
 
-Als Distanz wird die Entfernung von zwei Positionen bezeichnet. Sie kann zunächst einmal als ein zentrales Konzept der Geographie angenommen werden. Erinnern sie sich an Waldo Toblers ersten Satz zur Geographie, dass "*alles mit allem anderen verwandt ist, aber nahe Dinge mehr verwandt sind als ferne Dinge*".  Die Entfernung ist scheinbar sehr einfach zu bestimmen. Natürlich können wir die Entfernung auf eine isometrischen und isomorhpen Fläche mittels der "*Luftlinie*" (euklidische Distanz) berechnen. Zentrales Problem ist das diese Betrachtung häufig wenn in der Regel nicht relevant ist. Es gibt nicht nur (nationale) Grenzen, Gebirge oder beliebige andere Hindernisse, die Entfernung zwischen A und B kann auch asymmetrisch sein (bergab geht's einfacher und  schneller  als bergauf). Das heißt Distanzen können auch über z.B. *Distanzkosten* gewichtet werden.
+Als Distanz wird die Entfernung von zwei Positionen bezeichnet. Sie kann zunächst einmal als ein zentrales Konzept der Geographie angenommen werden. Erinnern sie sich an Waldo Toblers ersten Satz zur Geographie, dass "*alles mit allem anderen verwandt ist, aber nahe Dinge mehr verwandt sind als ferne Dinge*".  Die Entfernung ist scheinbar sehr einfach zu bestimmen. Natürlich betrachten wir im einfachsten Fall Distanz als die Entfernung auf eine isometrischen und isomorhpen Fläche mittels der "*Luftlinie*" (euklidische Distanz). Zentrales Problem ist das diese Betrachtungsweise häufig, wenn noicht sogar in der Regel unzutreffend ist. Es gibt nicht nur (nationale) Grenzen, Gebirge oder beliebige andere Hindernisse, die Entfernung zwischen A und B kann auch asymmetrisch sein (bergab geht's einfacher und  schneller  als bergauf). Das heißt Distanzen können auch über z.B. *Distanzkosten* gewichtet werden.
 
 Üblicherweise werden Distanzen in einer "Distanzmatrix" dargestellt. Eine solche Matrix enthält als Spaltenüberschriften und als Zeilenbeschriftung die Kennung von jedem berechneten Ort. Im jedem Feld wird die Entfernung eingetragen. Für kartesische Koordinaten erfolgt dies einfach über den Satz des Pythagoras.
 
 
 ###  Distanz-Matrix
-Wir nutzen für die geroreferenzierten Positionen von 10 deutschen Städten für die Berechnung einer Distanzmatrix. Wenn die Positionen in Länge/Breite angegeben sind ist die Distanzbeechnung etwas aufwendiger. In diesem Fall können wir die Funktion `pointDistance` aus dem `raster` Paket verwenden (allerdings nur wenn das Koordinatensystem korrekt angegeben wird). Eleganter ist jedoch die Konvertierung von Punktdaten in ein Geodatenformat z.B. als  `sf` Objekt. 
+Wir nutzen für die geroreferenzierten Positionen von 10 deutschen Städten für die Berechnung einer Distanzmatrix. Wenn die Positionen in Länge/Breite angegeben sind ist die Distanzberechnung etwas aufwendiger. In diesem Fall können wir die Funktion `pointDistance` aus dem `raster` Paket verwenden (allerdings nur wenn das Koordinatensystem korrekt angegeben wird). Eleganter ist jedoch die Konvertierung von Punktdaten in ein Geodatenformat z.B. als  `sf` Objekt. 
 
-Zur direkten Überprüfung ob die Punkte richtig geokodiert sind eignet sich nach Erzeugung des Punkte-Objekts die Funktion  `mapview` hervorragend.
+Zur direkten Überprüfung ob die Punkte richtig geokodiert sind eignet sich nach Erzeugung des Punkte-Objekts die Funktion  `mapview` hervorragend. Zunächst erzeugen wir uns eine typische Punktmatrix in Form von Städten.
  
-
 ```r
-geo_coord_city = readRDS("geo_coord_city.rds")
+# Erzeugen von beliebigen Raumkoordinaten 
+# mit Hilfe von tidygeocoder::geo_osm und sf
+# Städteliste
+staedte=c("München","Berlin","Hamburg","Köln","Bonn","Hannover","Nürnberg","Stuttgart","Freiburg","Marburg")
 
+# Abfragen der Geokoordinaten der Städte mit eine lapply Schleife
+# 1) die Stadliste wird in die apply Schleife (eine optimierte for-Schleife) eingelesen
+# 2) für jeden Namen (X) in der Liste wird mit geo_osm die
+# Koordinate ermittelt Die in eckigen Klammern angegebne Position 2
+# ist die Latitude  (geo_osm(x)[2]) [1] enstprechend die Longitude
+# 3) Umwandlung in numerische Werte
+# 4) Jedes latlon Paar wird in einen sf-Punkt konvertiert und
+# gleichzeitig das korrekte Georefrenzierungssystem zugewiesen (cres = 4326)
+# 5) Zuletzt werden an die Koordinatenpaare die Städtenamen angehangen
+coord_city = lapply(staedte, function(x){
+  latlon = c(geo_osm(x)[2],geo_osm(x)[1])
+  class(latlon) = "numeric"
+  p = st_sfc(st_point(latlon), crs = 4326)
+  st_sf(name = x,p)
+})
+
+# Umwandeln der aus der lapply Schleife zurückgegebnen Liste in eine Matrix 
+geo_coord_city = do.call("rbind", coord_city)
+saveRDS(geo_coord_city,"geo_coord_city.rds")
 # visualize with mapview
 mapview(geo_coord_city,  color='red',legend = FALSE)
 ```
@@ -112,6 +142,7 @@ mapview(geo_coord_city,  color='red',legend = FALSE)
 [Full-Screen Version der Karte]({{ site.baseurl }}/assets/misc/geo_city_city.html){:target="_blank"}
 
 *Abbildung 04-02-05: Webkarte mit den erzeugten Punktdaten. In diesem Falle zehn nicht ganz zufällige Städte Deutschlands*
+Dann Berechnen wir die Vogelflugdistanzen
 
 ### Distanzberechnung von Geokoordinaten
 
@@ -184,17 +215,20 @@ colnames(city_distanz)=staedte
 
 ## Räumlicher Einfluss
 
-Die beiden Aspekte zuvor haben die räumlichen Verhältnisse in Form von Raumabgrenzung und Distanz beschrieben. In der räumlichen Analyse ist es jedoch von zentraler Bedeutung den räumlichen **Einfluss** zwischen geographischen Objekten zu schätzen bzw. zu messen. Das generelle Problem ist, dass der räumliche Einfluss sehr komplex ist und faktisch nie gemessen werden kann. Daher gibt es zahllose Arten ihn zu schätzen. 
+Die beiden Aspekte zuvor haben die räumlichen Verhältnisse in Form von **Raumabgrenzung** und **Distanz** beschrieben. In der räumlichen Analyse ist es jedoch von zentraler Bedeutung den räumlichen **Einfluss** zwischen geographischen Objekten zu schätzen bzw. zu messen. Das generelle Problem ist, dass der räumliche Einfluss sehr komplex ist und faktisch nie gemessen werden kann. Daher gibt es zahllose Ansätze ihn zu schätzen. 
 
-Dich beiden wichtigsten Ansätze sind dies prozessorientiert (funktional) durchzuführen (der oberliegende Teil eines Baches fließt in den unterliegenden) oder datengetrieben dann wird mit statistischen Verfahren die räumliche Autokorrelation ermittelt. Für den datengetriebnen Ansatz ist dieser Einfluss in der Regel eine Funktion der *Nachbarschaft* oder der *(inversen) Entfernung*. Um damit in statistischen Modellen arbeiten zu können werden diese Nachbarschaftskonzepte als *räumliche Gewichtungsmatrix* ausgedrückt. 
+Die wichtigsten Ansätze sind: (1) prozessorientiert (funktional) durchzuführen (der oberliegende Teil eines Baches fließt in den unterliegenden) bzw. (2) datengetrieben dann wird mit statistischen Verfahren die räumliche Autokorrelation ermittelt. Für den datengetriebnen Ansatz ist dieser Einfluss in der Regel eine Funktion der *Nachbarschaft* oder der *(inversen) Entfernung*. Um damit in statistischen Modellen arbeiten zu können werden diese Nachbarschaftskonzepte als *räumliche Gewichtungsmatrix* ausgedrückt. 
 
-
-Zum Beispiel kann der räumliche Einfluss von Polygonen aufeinander (z.B, NUTS3 Verwaltungsbezirke) so ausgedrückt werden, dass sie eine/keine gemeinsame Grenze, sie kann als euklidische Distanz zwischen ihren Schwerpunkten bestimmt werden oder über die Länge gemeinsamer Grenzen gewichtet werden und so fort.
+Zum Beispiel kann der räumliche Einfluss von Flächeneinheiten (NUTS3/Polygonen) aufeinander (z.B, NUTS3 Verwaltungsbezirke) so ausgedrückt werden, dass sie eine/keine gemeinsame Grenze haben, sie kann als euklidische Distanz zwischen ihren Schwerpunkten bestimmt werden oder auch über die Länge gemeinsamer Grenzen gewichtet werden und so fort.
 
 ## Nachbarschaft
 
-Die Nachbarschaft ist das vielleicht wichtigste Konzept. höherdimensionale Geoobjekte können als benachbart betrachtet werden wenn sie sich *berühren*, z.B. benachbarte Länder. Bei null-dimensionalen Objekten (Punkte) ist der gebräuchlichste Ansatz die Entfernung in Kombination mit einer Anzahl von Punkten für die Ermittlung der Nachbarschaft zu nutzen.
+Die Nachbarschaft ist das vielleicht wichtigste Konzept. höherdimensionale Geoobjekte (also ab Linie aufwärts) können als benachbart betrachtet werden wenn sie sich *berühren*, z.B. benachbarte Länder. Bei null-dimensionalen Objekten (Punkte) ist der gebräuchlichste Ansatz die Entfernung in Kombination mit einer Anzahl von Punkten für die Ermittlung der Nachbarschaft zu nutzen.
 
+Das klassische lineare Regressionsmodell geht von exogenen und sphärischen Störungen aus Betrachten wir n-Regionen kann eine nicht lineare (sphärische) Ausprägung der Residuen durch räumliche Autokorrelation und räumlicher Heterogenität bewirken, die die optimalen Eigenschaften der gewöhnlichen kleinsten Quadrate (OLS) verfälschen bzw. aufheben. 
+
+Intuitiv wird die räumliche Korrelation als die Tatsache aufgefasst, dass nahe beieinander liegende Beobachtungen stärker korreliert sind als weit auseinander liegende (das "erste Gesetz der Geographie" (Tobler, 1970)). Eine formale Definition erfordert jedoch eine Klärung des Konzepts der "Nähe". 
+Nähe wird in der räumlichen Ökonometrie als "Gewichtungsmatrix" (oder "Konnektivitätsmatrix") ausgedrückt. Von Bedeutng ist eine Schwellendistanz (sagen wir d*), die eingeführt wird, um die Datenmenge der W-Matrix zu verringern. Dies erfolgt häufig als eine einfache binäre Matrize die zudem üblicherweise so standardisiert wird, dass die Summe in jeder Zeile eins ist. Diese Operation wird "Zeilennormierung" genannt. 
 
 ### Distanzbasierte Gewichtungs-Matrix für Punkte
 
@@ -323,7 +357,7 @@ plot(rook, coords, col='red', lwd=2, add=TRUE)
 
 #### Nächste Nachbarn
 
-Natürlich können auch nicht nur die vier oder acht angenzenden Nachbarn ermittelt werden sondern beliebig viele. Nachfolgend werden exemplarisch die 3 bzw. 5 nächsten Nachbarn zu einem Kreis ausgewiesen.
+Natürlich können auch nicht nur die vier oder acht angrenzenden Nachbarn ermittelt werden sondern beliebig viele. Nachfolgend werden exemplarisch die 3 bzw. 5 nächsten Nachbarn zu einem Kreis ausgewiesen.
 
 
 ```r
@@ -354,7 +388,7 @@ plot(kreise_dist_k5, lwd =1, coords, add=TRUE,col="red")
 
 ## Räumliche Autokorrelation
 
-Nachdem wir nun beliebige Nachbarschaften berechnen können sollten wir uns um die räumliche Autokorrelation der in disen Nachbarschaften ausgeprägten Merkmale Gedanken machen.  Die räumliche Autokorrelation die nach Tobler den Einfluß der nachbarschaftlichen Nähe beschreibt, ist komplizierter als das die zeitliche Autokorrelation. Räumliche Objekte haben in der Regel zwei Dimensionen und weisen komplexe Formen auf was zu einer mindestens zweidimensionalen Beeinflussung durch *Nähe* führt.
+Nachdem wir nun beliebige Nachbarschaften berechnen können sollten wir uns um die räumliche Autokorrelation der in diesen Nachbarschaften ausgeprägten Merkmale Gedanken machen. Die räumliche Autokorrelation die nach Tobler den Einfluß der nachbarschaftlichen Nähe beschreibt, ist komplizierter als das die zeitliche Autokorrelation. Räumliche Objekte haben in der Regel zwei Dimensionen und weisen komplexe Formen auf was zu einer mindestens zweidimensionalen Beeinflussung durch *Nähe* führt.
 
 Grundsätzlich beschreiben die räumlichen Autokorrelationsmaße die Ähnlichkeit der beobachteten Werte zueinander. Räumliche Autokorrelation entstehen durch Beobachtungen und Beobachtungen und Positionen/Objekte im Raum.
 
@@ -448,6 +482,10 @@ moran.plot (residuen_uni_bau, nuts3_gewicht)
 *Abbildung 04-02-08: Moran-I Plot*
 
 
+## Zusammenfassung
+
+Es sollten die grundlegenden Konzepte der räumlichen Analyse, die die Grundlage der räumlichen Statisik bilden umrissen werden. Das sind zum einen das Konzept der der W-Matrix die Raum für räumliche Regressionsmodelle abbildet, zum Anderen der Begriff der räumlichen Autokorrelation 
+
 ## Download Skript
 Das Skript kann unter [unit05-02_sitzung.R]({{ site.baseurl }}/assets/scripts/unit04-02_sitzung.R){:target="_blank"} heruntergeladen werden
 
@@ -461,10 +499,10 @@ Bitte bearbeiten Sie folgende Aufgabenstellung:
 {: .notice--success}
 
 ## Was ist sonst noch zu tun?
-Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressions-Analysen und  -Modelle auf den Grundannahmen dieser Übung basieren. Das heisst es kommt maßgeblich auf Ihre konzeptionellen oder theoriegeleiteten Vorstellungen an, welche Nachbarschaft, welches Nähe-Maß und somit auch, welche räumlichen Korrelationen zustande kommen. Bitte beschäftigen Sie sich mitdem Skript. 
+Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressions-Analysen und  -Modelle auf den Grundannahmen dieser Übung basieren. Das heisst es kommt maßgeblich auf Ihre konzeptionellen oder theoriegeleiteten Vorstellungen an, welche Nachbarschaft, welches Nähe-Maß und somit auch, welche räumlichen Korrelationen zustande kommen. Bitte beschäftigen Sie sich mit dem Skript. 
 
 * gehen Sie die Skripte **schrittweise** durch. Lassen Sie es nicht von vorne bis hinten unkontrolliert durchlaufen 
-* gleichen Sie ihre Kenntnisse aus dem Statistikkurs mit diesen praktischen Übungen ab und identifizieren Sie was Raum-Wirskamkeiten sind.
+* gleichen Sie ihre Kenntnisse aus dem Statistikkurs mit diesen praktischen Übungen ab und identifizieren Sie was Raum-Wirskamkeiten sind (Sehr hilfreich ist zur Vertiefung die (auszugsweise) Lektüre von [Spatial Microeconometrics](https://doi.org/10.4324/9781315735276)).
 * *spielen* Sie mit den Einstellungen, lesen Sie Hilfen und lernen Sie schrittweise die Handhabung von R kennen. 
 * lernen Sie quasi im "*Vorbeigehen*" wie Daten zu plotten sind oder wann Sie ein wenig Acht geben müssen wenn Sie mit Geodaten arbeiten (viele Hinweise und Erläuterungen sind in den Kommentarzeilen untergebracht).
 
@@ -472,7 +510,12 @@ Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressi
 * **stellen Sie Fragen im Forum, im Kurs oder per email mit dem Betreff [M&S2020]**
 
 ## Wo gibt's mehr Informationen?
-                                                                                                                                                 Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 
+
+Zur Theorie und anwendungsorientirer Umsetzung der Konzepte das ausgesprochen **empfehlenswerte** Lehrbuch kann [Spatial Microeconometrics](https://doi.org/10.4324/9781315735276) Arbia et al. 2021 empfohlen werden
+
+Für R-spezifische  Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 
  * [Spatial Data Analysis](https://rspatial.org/raster/analysis/2-scale_distance.html) von Robert Hijmans. Sehr umfangreich und empfehlenswert. Viel der Beispiele basieren auf seiner Vorlesung und sind für unsere Verhältnisse angepasst.
  * Der [UseR! 2019 Spatial Workshop](https://edzer.github.io/UseR2019/part2.html) von Roger Bivand. Roger ist die absolute Referenz hinischtlich räumlicher Ökonometrie mit R. Er hat unzählige Pakete geschrieben und ebensoviel Schulungs-Material und ist unermüdlich in  der Unterstützung der Community.
+ 
+ Arbia, G.: Spatial Data Configuration in the Statistical Analysis of Regional Economics and Related Problems. Kluwer, Dordrecht (1989)
  
