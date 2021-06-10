@@ -89,7 +89,7 @@ cat(
 ACHTUNG: Die Daten sind zum Teil sehr umfangreich.\n Bitte nicht einfach 'durchlaufen' lassen sondern gezielt nutzen.
 "
 )
-waiting(10)
+waiting(3)
 
 if ( auswahl=="mikrozensus"){
   # ---- Mikrozensus Daten
@@ -283,7 +283,7 @@ if ( auswahl=="mikrozensus"){
   
   # für jede Gemeinde (hier für die Gemeinden 1-10 der Liste [1:10])
   # und für jede Kategorie: [[1]] heisst also für Kategorie 1 = Beschäftigung
-  for (u in url_gemeinde_liste[[1]][1:10]){
+  for (u in url_gemeinde_liste[[1]]){
     # Check ob die Datei bereits existiert falls nicht download
     if (!file.exists(gsub("\\+","_",paste0(rootDIR,strsplit(basename(u),".",fixed=TRUE)[[1]][1],".xlsx"))))
       download.file(url = u,destfile =  gsub("\\+","_",paste0(rootDIR,strsplit(basename(u),".",fixed=TRUE)[[1]][1],".xlsx")),quiet = FALSE,overwrite=TRUE)

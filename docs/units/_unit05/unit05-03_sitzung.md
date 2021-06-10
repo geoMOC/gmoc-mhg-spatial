@@ -5,7 +5,7 @@ toc_label: Inhalt
 ---
   
   
-  Geodaten sind prinzipiell wie gewöhnliche Daten zu betrachten. Allerdings sind die Aspekte der Skala, der Zonierung (aggregierte  Flächeneinheiten), der Topologie (der Lage im Verhältnis zu anderen Entitäten) der Geometrie (Entfernung zueinander) eine Ableitung aus der Grundeigenschaft dass Geodaten eine Position im Raum besitzen. <!--more-->
+Geodaten sind prinzipiell wie gewöhnliche Daten zu betrachten. Allerdings sind die Aspekte der Skala, der Zonierung (aggregierte  Flächeneinheiten), der Topologie (der Lage im Verhältnis zu anderen Entitäten) der Geometrie (Entfernung zueinander) eine Ableitung aus der Grundeigenschaft dass Geodaten eine Position im Raum besitzen. <!--more-->
   
   
   
@@ -83,16 +83,15 @@ geo_coord_city = readRDS("geo_coord_city.rds")
 
 Auch wenn Daten auf einer möglichst hoch aufgelösten Ebene bevorzugt würden (im besten Fall Einzelpersonen, Haushalte, Grundstücke, Briefkästen etc.) ist der Regelfall, dass es sich um räumlich (und zeitlich) aggregierte  Daten handelt. Statt tägliche Daten über den Cornfllakes-Kosum in jeden Haushalt haben wir den  Jahresmittelwert aller verkauften Zerealien in einem Bundesland. So geht das mit den meisten Daten, die zudem oft unterschiedlich aggregiert sind wo in Europa z.B. nationale und subnationale Einheiten (z.B. NUTS1, NUTS3, NUTS3, AMR etc.) vorliegen. Häufig gibt es auch räumliche Datensätze die in Form von Rasterzellenwerten quasi-kontinuierlich vorliegen.
 
-  Die tradionelle räumliche Ökonometrie betrachtet Standorte und Entfernungen als exogenwodurch die Modellierung der ökonomischen Variablen und auch etwaiger  Standortentscheidungen bzw. räumlicher Abhängigkeiten kaum innerhalb einestheretischen Konzepts durchführbar wird. Raum wird so zur impliziten zur abgeleiteten Größe. 
+  Die tradionelle räumliche Ökonometrie betrachtet Standorte und Entfernungen als exogen wodurch die Modellierung der ökonomischen Variablen und auch etwaiger  Standortentscheidungen bzw. räumlicher Abhängigkeiten kaum innerhalb eines theoretischen Konzepts durchführbar wird. Raum wird so zur impliziten zur abgeleiteten Größe. 
   
-Die explizite Betrachtung des Raumes führt durch eine mikro-ökonomische Betrachtungsgrundlage auf der Basis regionaler oder sogar lokaler Daten zu charakterisch abweichenden Merkmale auf. Direkt erschließbar sind größerer Realismus und größerer Informationsgehalt und durch die besser aufgelöste Datengrundlage Disaggregation und Heterogenität der zugrunde liegenden Handlungsund Beziehungsgeflechte was grundständig die Analyse und Modellierun gvon Dynamiken ermöglicht. So kann behauptet werden, dass ein räumlicher mikroökonometrischer Ansatz die Möglichkeit bietet, realistischere Modelle zu identifizieren da in der Regel dietheoretischen Rahmen auf Grundlage empirisch beobachteter oder behaupteter individuellen Entscheidungen der Wirtschaftsakteure ableiten. Man könnte sogar postulieren das die bekannte Inkonsistenz zwischen 
-mikroökonomischen Theorien und makroökonomischen Zusammenhängen durch granulare hochaufgelöste Daten zumindest gemildert werden kann. 
+Die explizite Betrachtung des Raumes führt durch eine mikro-ökonomische Betrachtungsgrundlage auf der Basis regionaler oder sogar lokaler Daten zu charakteristisch abweichenden Merkmale auf. Direkt erschließbar sind größerer Realismus und größerer Informationsgehalt und durch die besser aufgelöste Datengrundlage Disaggregation und Heterogenität der zugrunde liegenden Handlungs- und Beziehungsgeflechte was grundständig die Analyse und Modellierung von Dynamiken ermöglicht. So kann behauptet werden, dass ein räumlicher mikroökonometrischer Ansatz die Möglichkeit bietet, realistischere Modelle zu identifizieren da in der Regel die theoretischen Rahmen auf Grundlage empirisch beobachteter oder behaupteter individuellen Entscheidungen der Wirtschaftsakteure ableiten. Man könnte sogar postulieren das die bekannte Inkonsistenz zwischen 
+mikroökonomischen Theorien und makroökonomischen Zusammenhängen durch granulare, hochaufgelöste Daten zumindest gemildert werden kann. 
 
   
-Das Aggregationsproblem von räumlichen daten ist einsehr relevantesProblem bei der Analyse regionaler Daten. Räumlich aggregierte Daten basieren auf "willkürlichen" Definitionen der räumlichen Beobachtungseinheiten und führen so zu statistische Verzerrung. Dieses Problem wird als "modifizierbares Flächeneinheitenproblem" oder MAUP bezeichnet (Arbia, 1989). Das MAUP wirkt als Skalenproblem, (Unbestimmtheit der Statistik hinsichtlich des Aggregationsniveaus) und als Aggregationsproblem (Unbestimmtheit hinischtlich des  Aggregationskriteriums) auf. Die wichtigsten Effekte sind, dass die Schätzer von Regressionsparameter bei Verwendung aggregierter statt individueller Daten eine größere Varianzaufweisen was zu falschen inferentiellen Schlussfolgerungen und zur Akzeptanz von Modellen führt, die verworfen werden sollten. So impliziert eine (falschlicherweise angenommene) positive räumliche Korrelation eine Aggregation zwischen ähnlichen Werten, wodurch die Variabilität erhalten bleibt, während eine negative räumliche Korrelation eine Aggregation zwischen sehr unterschiedlichen Werten impliziert. Im Rahmen der räumlichen Statistik wirft das Fragen der räumlichen Autokorrelation bzw. Inhomogenität auf. Also letztlich Fragen welche Raumkonstruktion auf welcher Skala einen Einfluss auf die Fragestellung hat.
+Das Aggregationsproblem von räumlichen Daten ist ein sehr relevantes Problem bei der Analyse regionaler Daten. Räumlich aggregierte Daten basieren auf "willkürlichen" Definitionen der räumlichen Beobachtungseinheiten und führen so zu statistische Verzerrung. Dieses Problem wird als "modifizierbares Flächeneinheitenproblem" oder MAUP bezeichnet (Arbia, 1989). Das MAUP wirkt als Skalenproblem, (Unbestimmtheit der Statistik hinsichtlich des Aggregationsniveaus) und als Aggregationsproblem (Unbestimmtheit hinischtlich des  Aggregationskriteriums). Die wichtigsten Effekte sind, dass die Schätzer von Regressionsparameter bei Verwendung aggregierter statt individueller Daten eine größere Varianz, aufweisen Das kann in erheblichem Maße zu falschen inferentiellen Schlussfolgerungen und zur Akzeptanz von ungültigen Modellen führen. So impliziert eine (falschlicherweise angenommene) positive räumliche Korrelation eine Aggregation zwischen ähnlichen Werten, wodurch die Variabilität erhalten bleibt, während eine negative räumliche Korrelation eine Aggregation zwischen sehr unterschiedlichen Werten impliziert. Im Rahmen der räumlichen Statistik wirft das Fragen der räumlichen Autokorrelation bzw. Inhomogenität auf. Also letztlich Fragen welche Raumkonstruktion auf welcher Skala einen Einfluss auf die Fragestellung hat.
 
-
-Bei der visuellen Exploration aber auch bei der statistischen Analyse ist es von erheblichem Einfluss wie die Gebiete zur Aggregation der Daten geschnitten sind. Da wie bereits gesagt,  dieser Zusammenhang willkürlich (auch oft historisch oder politisch begründet) ist, sind die Muster, die wir sehen äußerst subjektiv. Sowohl das MAup (Aggregationsproblem als auch die *ökologische Inferenz* (Ecological Inference) also der Effekt von höheren Einheiten auf niedrigere zu schließen sind grundsätzliche methodische Problem. .
+Bei der visuellen Exploration aber auch bei der statistischen Analyse ist es von erheblichem Einfluss wie die Gebiete zur Aggregation der Daten geschnitten sind. Da wie bereits gesagt,  dieser Zusammenhang willkürlich (auch oft historisch oder politisch begründet) ist, sind die Muster, die wir sehen äußerst subjektiv. Sowohl das MAUP als auch die *ökologische Inferenz* (Ecological Inference) also der Effekt von höheren Einheiten auf niedrigere zu schließen sind grundsätzliches methodisches Problem der räumlichen Regressionstatisik.
 
 
 
@@ -116,22 +115,14 @@ staedte=c("München","Berlin","Hamburg","Köln","Bonn","Hannover","Nürnberg","S
 
 # Abfragen der Geokoordinaten der Städte mit eine lapply Schleife
 # 1) die Stadliste wird in die apply Schleife (eine optimierte for-Schleife) eingelesen
-# 2) für jeden Namen (X) in der Liste wird mit geo_osm die
-# Koordinate ermittelt Die in eckigen Klammern angegebne Position 2
-# ist die Latitude  (geo_osm(x)[2]) [1] enstprechend die Longitude
-# 3) Umwandlung in numerische Werte
-# 4) Jedes latlon Paar wird in einen sf-Punkt konvertiert und
-# gleichzeitig das korrekte Georefrenzierungssystem zugewiesen (cres = 4326)
-# 5) Zuletzt werden an die Koordinatenpaare die Städtenamen angehangen
-coord_city = lapply(staedte, function(x){
-  latlon = c(geo_osm(x)[2],geo_osm(x)[1])
-  class(latlon) = "numeric"
-  p = st_sfc(st_point(latlon), crs = 4326)
+# 2) für jeden Namen (X) in der Liste wird mit geo() die
+# Koordinate ermittelt $lat $long und in einen sf-Punkt Objekt mit (crs = 4326) konvertiert
+# 3)Anfügen des Namens an das Koordinatenpaar
+# 4) rbind()fügt die einzlnen listen zu einer MAtrix zusammen
+geo_coord_city = do.call("rbind", lapply(staedte, function(x){
+  p = st_sfc(st_point(c(geo(x,method = "osm")$long,geo(x,method = "osm")$lat)), crs = 4326)
   st_sf(name = x,p)
-})
-
-# Umwandeln der aus der lapply Schleife zurückgegebnen Liste in eine Matrix 
-geo_coord_city = do.call("rbind", coord_city)
+}))
 saveRDS(geo_coord_city,"geo_coord_city.rds")
 # visualize with mapview
 mapview(geo_coord_city,  color='red',legend = FALSE)
@@ -487,7 +478,7 @@ moran.plot (residuen_uni_bau, nuts3_gewicht)
 Es sollten die grundlegenden Konzepte der räumlichen Analyse, die die Grundlage der räumlichen Statisik bilden umrissen werden. Das sind zum einen das Konzept der der W-Matrix die Raum für räumliche Regressionsmodelle abbildet, zum Anderen der Begriff der räumlichen Autokorrelation 
 
 ## Download Skript
-Das Skript kann unter [unit05-02_sitzung.R]({{ site.baseurl }}/assets/scripts/unit04-02_sitzung.R){:target="_blank"} heruntergeladen werden
+Das Skript kann unter [unit05-03_bigdata.R]({{ site.baseurl }}/assets/scripts/unit05-03_bigdata.R){:target="_blank"} heruntergeladen werden
 
 ## Aufgabenstellung
 

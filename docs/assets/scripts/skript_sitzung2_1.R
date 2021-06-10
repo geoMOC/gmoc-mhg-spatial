@@ -63,8 +63,8 @@ source(paste("../skript_sitzung_2_0.R"))
 # - Beispiel 1  Mikrozensus Tabellen in eine SQLITE Datenbank einlesen
 # ------------
 
-# ACHTUNG die aktuelle Datei ist >  GB!
-mydb <- dbConnect(RSQLite::SQLite(), paste0(rootDIR,"mikrozensus2011_BD.sqlite"),cache_size = "2000000")
+# ACHTUNG die aktuelle Datei ist > 10 GB!
+mydb <- dbConnect(RSQLite::SQLite(), paste0(rootDIR,"mikrozensus2011_BD_2.sqlite"),cache_size = "2000000")
 dbWriteTable(mydb, "grid_bevoelkerung_2011", data.table::fread(paste0(rootDIR,"Zensus_Bevoelkerung_100m-Gitter.csv")))
 dbWriteTable(mydb, "mz_demografie_2011", data.table::fread(fn[1]))
 
@@ -89,8 +89,7 @@ ledig = dbGetQuery(mydb, query)
 
 # dplyr macht es r-ish heisst es erzeugt SQL Code via R syntax
 # dplyr Abfrage nach alle Ledigen in Deutschland
-demo_link %>% 
-  filter(Auspraegung_Text =='Ledig') 
+demo_link %>%   filter(Auspraegung_Text =='Ledig') 
 
 # Ausgabe der ersten 10 Zeilen
 head(demo_link, n = 10)

@@ -378,8 +378,8 @@ Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden:
 ## Download Skripte
 Die Skripte können unter folgenden Links herunter geladen werden:
 * [skript_sitzung_2_0.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_0.R ){:target="_blank"} Basisskript für Downloads und Datensäuberung
-* [skript_sitzung_2_1.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_0.R ){:target="_blank"} Analyse und Visualisierung für Zensus und Gemeindedaten
-* [skript_sitzung_2_2.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_0.R ){:target="_blank"} Einfache Analyse und  Visualisierung von Bertelsmann Gemeindedaten
+* [skript_sitzung_2_1.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_1.R ){:target="_blank"} Analyse und Visualisierung für Zensus und Gemeindedaten
+* [skript_sitzung_2_2.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_2.R ){:target="_blank"} Einfache Analyse und  Visualisierung von Bertelsmann Gemeindedaten
 
 ## Download Daten
 Die Daten der Beispiele (ACHTUNG > 10 GB) finden sie auch unter [Datendownload](https://137.248.191.215:8989/sharing/J4g5s2x3d) von einem Uni-Server laden (Unsichere VErbindung bestätigen). 

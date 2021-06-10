@@ -76,12 +76,10 @@ nuts3_kreise = nuts3_3035
 gemeinden_hessen_sf_3035 = gemeinden_sf_3035 %>% filter(SN_L=="06")
 
 # merge der Gemeindegeometrien mit den aktuellen Datentabellen über die Spalte GEN
-Bertel_HESSEN  = full_join(gemeinden_hessen_sf_3035 , gemeinde_tab_all)
-
-# Filtern der Bevölkerung und Beschäftigungsquoten
-Anzahl_Bevoelkerung=Bertel_HESSEN  %>% filter(Indikatoren=="Bevölkerung (Anzahl)")
-Beschäftigungsquote=Bertel_HESSEN  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
-Frauenbeschäftigungsquote=Bertel_HESSEN  %>% filter(Indikatoren=="Frauenbeschäftigungsquote (%)")
+Bertel_HESSEN= right_join(gemeinden_hessen_sf_3035 , gemeinde_tab_all)
+Habichtswald_3000 = st_intersects(st_buffer(st_centroid((Bertel_HESSEN[Bertel_HESSEN$GEN=="Kriftel",])), 9000),Bertel_HESSEN)
+mapview(Bertel_HESSEN[Habichtswald_3000[[1]],])
+habicht=Bertel_HESSEN[Habichtswald_3000[[1]],]
 
 # Normalverteilte Erzeugung von zufälligen Koordinatenpaaren
 # in der Ausdehnung der nuts3_kreise Daten
@@ -334,8 +332,6 @@ plot(st_geometry(nuts3_kreise), border="grey", reset=FALSE,
 plot(nachbarschaft_mean, lwd =3, coords, add=TRUE,col="blue")
 
 
-
-## ----moran_setup, echo=TRUE, message=FALSE, warning=FALSE, results=TRUE,fig.retina = 1----
 nuts3_kreise_rook = poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)
 
 coords <- coordinates(as(nuts3_kreise,"Spatial"))
@@ -345,31 +341,35 @@ plot(st_geometry(nuts3_kreise), border="grey", reset=FALSE,
 plot(nuts3_kreise_rook, coords, col='red', lwd=2, add=TRUE)
 
 
-## ----moran, echo=TRUE, message=FALSE, warning=FALSE, results=TRUE-----
-nuts3_kreise_rook = poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)
-w_nuts3_kreise_rook =  nb2listw(nuts3_kreise_rook, style='B',zero.policy = TRUE)
-m_nuts3_kreise_rook =   nb2mat(nuts3_kreise_rook, style='B', zero.policy = TRUE)
-nuts3_gewicht <- mat2listw(as.matrix(m_nuts3_kreise_rook))
+# für geneinden
+h= habicht  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
+habicht_rook = poly2nb(t, row.names= unique(habicht$GEN), queen=FALSE)#
+w_habicht_rook =  nb2listw(habicht_rook, style='B',zero.policy = TRUE)
+m_habicht_rook =   nb2mat(habicht_rook, style='B', zero.policy = TRUE)
+habicht_gewicht <- mat2listw(as.matrix(m_habicht_rook))
 
 
 # lineares Modell
-lm_uni_bau = lm(nuts3_kreise$Anteil.Hochschulabschluss ~ nuts3_kreise$Anteil.Baugewerbe, data=nuts3_kreise)
-summary(lm_uni_bau)
+
+# Filtern der Bevölkerung und Beschäftigungsquoten
+
+Beschäftgungsquote_2006=habicht  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
+Frauenbeschäftigungsquote_2006=habicht  %>% filter(Indikatoren=="Frauenbeschäftigungsquote (%)")
+lm_2006 = lm(Beschäftgungsquote_2006  ~ Frauenbeschäftigungsquote_2006, data=habicht)
+summary(lm_2006)
 
 
-## ----residuen, echo=TRUE, message=FALSE, warning=FALSE, results=TRUE----
 
 # Extraktion der Residuen
-residuen_uni_bau <- lm (lm ( nuts3_kreise$Anteil.Hochschulabschluss ~ nuts3_kreise$Anteil.Baugewerbe, data=nuts3_kreise))$resid
+residuen_lm_2006 <- lm (lm (Beschäftgungsquote_2006$`2006` ~ Frauenbeschäftigungsquote_2006$`2006`, data=habicht))$resid
 
 # Moran I test rondomisiert und nicht randomisiert
-m_nr_residuen_uni_bau = moran.test(residuen_uni_bau, nuts3_gewicht,randomisation=FALSE)
-m_r_residuen_uni_bau = moran.test(residuen_uni_bau, nuts3_gewicht,randomisation=TRUE)
-m_r_residuen_uni_bau
+m_nr_residuen_lm_2006 = moran.test(residuen_lm_2006 , habicht_gewicht,randomisation=FALSE)
+m_r_residuen_lm_2006  = moran.test(residuen_lm_2006 , habicht_gewicht,randomisation=TRUE)
+residuen_lm_2006 
 
 
-## ----moran_plot, echo=TRUE, message=FALSE, warning=FALSE, results=TRUE,out.width = "800px",out.height = "800px",fig.retina = 1----
 
-moran.plot (residuen_uni_bau, nuts3_gewicht)
+moran.plot (residuen_lm_2006 , habicht_gewicht)
 
 
