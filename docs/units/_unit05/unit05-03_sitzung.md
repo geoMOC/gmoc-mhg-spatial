@@ -483,7 +483,7 @@ Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressi
 
 ## Wo gibt's mehr Informationen?
 
-Zur Theorie und anwendungsorientirer Umsetzung der Konzepte das ausgesprochen **empfehlenswerte** Lehrbuch kann [Spatial Microeconometrics](https://doi.org/10.4324/9781315735276) empfohlen werden
+Zur Theorie und anwendungsorientierter Umsetzung der Konzepte kann ein Vlick in das das ausgesprochen **empfehlenswerte** Lehrbuch [Spatial Microeconometrics](https://doi.org/10.4324/9781315735276) nützlich sein
 
 Für R-spezifische  Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 
  * [Spatial Data Analysis](https://rspatial.org/raster/analysis/2-scale_distance.html) von Robert Hijmans. Sehr umfangreich und empfehlenswert. Viel der Beispiele basieren auf seiner Vorlesung und sind für unsere Verhältnisse angepasst.
