@@ -485,7 +485,7 @@ Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressi
 
 Für R-spezifische  Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 
 
- * Von François Michonneau & Auriel Fournier [SQL databases and R][https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html]. Hier finden sich eininge der Beisiele aus Block 1 und der Verwendung von `dplyr`.
+ * Von François Michonneau & Auriel Fournier [SQL databases and R](https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html). Hier finden sich eininge der Beisiele aus Block 1 und der Verwendung von `dplyr`.
  * [Spatial Data Analysis](https://rspatial.org/raster/analysis/2-scale_distance.html) von Robert Hijmans. Sehr umfangreich und empfehlenswert. Einige der Vertiefungsbeispiele basieren auf seiner Vorlesung und sind für unsere Verhältnisse angepasst.
  * Der [UseR! 2019 Spatial Workshop](https://edzer.github.io/UseR2019/part2.html) von Roger Bivand. Roger ist die absolute Referenz hinischtlich räumlicher Ökonometrie mit R. Er hat unzählige Pakete geschrieben und ebensoviel Schulungs-Material und ist unermüdlich in  der Unterstützung der Community.
  
