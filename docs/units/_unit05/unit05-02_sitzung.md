@@ -367,7 +367,7 @@ Sobald wir unsere Tabellendaten als Geotabellendaten vorliegen haben (z.B. Gemei
 
 * versuchen sie sich an der verlinkten Hilfe auf der Geocomuptation with R Ressource. Sie sollen Sie zum aktiven Umgang mit `R` ermuntern.
 * *spielen* Sie mit den Einstellungen, lesen Sie Hilfen und lernen Sie schrittweise die Handhabung von R kennen. 
-* **stellen Sie Fragen im Forum, im Kurs oder per email mit dem Betreff [M&S2020]**
+* **stellen Sie Fragen im Forum, im Kurs oder per email mit dem Betreff [MHG-SPATIAL]**
 
 ## Wo gibt's mehr Informationen?
 Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 

@@ -479,7 +479,7 @@ Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressi
 * lernen Sie quasi im "*Vorbeigehen*" wie Daten zu plotten sind oder wann Sie ein wenig Acht geben müssen wenn Sie mit Geodaten arbeiten (viele Hinweise und Erläuterungen sind in den Kommentarzeilen untergebracht).
 
 
-* **stellen Sie Fragen im Forum, im Kurs oder per email mit dem Betreff [M&S2020]**
+* **stellen Sie Fragen im Forum, im Kurs oder per email mit dem Betreff [MHG-SPATIAL]**
 
 ## Wo gibt's mehr Informationen?
 
