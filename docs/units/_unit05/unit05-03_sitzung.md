@@ -474,7 +474,7 @@ Bitte bearbeiten Sie folgende Aufgabenstellung:
 Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressions-Analysen und  -Modelle auf den Grundannahmen dieser Übung basieren. Das heisst es kommt maßgeblich auf Ihre konzeptionellen oder theoriegeleiteten Vorstellungen an, welche Nachbarschaft, welches Nähe-Maß und somit auch, welche räumlichen Korrelationen zustande kommen. Bitte beschäftigen Sie sich mit dem Skript. 
 
 * gehen Sie die Skripte **schrittweise** durch. Lassen Sie es nicht von vorne bis hinten unkontrolliert durchlaufen 
-* gleichen Sie ihre Kenntnisse aus dem Statistikkurs mit diesen praktischen Übungen ab und identifizieren Sie was Raum-Wirskamkeiten sind (Sehr hilfreich ist zur Vertiefung die (auszugsweise) Lektüre von [Spatial Microeconometrics](https://doi.org/10.4324/9781315735276)).
+* gleichen Sie ihre Kenntnisse aus dem Statistikkurs mit diesen praktischen Übungen ab und identifizieren Sie was Raum-Wirskamkeiten sind.
 * *spielen* Sie mit den Einstellungen, lesen Sie Hilfen und lernen Sie schrittweise die Handhabung von R kennen. 
 * lernen Sie quasi im "*Vorbeigehen*" wie Daten zu plotten sind oder wann Sie ein wenig Acht geben müssen wenn Sie mit Geodaten arbeiten (viele Hinweise und Erläuterungen sind in den Kommentarzeilen untergebracht).
 
