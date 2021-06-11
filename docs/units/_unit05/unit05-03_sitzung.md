@@ -28,7 +28,7 @@ Die Lernziele der zweiten Übung sind:
   
   
   
-  ```r
+```r
 
 # rootDIR enthält nur den Dateipfad, 
 # die Tilde ~ steht dabei für das Nutzer-Home-Verzeichnis unter Windows 
