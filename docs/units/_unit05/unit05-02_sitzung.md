@@ -33,10 +33,10 @@ Die Lernziele der zweiten Übung sind:
 
 
 ---
-Dieser Teil ist umfangreich und sehr technisch. Leider ist die Datenmanipulation wirklich großer Datensätze einigermaßen herausfordernd für Maschinen und Analysten. Die Problematik liegt vorrangig in der ineffizienten Speichermethode von vektorbasierten Flächendaten in z.T. sehr alten Dateiformaten. Die Speicherung in räumlich organisierten Datenbanken, die auch mit grossen Datenmengen gut umgehen können ist jedoch aufwendig und komplex und bedarf ein deutlich vertieftes Wissen. 
-Diese Problematik wird noch deutlicher wenn wir Daten räumlich inhomogen verteilt vorliegen haben - also nicht mit Flächendaten sondern mit Punktdaten arbeiten. 
+Dieser Teil ist umfangreich und sehr technisch. Leider ist die Datenmanipulation wirklich großer Datensätze einigermaßen herausfordernd für Maschinen und Analysten. Die Problematik liegt vorrangig in der ineffizienten Speichermethode von vektorbasierten Flächendaten in z.T. sehr alten Dateiformaten. Die Speicherung in räumlich organisierten Datenbanken, die auch mit großen Datenmengen gut umgehen können ist jedoch aufwendig und komplex und bedarf eines deutlich vertieftes Wissens. 
+Diese Problematik wird noch deutlicher wenn Daten räumlich inhomogen verteilt vorliegen - also nicht als rasterbasierte Flächendaten sondern mit Punktdaten , die durchaus Flächen repräsentieren können mit verschiedenen MErkmalsausprägungen vorliegen haben. 
 
-Ein sehr gutes Beispiel sind die [Zensus-Daten](https://www.zensus2011.de/) aus dem Jahr 2011. Diese Daten sind nach einem [aufwendigen](https://www.zensus2011.de/SharedDocs/Downloads/DE/Publikationen/Aufsaetze_Archiv/2015_06_MethodenUndVerfahren.pdf?__blob=publicationFile&v=6) Verfahren erhoben worden und formal auf ein "Raster" von 100*100 Metern abgebildet worden. Also für jede dieser virtuellen Zellen gibt es eine Mittelpunktskoordinate an der vielfältige Daten angehangen sind. Ein [Beispiel für die Demographie](https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/DemografischeGrunddaten/Datensatzbeschreibung_Demograhie_100m_Gitter.xlsx?__blob=publicationFile&v=2) sieht wie folgt aus:
+Ein sehr gutes Beispiel für die letzte Variante sind die [Zensus-Daten](https://www.zensus2011.de/) aus dem Jahr 2011. Diese Daten sind nach einem [aufwendigen](https://www.zensus2011.de/SharedDocs/Downloads/DE/Publikationen/Aufsaetze_Archiv/2015_06_MethodenUndVerfahren.pdf?__blob=publicationFile&v=6) Verfahren erhoben und formal auf ein "Raster" von 100*100 Metern abgebildet worden. Also für jede dieser virtuellen Zellen gibt es eine Mittelpunktskoordinate an der vielfältige Daten angehangen sind. Die Kodierung für den [Demographie-Datensatz](https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/DemografischeGrunddaten/Datensatzbeschreibung_Demograhie_100m_Gitter.xlsx?__blob=publicationFile&v=2) sieht wie folgt aus:
 
 | Statistisches Bundesamt, Zensus 2011                                                           |          |                                                   |                                                                                                                                                    |
 | ---------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -144,7 +144,7 @@ Ein sehr gutes Beispiel sind die [Zensus-Daten](https://www.zensus2011.de/) aus 
 
 Quelle: [www.zensus2011.de/](https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/DemografischeGrunddaten/Datensatzbeschreibung_Demograhie_100m_Gitter.xlsx?__blob=publicationFile&v=2).
 
-In dieser Datei sind > 66 Mio Datensätze im Textformat gespeichert. Wie kann damit sinnvoll umgegangen werden? Die Zensusdaten können von Bürger_innen durch ein [Webinterface](https://atlas.zensus2011.de/) abgerufen werden. Hierzu sind vorgefertigte Rasterdateien für *ausgewählte* Datensätze verfügbar gemacht worden. Die nachfolgende Druckversion der Karte zeigt ein Merkmal der oben stehenden Tabelle für den Raum Marburg-Biedenkopf.
+In dieser Datei sind > 66 Mio Datensätze im Textformat gespeichert. Wie kann damit sinnvoll umgegangen werden? Die Zensusdaten können von Bürger_innen durch ein [Zensus 2011 Webinterface](https://atlas.zensus2011.de/) abgerufen werden. Hierzu sind vorgefertigte Rasterdateien für *ausgewählte* Datensätze verfügbar gemacht worden. Die nachfolgende Druckversion der Karte zeigt ein Merkmal der oben stehenden Tabelle für den Raum Marburg-Biedenkopf.
 
 <img src="{{ site.baseurl }}/assets/images/unit05/zensus_bev.png" width="500px" />
 
@@ -154,7 +154,7 @@ Quelle: [https://atlas.zensus2011.de/](https://atlas.zensus2011.de/)
 
 ## Einrichten der Umgebung
 
-Zunächst ist es sinnvoll die Arbeitsumgebung einzurichten. Hier werden Die Pfade zum Arbeitsverzeichnis und alle benötigten Pakete geladen. Hier und in allen weiteren Programmbeispielen sind ausführliche Kommentare, die erläutern was warum gemacht wird. Es ist sehr ratsam dise zu Lesen und nach Möglichkeit zu verstehen.
+Zunächst wird eine sinnvolle Arbeitsumgebung  eingerichtet. Hier werden Die Pfade zum Arbeitsverzeichnis und alle benötigten Pakete geladen. Hier und in allen weiteren Programmbeispielen sind ausführliche Kommentare, die erläutern was warum gemacht wird. Es ist sehr ratsam diese zu Lesen und nach Möglichkeit nachzuvollziehen.
 
 ```r
 # 0 - Umgebung einrichten, 
@@ -188,7 +188,7 @@ invisible(lapply(libs, library, character.only = TRUE))
 ```
 ## Datenaquise
 
-Um zu reproduzierbaren Ergebnissen zu kommen sollten die Daten von den jeweiligen **offiziellen** Datenprovidern bezogen werden. Dies geschieht in der Regel durch Download. Hierzu ist es nötig die Datenquellenzu identifizieren und die entsprechenden Download-Adressn (URLs) zu kopieren. Ein Bilck in die Handbücher und Datenbeschreibungen wirkt zudem oft Wunder. Nachfolgender Code-Schnipsel besorgt dies für die Zensus Daten.
+Um zu reproduzierbaren, vergleichbaren und amtlich "gültigen" Ergebnissen zu kommen sollten die Daten von den jeweiligen **offiziellen** Datenprovidern bezogen werden. Dies geschieht in der Regel durch einen direkten Download der betreffenden Datensätze. Hierzu ist es nötig die korrekt Datenquellen zu identifizieren. Die zugehörigen Download-Adressn (URLs) werden dann im Teil 1 (Daten) unserer Projektskripte abgespeichert. EinStudium der Handbücher und Datenbeschreibungen (Metadaten) ist meistens zwingend. Nachfolgender Code-Schnipsel besorgt dies für die Zensus Daten.
 ```r
   # ---- Zensus Daten
   # Download URLs der Zensusdaten https://www.zensus2011.de/
@@ -227,7 +227,7 @@ Um zu reproduzierbaren Ergebnissen zu kommen sollten die Daten von den jeweilige
  
  
 ```
-Der nächste Schritt ist das schnelle Einlesen der Daten.
+Der nächste Schritt ist das schnelle Einlesen der Daten. Es handelt sich um CSV Text Dateien. Die mit Abstand aufwändigste Art große Datenmengen abzuspeichern. In R ist derzeit das PAket `data.table` die effizienteste Wahl um derartige Dateien schnell und unkompliziert einzulesen. 
 
 ```r
 
@@ -245,21 +245,20 @@ Mit `head(mz_demografie_2011)` können Sie sich die ersten Zeilen und die Dateis
 Soweit so gut und auch nicht wirklich aufwendig (unter 10 Zeilen aktiver Code).
 
 
-## Grundsätzliche Vorgehensweise skiziieren
-Trotz dem einfachen Erfolg gibt es viele offene Fragen. Betrachten wir die Header-Daten (und schauen ins Handbuch) so sehen wir die räumliche Kodierung liegt als Datenbankschlüssel vor. In der Datei *Zensus_Bevoelkerung_100m-Gitter.csv* gibt es zusätzliche Koordinatenwerte mit der Bezeichnung `x_mp_100m, y_mp_100m` die jedoch **nicht** in den übrigen Dateien zu finden sind. Das Studium der Metadaten ergibt zusätzlich, dass die Daten in der Referenzierung `ETRS89-extended / LAEA Europe 3035` vorliegen. Eine Menge Informationen die eingeordnet werden müssen. 
+## Grundsätzliche Vorgehensweise der Datenvorprozessierung skiziieren
+Trotz dem einfachen Anfangs-Erfolg gibt es nun mehr offene Fragen als beantwortete. Betrachten wir die Header-Daten (und schauen ins Handbuch) so sehen wir die räumliche Kodierung liegt als Datenbankschlüssel vor. In der Datei *Zensus_Bevoelkerung_100m-Gitter.csv* gibt es zusätzliche Koordinatenwerte mit der Bezeichnung `x_mp_100m, y_mp_100m` die jedoch **nicht** in den übrigen Dateien zu finden sind. Das Studium der Metadaten ergibt zusätzlich, dass die Daten in der Referenzierung `ETRS89-extended / LAEA Europe 3035` vorliegen. Eine Menge Informationen die eingeordnet werden müssen. 
 
 Andererseits liegen keine Informationen über Landkreise Gemeinden oder Ortsnamen vor. Wir benötigen also zur Bearbeitung der unten stehenden Aufgabenstellung zumindest Gemeinde/Landkreisdaten und müssen diese mit den Zensusdaten verknüpfen.
 Es wird also Zeit eine Aufgabenliste zu erstellen:
-0. Lesen der HAndbücher und Datensatzbescheibungen (auszugsweise)
+0. Lesen der Handbücher und Datensatzbescheibungen (auszugsweise)
 1. Recherche und Beschaffung von Gemeindegeometriedaten für 2011
 2. (Optional) Recherche und Beschaffung von Landkreisgeometriedaten für 2011
 3. Verknüpfung von Zensustabellen untereinander
 4. Verknüpfung von Zensusdaten mit Gemeindegeometrien
 5  Visualisierung
 
-## Flächendaten
-
-In einem föderalen System sind für offizielle Datensätze in der Regel sehr unterschiedliche Stellen zuständig. Gute Anlaufstellen sind das Statistische Bundesamt (destatis) die europäische Statistikbehörde (eurostat) und die das Bundesamt für Geodäsie und Kartographie. Darüber gibt es natürlich noch Landesämter und Einrichtungen des öffentlichen Rechts die hoheitliche Aufgaben übernehmen und schliesslich gibt es noch Stiftungen etc. Die Suche ist mühsam und es gibt keine zentralen Zusammenstellungen von Zuständigkeiten. 
+## Flächendaten (Verwaltungsgeometrien)
+In einem föderalen System sind für offizielle Datensätze in der Regel sehr unterschiedliche Stellen zuständig. Gute Anlaufstellen sind das Statistische Bundesamt (destatis), die europäische Statistikbehörde (eurostat) und die das Bundesamt für Geodäsie und Kartographie. Darüber gibt es natürlich noch Landesämter und Einrichtungen des öffentlichen Rechts die hoheitliche Aufgaben übernehmen und schließlich gibt es noch Stiftungen etc.. Die Suche ist mühsam und es gibt keine zentralen Zusammenstellungen von Zuständigkeiten. 
 
 Die folgende Liste soll ein wenig unterstützen:
 
@@ -275,7 +274,7 @@ Die folgende Liste soll ein wenig unterstützen:
 * Aktuelle Gemeindedaten für Statistiken vorzuhalten ist in Deutschland kommunale Hoheit. Die Bertelsmannstiftung sammelt solche Daten bereitet sie auf und stellt sie zur Verfügung  
   * [Kommunale Daten](https://www.wegweiser-kommune.de/uber-den-wegweiser ) Bertelsmann-Stiftung
 
-Nun gilt es diese Daten zu beschaffen ihre Struktur zu sichten und für unsere Aufgaben vorzubereiten.
+Nun gilt es diese Daten zu beschaffen, ihre Struktur zu sichten und für unsere Aufgaben vorzubereiten.
 
 ```r
   # ---- Offizielle NUTS Geometriedaten (also die GI Daten für die NUTS3 Kreise)
@@ -354,11 +353,12 @@ Damit liegen alle Daten vor.
 
 ## Aufgabenstellung
 
+Nun sollte alles für die Bearbeitung der Aufgabenstellung bereit sein.
+
 Bitte bearbeiten Sie folgende Aufgabenstellung:
 * Extrahieren Sie für einen Landkreis/Bundesland Ihrer Wahl alle Zensusdaten.
-* Erzeugen Sie ein sf Objekt das die Geometrie und diese Daten enthält
+* Erzeugen Sie ein sf Objekt das die gewählte Geometrie und diese Daten enthält
 * Visualisieren Sie diese Daten mit mapview 
-
 
 
 ## Was ist sonst noch zu tun?
@@ -376,10 +376,12 @@ Für mehr Informationen kann unter den folgenden Ressourcen nachgeschaut werden:
 * [Making Maps with R](https://geocompr.robinlovelace.net/adv-map.html) bietet eine sehr gelungen Einstieg in das Thema. 
 
 ## Download Skripte
-Die Skripte können unter folgenden Links herunter geladen werden:
+Die Skripte für die Bearbeitung dieser Aufgabe können unter folgenden Links herunter geladen werden:
 * [skript_sitzung_2_0.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_0.R ){:target="_blank"} Basisskript für Downloads und Datensäuberung
 * [skript_sitzung_2_1.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_1.R ){:target="_blank"} Analyse und Visualisierung für Zensus und Gemeindedaten
 * [skript_sitzung_2_2.R ]({{ site.baseurl }}/assets/scripts/skript_sitzung_2_2.R ){:target="_blank"} Einfache Analyse und  Visualisierung von Bertelsmann Gemeindedaten
 
 ## Download Daten
-Die Daten der Beispiele (ACHTUNG > 10 GB) finden sie auch unter [Datendownload](https://137.248.191.215:8989/sharing/J4g5s2x3d) von einem Uni-Server laden (Unsichere VErbindung bestätigen). 
+Die Daten der Beispiele (ACHTUNG > 10 GB) finden sie auch unter [Datendownload](https://137.248.191.215:8989/sharing/J4g5s2x3d) von einem Uni-Server laden.
+(Unsichere Verbindung bestätigen).
+{: .notice--danger}

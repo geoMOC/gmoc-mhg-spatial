@@ -47,6 +47,11 @@ if (!dir.exists(rootDIR)) dir.create(path.expand(rootDIR))
 setwd(rootDIR)
 
 # --- Schritt 2 Download und Vorbereitung der Geometriedaten
+
+# Schalter auswahl = "zensus"
+auswahl = "NUTS"
+source(paste("../skript_sitzung_2_0.R"))
+
 # Schalter auswahl = "NUTS"
 auswahl = "NUTS"
 source(paste("../skript_sitzung_2_0.R"))
@@ -351,12 +356,14 @@ Kriftel_gewicht <- mat2listw(as.matrix(m_Kriftel_rook))
 
 # lineares Modell
 
+
 # Filtern der Bevölkerung und Beschäftigungsquoten
 
-Beschaeftgungsquote_2006    =   (Kriftel  %>% filter(Indikatoren=="Beschäftigungsquote (%)"))[,30]
-Frauenbeschaeftigungsquote_2006 = (Kriftel  %>% filter(Indikatoren=="Frauenbeschäftigungsquote (%)"))[,30]
-  lm_2006 = lm(Beschaeftgungsquote_2006$`2006`  ~ Frauenbeschaeftigungsquote_2006$`2006`, data=Kriftel)
+Beschäftgungsquote_2006=Kriftel  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
+Frauenbeschäftigungsquote_2006=Kriftel  %>% filter(Indikatoren=="Frauenbeschäftigungsquote (%)")
+lm_2006 = lm(Beschäftgungsquote_2006  ~ Frauenbeschäftigungsquote_2006, data=Kriftel)
 summary(lm_2006)
+
 
 
 
