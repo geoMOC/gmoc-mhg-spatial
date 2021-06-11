@@ -449,7 +449,7 @@ Anstelle des üblichen einfachen  Moran I  Tests sollte eine Monte-Carlo-Simulat
 moran.plot (residuen_lm_2006, nuts3_gewicht)
 ```
 
-<img src="{{ site.baseurl }}/assets/images/unit04/moran_plot-1.png" width="800px" height="800px" />
+<img src="{{ site.baseurl }}/assets/images/unit05/moran_plot-1.png" width="800px" height="800px" />
 
 *Abbildung 04-02-08: Moran-I Plot*
 
