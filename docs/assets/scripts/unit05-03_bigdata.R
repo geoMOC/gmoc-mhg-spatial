@@ -343,7 +343,7 @@ plot(nuts3_kreise_rook, coords, col='red', lwd=2, add=TRUE)
 
 # für geneinden
 h= Kriftel  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
-Kriftel_rook = poly2nb(t, row.names= unique(Kriftel$GEN), queen=FALSE)#
+Kriftel_rook = poly2nb(h, row.names= Kriftel$GEN, queen=FALSE)#
 w_Kriftel_rook =  nb2listw(Kriftel_rook, style='B',zero.policy = TRUE)
 m_Kriftel_rook =   nb2mat(Kriftel_rook, style='B', zero.policy = TRUE)
 Kriftel_gewicht <- mat2listw(as.matrix(m_Kriftel_rook))
@@ -353,9 +353,9 @@ Kriftel_gewicht <- mat2listw(as.matrix(m_Kriftel_rook))
 
 # Filtern der Bevölkerung und Beschäftigungsquoten
 
-Beschäftgungsquote_2006=Kriftel  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
-Frauenbeschäftigungsquote_2006=Kriftel  %>% filter(Indikatoren=="Frauenbeschäftigungsquote (%)")
-lm_2006 = lm(Beschäftgungsquote_2006  ~ Frauenbeschäftigungsquote_2006, data=Kriftel)
+Beschaeftgungsquote_2006    =   (Kriftel  %>% filter(Indikatoren=="Beschäftigungsquote (%)"))[,30]
+Frauenbeschaeftigungsquote_2006 = (Kriftel  %>% filter(Indikatoren=="Frauenbeschäftigungsquote (%)"))[,30]
+  lm_2006 = lm(Beschaeftgungsquote_2006$`2006`  ~ Frauenbeschaeftigungsquote_2006$`2006`, data=Kriftel)
 summary(lm_2006)
 
 
@@ -366,7 +366,7 @@ residuen_lm_2006 <- lm (lm (Beschäftgungsquote_2006$`2006` ~ Frauenbeschäftigu
 # Moran I test rondomisiert und nicht randomisiert
 m_nr_residuen_lm_2006 = moran.test(residuen_lm_2006 , Kriftel_gewicht,randomisation=FALSE)
 m_r_residuen_lm_2006  = moran.test(residuen_lm_2006 , Kriftel_gewicht,randomisation=TRUE)
-residuen_lm_2006 
+summary(residuen_lm_2006 )
 
 
 

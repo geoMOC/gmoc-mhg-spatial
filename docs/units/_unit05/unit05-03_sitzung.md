@@ -405,6 +405,24 @@ Frauenbeschäftigungsquote_2006=Kriftel  %>% filter(Indikatoren=="Frauenbeschäf
 lm_2006 = lm(Beschäftgungsquote_2006  ~ Frauenbeschäftigungsquote_2006, data=Kriftel)
 summary(lm_2006)
 
+Call:
+lm(formula = Beschaeftgungsquote_2006$`2006` ~ Frauenbeschaeftigungsquote_2006$`2006`, 
+    data = Kriftel)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.5083 -1.3568 -0.6673  0.7916  5.0432 
+
+Coefficients:
+                                       Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                              -9.819      6.425  -1.528    0.139    
+Frauenbeschaeftigungsquote_2006$`2006`    1.288      0.135   9.542 5.57e-10 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.934 on 26 degrees of freedom
+Multiple R-squared:  0.7779,	Adjusted R-squared:  0.7693 
+F-statistic: 91.05 on 1 and 26 DF,  p-value: 5.573e-10
 
 
 # Extraktion der Residuen
@@ -413,9 +431,10 @@ residuen_lm_2006 <- lm (lm (Beschäftgungsquote_2006$`2006` ~ Frauenbeschäftigu
 # Moran I test rondomisiert und nicht randomisiert
 m_nr_residuen_lm_2006 = moran.test(residuen_lm_2006 , Kriftel_gewicht,randomisation=FALSE)
 m_r_residuen_lm_2006  = moran.test(residuen_lm_2006 , Kriftel_gewicht,randomisation=TRUE)
-residuen_lm_2006 
+summary(residuen_lm_200)
 
-
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-2.5083 -1.3568 -0.6673  0.0000  0.7916  5.0432 
 
 moran.plot (residuen_lm_2006 , Kriftel_gewicht)
 ```
