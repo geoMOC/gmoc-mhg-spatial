@@ -23,11 +23,34 @@ Die Lernziele der zweiten Übung sind:
 * Berechnung unterschiedlicher Gewichtungsmatritzen 
 * Visualisierung der Ergebnisse
 
+
+## Regionalisierung oder Aggregationsräume
+
+Auch wenn von Nutzern in der Regel Daten auf einer möglichst hoch aufgelösten Ebene bevorzugt würden (im besten Fall Einzelpersonen, Haushalte, Grundstücke, Briefkästen etc.) ist die Realität, dass es sich üblicherweise um räumlich (und zeitlich) aggregierte  Daten handelt. Statt also tägliche Daten über den Cornfllakes-Kosum in jeden Haushalt verfügbar zu haben (um z.B. gezielt zu produzieren oder zu vermarkten), haben wir den  Jahresmittelwert aller verkauften Zerealien in einem Bundesland. So sieht es für die meisten Daten aus, die zudem räumlich und sachlich oft unterschiedlich aggregiert sind und z.B. nationale und subnationale Einheiten (z.B. NUTS1, NUTS3, NUTS3, AMR etc.) vorliegen, die zwar formal als gleich gelten aber enorm voneinander abweichen. Die einzigen Daten die quasi-kontinuierlich erhoben werden sind Fernerkundungsdaten aus etwa aus Satellitenaufnahmen in Form von Rasterzellenwerten, die häufig in den naturwissenschftlichen Studien Verwendung finden.
+
+Auch aus diesem Mangel betrachtet die tradionelle räumliche Ökonometrie Standorte und Entfernungen als exogen, wodurch die Modellierung der ökonomischen Variablen und etwaiger Standortentscheidungen bzw. räumlicher Abhängigkeiten nicht direkt an den Theorierahmenanknüpfbar wird, da die aggregierten Daten keinen Rückschluss auf die handlenen Subjekte zulassen. Auf diesen Handlungen basieren aber die meisten theoretischen Konzepte räumlichen ökonomischen Handelns. Der Raum wird so zur impliziten also zur abgeleiteten Größe. 
   
-  ## Einrichten der Umgebung
+Eine explizite Betrachtung des Raumes führt durch eine mikro-ökonomische Betrachtungsgrundlage auf der Basis regionaler oder sogar lokaler Daten zu charakteristisch abweichenden Merkmalen. Daraus ergen sich eine größere Realitätsnähe und größerer Informationsgehalt da durch die besser aufgelöste Datengrundlage Disaggregation und Heterogenität der zugrunde liegenden Handlungs- und Beziehungsgeflechte abbildbar werden, was eine vertiefte Analyse und Modellierung von Dynamiken ermöglicht. 
+
+So wird postuliert, dass ein räumlicher mikroökonometrischer Ansatz die Möglichkeit bietet, realistischere Modelle zu identifizieren, da in der Regel, die theoretischen Rahmen, auf Grundlage empirisch beobachteter oder behaupteter Entscheidungen der individuellen Wirtschaftsakteure abgeleitet werden. Man könnte sogar folgern, dass die bekannte Inkonsistenz zwischen mikroökonomischen Theorien und makroökonomischen in Daten abgebildeten Zusammenhängen, durch granulare, hochaufgelöste Daten zumindest gemildert werden kann. 
+
   
-  
-  
+Das Aggregationsproblem von räumlichen Daten ist ein sehr relevantes Problem bei der Analyse regionaler Daten. Räumlich aggregierte Daten basieren auf **willkürlichen** Definitionen der räumlichen Beobachtungseinheiten und führen so systematisch zu statistischer Verzerrung. Dieses Problem wird als *modifizierbares Flächeneinheitenproblem* oder MAUP bezeichnet (Arbia, 1989). Das MAUP wirkt sowohl als Skalenproblem, (Unbestimmtheit der Statistik hinsichtlich des Aggregationsniveaus) als auch als Aggregationsproblem (Unbestimmtheit hinsichtlich des  Aggregationskriteriums). Der wohl wichtigste Effekt ist, dass die Schätzer von Regressionsparametern, bei Verwendung aggregierter statt individueller Daten, eine größere Varianz aufweisen. Das kann in erheblichem Maße zu falschen inferentiellen Schlussfolgerungen und zur Akzeptanz von ungültigen Modellen führen. So impliziert eine (fälschlicherweise angenommene) positive räumliche Korrelation eine Aggregation zwischen ähnlichen Werten, wodurch die Variabilität erhalten bleibt, während eine negative räumliche Korrelation eine Aggregation zwischen sehr unterschiedlichen Werten impliziert. Im Rahmen der räumlichen Statistik wirft das Fragen der räumlichen Autokorrelation bzw. Inhomogenität auf. Also letztlich Fragen welche Raumkonstruktion, auf welcher Skala einen Einfluss auf die Fragestellung hat.
+
+Bei der visuellen Exploration aber auch bei der statistischen Analyse ist es von erheblichem Einfluss wie die Gebiete zur Aggregation der Daten geschnitten sind. Da wie bereits gesagt,  dieser Zusammenhang willkürlich (auch oft historisch oder politisch begründet) ist, sind die Muster, die wir sehen äußerst subjektiv. Sowohl das MAUP als auch die *ökologische Inferenz* (Ecological Inference) also der Effekt von höheren Einheiten auf niedrigere zu schließen sind grundsätzliches methodisches Problem der räumlichen Regressionstatisik.
+
+
+
+## Distanz
+
+Als Distanz wird die Entfernung von zwei Positionen bezeichnet. Sie kann zunächst einmal als ein zentrales Konzept der Geographie angenommen werden. Erinnern sie sich an Waldo Toblers ersten Satz zur Geographie, dass *alles mit allem anderen verwandt ist, aber nahe Dinge mehr verwandt sind als ferne Dinge*.  Die Entfernung ist scheinbar sehr einfach zu bestimmen. Natürlich betrachten wir im einfachsten Fall Distanz als die Entfernung auf eine isometrischen und isomorhpen Fläche mittels der *Luftlinie* (euklidische Distanz). Zentrales Problem ist das diese Betrachtungsweise häufig, wenn noicht sogar in der Regel unzutreffend ist. Es gibt nicht nur (nationale) Grenzen, Gebirge oder beliebige andere Hindernisse, die Entfernung zwischen A und B kann auch asymmetrisch sein (bergab geht's einfacher und  schneller  als bergauf). Das heißt Distanzen können auch über z.B. *Distanzkosten* gewichtet werden.
+
+Üblicherweise werden Distanzen in einer "Distanzmatrix" dargestellt. Eine solche Matrix enthält als Spaltenüberschriften und als Zeilenbeschriftung die Kennung von jedem berechneten Ort. Im jedem Feld wird die Entfernung eingetragen. Für kartesische Koordinaten erfolgt dies einfach über den Satz des Pythagoras.
+
+
+## Erzeugen einer Distanz-Matrix
+
+### Einrichten der Arbeitsumgebung
 ```r
 
 # rootDIR enthält nur den Dateipfad, 
@@ -69,37 +92,13 @@ mapview(Bertel_HESSEN[Kriftel_9000[[1]],])
 Kriftel=Bertel_HESSEN[Kriftel_9000[[1]],]
 
 ```
+### Erzeugen von 10 georeferenzierten Positionen  
 
-
-
-## Regionalisierung oder Aggregationsräume
-
-Auch wenn von Nutzern in der Regel Daten auf einer möglichst hoch aufgelösten Ebene bevorzugt würden (im besten Fall Einzelpersonen, Haushalte, Grundstücke, Briefkästen etc.) ist die Realität, dass es sich üblicherweise um räumlich (und zeitlich) aggregierte  Daten handelt. Statt also tägliche Daten über den Cornfllakes-Kosum in jeden Haushalt verfügbar zu haben (um z.B. gezielt zu produzieren oder zu vermarkten), haben wir den  Jahresmittelwert aller verkauften Zerealien in einem Bundesland. So sieht es für die meisten Daten aus, die zudem räumlich und sachlich oft unterschiedlich aggregiert sind und z.B. nationale und subnationale Einheiten (z.B. NUTS1, NUTS3, NUTS3, AMR etc.) vorliegen, die zwar formal als gleich gelten aber enorm voneinander abweichen. Die einzigen Daten die quasi-kontinuierlich erhoben werden sind Fernerkundungsdaten aus etwa aus Satellitenaufnahmen in Form von Rasterzellenwerten, die häufig in den naturwissenschftlichen Studien Verwendung finden.
-
-Auch aus diesem Mangel betrachtet die tradionelle räumliche Ökonometrie Standorte und Entfernungen als exogen, wodurch die Modellierung der ökonomischen Variablen und etwaiger Standortentscheidungen bzw. räumlicher Abhängigkeiten nicht direkt an den Theorierahmenanknüpfbar wird, da die aggregierten Daten keinen Rückschluss auf die handlenen Subjekte zulassen. Auf diesen Handlungen basieren aber die meisten theoretischen Konzepte räumlichen ökonomischen Handelns. Der Raum wird so zur impliziten also zur abgeleiteten Größe. 
-  
-Eine explizite Betrachtung des Raumes führt durch eine mikro-ökonomische Betrachtungsgrundlage auf der Basis regionaler oder sogar lokaler Daten zu charakteristisch abweichenden Merkmalen. Daraus ergen sich eine größere Realitätsnähe und größerer Informationsgehalt da durch die besser aufgelöste Datengrundlage Disaggregation und Heterogenität der zugrunde liegenden Handlungs- und Beziehungsgeflechte abbildbar werden, was eine vertiefte Analyse und Modellierung von Dynamiken ermöglicht. 
-
-So wird postuliert, dass ein räumlicher mikroökonometrischer Ansatz die Möglichkeit bietet, realistischere Modelle zu identifizieren, da in der Regel, die theoretischen Rahmen, auf Grundlage empirisch beobachteter oder behaupteter Entscheidungen der individuellen Wirtschaftsakteure abgeleitet werden. Man könnte sogar folgern, dass die bekannte Inkonsistenz zwischen mikroökonomischen Theorien und makroökonomischen in Daten abgebildeten Zusammenhängen, durch granulare, hochaufgelöste Daten zumindest gemildert werden kann. 
-
-  
-Das Aggregationsproblem von räumlichen Daten ist ein sehr relevantes Problem bei der Analyse regionaler Daten. Räumlich aggregierte Daten basieren auf **willkürlichen** Definitionen der räumlichen Beobachtungseinheiten und führen so systematisch zu statistischer Verzerrung. Dieses Problem wird als *modifizierbares Flächeneinheitenproblem* oder MAUP bezeichnet (Arbia, 1989). Das MAUP wirkt sowohl als Skalenproblem, (Unbestimmtheit der Statistik hinsichtlich des Aggregationsniveaus) als auch als Aggregationsproblem (Unbestimmtheit hinsichtlich des  Aggregationskriteriums). Der wohl wichtigste Effekt ist, dass die Schätzer von Regressionsparametern, bei Verwendung aggregierter statt individueller Daten, eine größere Varianz aufweisen. Das kann in erheblichem Maße zu falschen inferentiellen Schlussfolgerungen und zur Akzeptanz von ungültigen Modellen führen. So impliziert eine (fälschlicherweise angenommene) positive räumliche Korrelation eine Aggregation zwischen ähnlichen Werten, wodurch die Variabilität erhalten bleibt, während eine negative räumliche Korrelation eine Aggregation zwischen sehr unterschiedlichen Werten impliziert. Im Rahmen der räumlichen Statistik wirft das Fragen der räumlichen Autokorrelation bzw. Inhomogenität auf. Also letztlich Fragen welche Raumkonstruktion, auf welcher Skala einen Einfluss auf die Fragestellung hat.
-
-Bei der visuellen Exploration aber auch bei der statistischen Analyse ist es von erheblichem Einfluss wie die Gebiete zur Aggregation der Daten geschnitten sind. Da wie bereits gesagt,  dieser Zusammenhang willkürlich (auch oft historisch oder politisch begründet) ist, sind die Muster, die wir sehen äußerst subjektiv. Sowohl das MAUP als auch die *ökologische Inferenz* (Ecological Inference) also der Effekt von höheren Einheiten auf niedrigere zu schließen sind grundsätzliches methodisches Problem der räumlichen Regressionstatisik.
-
-
-
-## Distanz
-
-Als Distanz wird die Entfernung von zwei Positionen bezeichnet. Sie kann zunächst einmal als ein zentrales Konzept der Geographie angenommen werden. Erinnern sie sich an Waldo Toblers ersten Satz zur Geographie, dass *alles mit allem anderen verwandt ist, aber nahe Dinge mehr verwandt sind als ferne Dinge*.  Die Entfernung ist scheinbar sehr einfach zu bestimmen. Natürlich betrachten wir im einfachsten Fall Distanz als die Entfernung auf eine isometrischen und isomorhpen Fläche mittels der *Luftlinie* (euklidische Distanz). Zentrales Problem ist das diese Betrachtungsweise häufig, wenn noicht sogar in der Regel unzutreffend ist. Es gibt nicht nur (nationale) Grenzen, Gebirge oder beliebige andere Hindernisse, die Entfernung zwischen A und B kann auch asymmetrisch sein (bergab geht's einfacher und  schneller  als bergauf). Das heißt Distanzen können auch über z.B. *Distanzkosten* gewichtet werden.
-
-Üblicherweise werden Distanzen in einer "Distanzmatrix" dargestellt. Eine solche Matrix enthält als Spaltenüberschriften und als Zeilenbeschriftung die Kennung von jedem berechneten Ort. Im jedem Feld wird die Entfernung eingetragen. Für kartesische Koordinaten erfolgt dies einfach über den Satz des Pythagoras.
-
-
-###  Distanz-Matrix
 Wir nutzen für die geroreferenzierten Positionen von 10 deutschen Städten für die Berechnung einer Distanzmatrix. Wenn die Positionen in Länge/Breite angegeben sind ist die Distanzberechnung etwas aufwendiger. In diesem Fall können wir die Funktion `pointDistance` aus dem `raster` Paket verwenden (allerdings nur wenn das Koordinatensystem korrekt angegeben wird). Eleganter ist jedoch die Konvertierung von Punktdaten in ein Geodatenformat z.B. als  `sf` Objekt. 
 
 Zur direkten Überprüfung ob die Punkte richtig geokodiert sind eignet sich nach Erzeugung des Punkte-Objekts die Funktion  `mapview` hervorragend. Zunächst erzeugen wir uns eine typische Punktmatrix in Form von Städten (auch als Übung um zu zeigen wie einfach solche Daten erzeugbar sind).
+
+
  
 ```r
 # Erzeugen von beliebigen Raumkoordinaten 
@@ -131,7 +130,7 @@ Dann berechnen wir die Vogelflugdistanzen
 
 ### Distanzberechnung von Geokoordinaten
 
-Die Berechnung der Distanzen zwischen den 10 Städten, bzw. die korrekte Nutzung der erzeugten Punktdaten, greift einigermaßen tief in Geodaten-Verarbeitung ein: In Kürze, die Punkte liegen als geographische Koordinaten, also als unprojizierte Längen und Breitengrade auf Grundlage des WGS84 Datum vor. Auf einem Ellipsoid ist es deutlich aufwendiger (bzw. fehlerträchtiger) Entfernungen zu rechnen als in in einem projizierten (also kartesischen) Koordinatensystem. Daher müssen diese Daten geodätisch korrekt behandelt werden was kein HExenwerk ist aber sorgfältig berücksichtigt werden muss. 
+Die Berechnung der Distanzen zwischen den 10 Städten, bzw. die korrekte Nutzung der erzeugten Punktdaten, greift einigermaßen tief in Geodaten-Verarbeitung ein: In Kürze, die Punkte liegen als geographische Koordinaten, also als unprojizierte Längen und Breitengrade auf Grundlage des WGS84 Datum vor. Auf einem Ellipsoid ist es deutlich aufwendiger (bzw. fehlerträchtiger) Entfernungen zu rechnen als in in einem projizierten (also kartesischen) Koordinatensystem. Daher müssen diese Daten geodätisch korrekt behandelt werden was kein Hexenwerk ist aber sorgfältig berücksichtigt werden muss. 
 {: .notice--success}
 
 Wir transformieren zunächst den Datensatz in das für Deutschland amtlich gültige [Referenzsystem](https://de.wikipedia.org/wiki/Europ%C3%A4isches_Terrestrisches_Referenzsystem_1989) für Deutschland nämlich `ETRS89/UTM`. Im nachstehenden Beispiel nutzen wir die [EPSG](https://de.wikipedia.org/wiki/European_Petroleum_Survey_Group_Geodesy#EPSG-Codes) Konvention. Für das zuvor genannte System ist das der [EPSG-Code 25832](https://epsg.io/25832). Techsnisch nutzen wir die `st_transform()` Funktion des `sf` Pakets.
@@ -487,8 +486,8 @@ Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressi
 Für R-spezifische  Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 
  * [Spatial Data Analysis](https://rspatial.org/raster/analysis/2-scale_distance.html) von Robert Hijmans. Sehr umfangreich und empfehlenswert. Viel der Beispiele basieren auf seiner Vorlesung und sind für unsere Verhältnisse angepasst.
  * Der [UseR! 2019 Spatial Workshop](https://edzer.github.io/UseR2019/part2.html) von Roger Bivand. Roger ist die absolute Referenz hinischtlich räumlicher Ökonometrie mit R. Er hat unzählige Pakete geschrieben und ebensoviel Schulungs-Material und ist unermüdlich in  der Unterstützung der Community.
- * Einen guten Überblick über die Leistungsfähigkeit und Anwendungsbereiche der gängigsten Algorithmen zur Konstruktion von Nachbarschaften ist [A survey of neighborhood construction algorithms for clustering and classifying data points 2018](https://www.sciencedirect.com/science/article/abs/pii/S1574013720304159) gut geeignet.
- * [A comparison of Euclidean Distance, Travel Times, and Network Distances in Location Choice Mixture Models 2019](https://link.springer.com/article/10.1007/s11067-018-9439-5) gibt einen guten Einblick in die theoriegeleitete Passung unterschiedlicher Raumkonstruktionen. Insbesondere die Resultate ab Seite 15 sind interessant. 
+ * Einen guten Überblick über die Leistungsfähigkeit und Anwendungsbereiche der gängigsten Algorithmen zur Konstruktion von Nachbarschaften bietet [A survey of neighborhood construction algorithms for clustering and classifying data points 2018](https://www.sciencedirect.com/science/article/abs/pii/S1574013720304159).
+ * [A comparison of Euclidean Distance, Travel Times, and Network Distances in Location Choice Mixture Models 2019](https://link.springer.com/article/10.1007/s11067-018-9439-5) gibt einen guten Einblick in die theoriegeleitete Passung unterschiedlicher Distanzableitungen. Insbesondere die Resultate ab Seite 15 sind interessant. 
  
  Arbia, G.: Spatial Data Configuration in the Statistical Analysis of Regional Economics and Related Problems. Kluwer, Dordrecht (1989)
  
