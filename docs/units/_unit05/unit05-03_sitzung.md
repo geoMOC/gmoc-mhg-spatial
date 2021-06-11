@@ -54,6 +54,20 @@ for (lib in libs){
     utils::install.packages(lib)
   }}
 invisible(lapply(libs, library, character.only = TRUE))
+
+
+# einlesen der nuts3_kreise 
+nuts3_kreise = nuts3_3035
+
+# Erzeugen einer Hessen Geometrie für die Gemeinden
+gemeinden_hessen_sf_3035 = gemeinden_sf_3035 %>% filter(SN_L=="06")
+
+# merge der Gemeindegeometrien mit den aktuellen Datentabellen über die Spalte GEN
+Bertel_HESSEN= right_join(gemeinden_hessen_sf_3035 , gemeinde_tab_all)
+Kriftel_9000 = st_intersects(st_buffer(st_centroid((Bertel_HESSEN[Bertel_HESSEN$GEN=="Kriftel",])), 9000),Bertel_HESSEN)
+mapview(Bertel_HESSEN[Kriftel_9000[[1]],])
+Kriftel=Bertel_HESSEN[Kriftel_9000[[1]],]
+
 ```
 
 
@@ -185,28 +199,25 @@ rownames(city_distanz)=staedte
 colnames(city_distanz)=staedte
 ```
 
-## Räumlicher Einfluss
+# Räumlicher Einfluss
 
-Die beiden Aspekte zuvor haben die räumlichen Verhältnisse in Form von **Raumabgrenzung** und **Distanz** beschrieben. In der räumlichen Analyse ist es jedoch von zentraler Bedeutung den räumlichen **Einfluss** zwischen geographischen Objekten zu schätzen bzw. zu messen. Das generelle Problem ist, dass der räumliche Einfluss sehr komplex ist und faktisch nie gemessen werden kann. Daher gibt es zahllose Ansätze ihn zu schätzen. 
+Die beiden Aspekte zuvor haben die räumlichen Verhältnisse in Form von **Raumabgrenzung** und **Distanz** beschrieben. In der räumlichen Analyse ist es jedoch von zentraler Bedeutung den räumlichen **Einfluss** dieser Merkmale  in Bezug auf die Wirksamkeit auf ein Modell zu schätzen bzw. zu messen. Dabei ist das generelle Problem, dass der räumliche Einfluss sehr komplex ist und faktisch nie zureichend ermittelt werden kann. Wie nicht anders zu erwarten gibt es daher eininge Ansätze ihn zumindest zureichend zu schätzen. 
 
-Die wichtigsten Ansätze sind: (1) prozessorientiert (funktional) durchzuführen (der oberliegende Teil eines Baches fließt in den unterliegenden) bzw. (2) datengetrieben dann wird mit statistischen Verfahren die räumliche Autokorrelation ermittelt. Für den datengetriebnen Ansatz ist dieser Einfluss in der Regel eine Funktion der *Nachbarschaft* oder der *(inversen) Entfernung*. Um damit in statistischen Modellen arbeiten zu können werden diese Nachbarschaftskonzepte als *räumliche Gewichtungsmatrix* ausgedrückt. 
+Die wichtigsten Kategorien sind: (1) prozessorientiert (funktional) durchzuführen (der oberliegende Teil eines Baches fließt in den unterliegenden) bzw. (2) datengetrieben dann wird mit statistischen Verfahren die räumliche Autokorrelation ermittelt. Für den datengetriebnen Ansatz ist dieser Einfluss in der Regel eine Funktion der *Nachbarschaft* oder der *(inversen) Entfernung*. Um damit in statistischen Modellen arbeiten zu können werden diese Nachbarschaftskonzepte als *räumliche Gewichtungsmatrix* ausgedrückt. 
 
-Zum Beispiel kann der räumliche Einfluss von Flächeneinheiten (NUTS3/Polygonen) aufeinander (z.B, NUTS3 Verwaltungsbezirke) so ausgedrückt werden, dass sie eine/keine gemeinsame Grenze haben, sie kann als euklidische Distanz zwischen ihren Schwerpunkten bestimmt werden oder auch über die Länge gemeinsamer Grenzen gewichtet werden und so fort.
+Zum Beispiel kann der räumliche Einfluss von Flächeneinheiten (NUTS3/Polygonen) aufeinander (z.B, NUTS3 Verwaltungsbezirke) so ausgedrückt werden, dass sie eine/keine gemeinsame Grenze (binär) haben, sie kann als euklidische Distanz (metrisch kontinuierlich) zwischen ihren Schwerpunkten bestimmt werden oder auch über die Länge gemeinsamer Grenzen gewichtet werden und so fort.
 
 ## Nachbarschaft
 
-Die Nachbarschaft ist das vielleicht wichtigste Konzept. höherdimensionale Geoobjekte (also ab Linie aufwärts) können als benachbart betrachtet werden wenn sie sich *berühren*, z.B. benachbarte Länder. Bei null-dimensionalen Objekten (Punkte) ist der gebräuchlichste Ansatz die Entfernung in Kombination mit einer Anzahl von Punkten für die Ermittlung der Nachbarschaft zu nutzen.
+Hinsichtlich des räumlichen Einflussesist die **Nachbarschaft** das vielleicht wichtigste Konzept (viele werden es leidvoll kennen). Höherdimensionale Geoobjekte (also ab Linie aufwärts) können als benachbart betrachtet werden wenn sie sich *berühren*, z.B. benachbarte Länder. Bei null-dimensionalen Objekten (Punkte) ist der gebräuchlichste Ansatz die Entfernung in Kombination mit einer minimalen/maximalen Anzahl von Punkten für die Ermittlung der Nachbarschaft zu nutzen.
 
-Das klassische lineare Regressionsmodell geht von exogenen und sphärischen Störungen aus Betrachten wir n-Regionen kann eine nicht lineare (sphärische) Ausprägung der Residuen durch räumliche Autokorrelation und räumlicher Heterogenität bewirken, die die optimalen Eigenschaften der gewöhnlichen kleinsten Quadrate (OLS) verfälschen bzw. aufheben. 
+Das klassische lineare Regressionsmodell geht (wie schon zuvor angesprochen) von exogenen und sphärischen Störungen aus. Betrachten wir also  n-Regionen, kann eine nicht lineare (sphärische) Ausprägung der Residuen durch räumliche Autokorrelation und räumliche Heterogenität bewirken, die die optimierenden Eigenschaften der gewöhnlichen kleinsten Quadrate (OLS) verfälschend oder sogar falsch wirken. 
 
-Intuitiv wird die räumliche Korrelation als die Tatsache aufgefasst, dass nahe beieinander liegende Beobachtungen stärker korreliert sind als weit auseinander liegende (das "erste Gesetz der Geographie" (Tobler, 1970)). Eine formale Definition erfordert jedoch eine Klärung des Konzepts der "Nähe". 
-Nähe wird in der räumlichen Ökonometrie als "Gewichtungsmatrix" (oder "Konnektivitätsmatrix") ausgedrückt. Von Bedeutng ist eine Schwellendistanz (sagen wir d*), die eingeführt wird, um die Datenmenge der W-Matrix zu verringern. Dies erfolgt häufig als eine einfache binäre Matrize die zudem üblicherweise so standardisiert wird, dass die Summe in jeder Zeile eins ist. Diese Operation wird "Zeilennormierung" genannt. 
+Intuitiv wird die räumliche Korrelation als die Tatsache aufgefasst, dass nahe beieinander liegende Beobachtungen stärker korreliert sind als weit auseinander liegende (*erste Satz der Geographie*, Tobler, 1970). Der quantitative formale Umgang mit dieser qualitativen Behauptung erfordert jedoch die Definition des Konzepts der **Nähe**. In der räumlichen Ökonometrie wird *Nähe* als **Gewichtungsmatrix** oder **Konnektivitätsmatrix** (W-Matrix ) ausgedrückt. Von Bedeutung ist eine Schwellendistanz (=maximale Wirksamkeit), die eingeführt wird, um die Datenmenge der W-Matrix zu verringern. Technisch wird dies häufig als eine einfache binäre Matrix die zudem üblicherweise so standardisiert wird, dass die Summe in jeder Zeile eins ist, umgesetzt. Letzterer Vorgang wird *Zeilennormierung* genannt. 
 
 ### Distanzbasierte Gewichtungs-Matrix für Punkte
 
 Anstatt den räumlichen Einfluss als binären Wert (also topologisch benachbart ja/nein) auszudrücken, kann er als kontinuierlicher Wert ausgedrückt werden. Der einfachste Ansatz ist die Verwendung des inversen Abstands (je weiter entfernt, desto niedriger der Wert).
-
-
 
 ```r
 # inverse Distanz
@@ -376,68 +387,38 @@ Der Moran-I-Test und der Geary C Test sind übliche Verfahren für die Überprü
 
 
 ```r
-# Berechnung der Nachbarschaft
-nuts3_kreise_rook = poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)
-# Extraktion der Koordinaten
-coords <- coordinates(as(nuts3_kreise,"Spatial"))
 
-w_nuts3_kreise_rook =  nb2listw(nuts3_kreise_rook, style='B',zero.policy = TRUE)
-m_nuts3_kreise_rook =   nb2mat(nuts3_kreise_rook, style='B', zero.policy = TRUE)
-nuts3_gewicht <- mat2listw(as.matrix(m_nuts3_kreise_rook))
+# für geneinden
+h= Kriftel  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
+Kriftel_rook = poly2nb(t, row.names= unique(Kriftel$GEN), queen=FALSE)#
+w_Kriftel_rook =  nb2listw(Kriftel_rook, style='B',zero.policy = TRUE)
+m_Kriftel_rook =   nb2mat(Kriftel_rook, style='B', zero.policy = TRUE)
+Kriftel_gewicht <- mat2listw(as.matrix(m_Kriftel_rook))
 
 
-# lineares Modell Anteil Hochschulabschluss / ANteil Baugewerbe
-lm_uni_bau = lm(nuts3_kreise$Anteil.Hochschulabschluss ~ nuts3_kreise$Anteil.Baugewerbe, data=nuts3_kreise)
-summary(lm_uni_bau)
-```
+# lineares Modell
 
-```
-## 
-## Call:
-## lm(formula = nuts3_kreise$Anteil.Hochschulabschluss ~ nuts3_kreise$Anteil.Baugewerbe, 
-##     data = nuts3_kreise)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.080237 -0.026671 -0.005943  0.017007  0.165641 
-## 
-## Coefficients:
-##                                 Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)                     0.175566   0.005368   32.71   <2e-16 ***
-## nuts3_kreise$Anteil.Baugewerbe -0.988080   0.073797  -13.39   <2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.0382 on 398 degrees of freedom
-## Multiple R-squared:  0.3105,	Adjusted R-squared:  0.3088 
-## F-statistic: 179.3 on 1 and 398 DF,  p-value: < 2.2e-16
-```
+# Filtern der Bevölkerung und Beschäftigungsquoten
 
-```r
+Beschäftgungsquote_2006=Kriftel  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
+Frauenbeschäftigungsquote_2006=Kriftel  %>% filter(Indikatoren=="Frauenbeschäftigungsquote (%)")
+lm_2006 = lm(Beschäftgungsquote_2006  ~ Frauenbeschäftigungsquote_2006, data=Kriftel)
+summary(lm_2006)
+
+
+
 # Extraktion der Residuen
-residuen_uni_bau <- lm( nuts3_kreise$Anteil.Hochschulabschluss ~ nuts3_kreise$Anteil.Baugewerbe, data=nuts3_kreise)$resid
+residuen_lm_2006 <- lm (lm (Beschäftgungsquote_2006$`2006` ~ Frauenbeschäftigungsquote_2006$`2006`, data=Kriftel))$resid
 
 # Moran I test rondomisiert und nicht randomisiert
-m_nr_residuen_uni_bau = moran.test(residuen_uni_bau, nuts3_gewicht,randomisation=FALSE)
-m_r_residuen_uni_bau = moran.test(residuen_uni_bau, nuts3_gewicht,randomisation=TRUE)
-m_r_residuen_uni_bau
-```
+m_nr_residuen_lm_2006 = moran.test(residuen_lm_2006 , Kriftel_gewicht,randomisation=FALSE)
+m_r_residuen_lm_2006  = moran.test(residuen_lm_2006 , Kriftel_gewicht,randomisation=TRUE)
+residuen_lm_2006 
 
-```
-## 
-## 	Moran I test under randomisation
-## 
-## data:  residuen_uni_bau  
-## weights: nuts3_gewicht    
-## 
-## Moran I statistic standard deviate = 11.344, p-value < 2.2e-16
-## alternative hypothesis: greater
-## sample estimates:
-## Moran I statistic       Expectation          Variance 
-##      0.3451598142     -0.0025062657      0.0009392513
-```
 
-*Abbildung 04-02-08: Berechnung der räumlichen Autokorrelation für Binäre 4-er Nachbarschaft für die Landkreise Deutschlands - Hier für die das lineare Modell lm(Anteil.Hochschulabschluss ~ Anteil.Baugewerbe)*
+
+moran.plot (residuen_lm_2006 , Kriftel_gewicht)
+```
 
 
 
@@ -446,7 +427,7 @@ Anstelle des üblichen einfachen  Moran I  Tests sollte eine Monte-Carlo-Simulat
 
 
 ```r
-moran.plot (residuen_uni_bau, nuts3_gewicht)
+moran.plot (residuen_lm_2006, nuts3_gewicht)
 ```
 
 <img src="{{ site.baseurl }}/assets/images/unit04/moran_plot-1.png" width="800px" height="800px" />

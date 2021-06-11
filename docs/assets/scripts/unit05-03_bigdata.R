@@ -77,9 +77,9 @@ gemeinden_hessen_sf_3035 = gemeinden_sf_3035 %>% filter(SN_L=="06")
 
 # merge der Gemeindegeometrien mit den aktuellen Datentabellen über die Spalte GEN
 Bertel_HESSEN= right_join(gemeinden_hessen_sf_3035 , gemeinde_tab_all)
-Habichtswald_3000 = st_intersects(st_buffer(st_centroid((Bertel_HESSEN[Bertel_HESSEN$GEN=="Kriftel",])), 9000),Bertel_HESSEN)
-mapview(Bertel_HESSEN[Habichtswald_3000[[1]],])
-habicht=Bertel_HESSEN[Habichtswald_3000[[1]],]
+Kriftel_9000 = st_intersects(st_buffer(st_centroid((Bertel_HESSEN[Bertel_HESSEN$GEN=="Kriftel",])), 9000),Bertel_HESSEN)
+mapview(Bertel_HESSEN[Kriftel_9000[[1]],])
+Kriftel=Bertel_HESSEN[Kriftel_9000[[1]],]
 
 # Normalverteilte Erzeugung von zufälligen Koordinatenpaaren
 # in der Ausdehnung der nuts3_kreise Daten
@@ -342,34 +342,34 @@ plot(nuts3_kreise_rook, coords, col='red', lwd=2, add=TRUE)
 
 
 # für geneinden
-h= habicht  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
-habicht_rook = poly2nb(t, row.names= unique(habicht$GEN), queen=FALSE)#
-w_habicht_rook =  nb2listw(habicht_rook, style='B',zero.policy = TRUE)
-m_habicht_rook =   nb2mat(habicht_rook, style='B', zero.policy = TRUE)
-habicht_gewicht <- mat2listw(as.matrix(m_habicht_rook))
+h= Kriftel  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
+Kriftel_rook = poly2nb(t, row.names= unique(Kriftel$GEN), queen=FALSE)#
+w_Kriftel_rook =  nb2listw(Kriftel_rook, style='B',zero.policy = TRUE)
+m_Kriftel_rook =   nb2mat(Kriftel_rook, style='B', zero.policy = TRUE)
+Kriftel_gewicht <- mat2listw(as.matrix(m_Kriftel_rook))
 
 
 # lineares Modell
 
 # Filtern der Bevölkerung und Beschäftigungsquoten
 
-Beschäftgungsquote_2006=habicht  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
-Frauenbeschäftigungsquote_2006=habicht  %>% filter(Indikatoren=="Frauenbeschäftigungsquote (%)")
-lm_2006 = lm(Beschäftgungsquote_2006  ~ Frauenbeschäftigungsquote_2006, data=habicht)
+Beschäftgungsquote_2006=Kriftel  %>% filter(Indikatoren=="Beschäftigungsquote (%)")
+Frauenbeschäftigungsquote_2006=Kriftel  %>% filter(Indikatoren=="Frauenbeschäftigungsquote (%)")
+lm_2006 = lm(Beschäftgungsquote_2006  ~ Frauenbeschäftigungsquote_2006, data=Kriftel)
 summary(lm_2006)
 
 
 
 # Extraktion der Residuen
-residuen_lm_2006 <- lm (lm (Beschäftgungsquote_2006$`2006` ~ Frauenbeschäftigungsquote_2006$`2006`, data=habicht))$resid
+residuen_lm_2006 <- lm (lm (Beschäftgungsquote_2006$`2006` ~ Frauenbeschäftigungsquote_2006$`2006`, data=Kriftel))$resid
 
 # Moran I test rondomisiert und nicht randomisiert
-m_nr_residuen_lm_2006 = moran.test(residuen_lm_2006 , habicht_gewicht,randomisation=FALSE)
-m_r_residuen_lm_2006  = moran.test(residuen_lm_2006 , habicht_gewicht,randomisation=TRUE)
+m_nr_residuen_lm_2006 = moran.test(residuen_lm_2006 , Kriftel_gewicht,randomisation=FALSE)
+m_r_residuen_lm_2006  = moran.test(residuen_lm_2006 , Kriftel_gewicht,randomisation=TRUE)
 residuen_lm_2006 
 
 
 
-moran.plot (residuen_lm_2006 , habicht_gewicht)
+moran.plot (residuen_lm_2006 , Kriftel_gewicht)
 
 
