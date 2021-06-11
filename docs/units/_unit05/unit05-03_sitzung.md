@@ -483,11 +483,12 @@ Versuchen Sie sich zu verdeutlichen, dass die Mehrzahl der räumlichen  Regressi
 
 ## Wo gibt's mehr Informationen?
 
-Zur Theorie und anwendungsorientierter Umsetzung der Konzepte kann ein Vlick in das das ausgesprochen **empfehlenswerte** Lehrbuch [Spatial Microeconometrics](https://doi.org/10.4324/9781315735276) nützlich sein
-
+* Zur Theorie und anwendungsorientierter Umsetzung der Konzepte kann ein Blick in das das ausgesprochen **empfehlenswerte** Lehrbuch [Spatial Microeconometrics](https://doi.org/10.4324/9781315735276) nützlich sein
 Für R-spezifische  Informationen kann unter den folgenden Ressourcen nachgeschaut werden: 
  * [Spatial Data Analysis](https://rspatial.org/raster/analysis/2-scale_distance.html) von Robert Hijmans. Sehr umfangreich und empfehlenswert. Viel der Beispiele basieren auf seiner Vorlesung und sind für unsere Verhältnisse angepasst.
  * Der [UseR! 2019 Spatial Workshop](https://edzer.github.io/UseR2019/part2.html) von Roger Bivand. Roger ist die absolute Referenz hinischtlich räumlicher Ökonometrie mit R. Er hat unzählige Pakete geschrieben und ebensoviel Schulungs-Material und ist unermüdlich in  der Unterstützung der Community.
+ * Einen guten Überblick über die Leistungsfähigkeit und Anwendungsbereiche der gängigsten Algorithmen zur Konstruktion von Nachbarschaften ist [A survey of neighborhood construction algorithms for clustering and classifying data points 2018](https://www.sciencedirect.com/science/article/abs/pii/S1574013720304159) gut geeignet.
+ * [A comparison of Euclidean Distance, Travel Times, and Network Distances in Location Choice Mixture Models 2019](https://link.springer.com/article/10.1007/s11067-018-9439-5) gibt einen guten Einblick in die theoriegeleitete Passung unterschiedlicher Raumkonstruktionen. Insbesondere die Resultate ab Seite 15 sind interessant. 
  
  Arbia, G.: Spatial Data Configuration in the Statistical Analysis of Regional Economics and Related Problems. Kluwer, Dordrecht (1989)
  
