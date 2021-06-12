@@ -10,7 +10,7 @@ Geodaten sind prinzipiell wie gewöhnliche Daten zu betrachten. Durch den Raumbe
   
   
 
-Als klassische oder typische Gebiete der räumlichen Statistik werden die Punktmusteranalyse, Regression und Inferenz mit räumlichen Daten betrachtet. Zur Modellierung oder Vorhersage fehlender Raumdaten werden Methoden der Geostatistik wie etwa Interpolation (z.B. Kriging) sowie AI MEthoden wie Machine/Deep Learning (ML/DL) zur Vorhersage eingesetzt. Nahezu alle dieser Bereiche verwenden Daten die als [Vektordatenmodell]({{ site.baseurl }}{% link _unit02/unit02-02_reader_gi_raum.md %}) vorliegen. Vorrangig in der ML/DL  Vorhersage werden in erheblichem Umfang Rasterdaten genutzt. In der Ökonometrie jedoch werden üblicherweise diskrete Geoobjekte die null-, ein- bzw. zwei-dimensionale Raumeigenschaften aufweisen.
+Als klassische oder typische Gebiete der räumlichen Statistik werden die Punktmusteranalyse, Regression und Inferenz mit räumlichen Daten betrachtet. Zur Modellierung oder Vorhersage fehlender Raumdaten werden Methoden der Geostatistik wie etwa Interpolation (z.B. Kriging) sowie AI Methoden wie Machine/Deep Learning (ML/DL) zur Vorhersage eingesetzt. Nahezu alle dieser Bereiche verwenden Daten die als [Vektordatenmodell]({{ site.baseurl }}{% link _unit02/unit02-02_reader_gi_raum.md %}) vorliegen. Vorrangig in der ML/DL  Vorhersage werden in erheblichem Umfang Rasterdaten genutzt. In der Ökonometrie jedoch werden üblicherweise diskrete Geoobjekte die null-, ein- bzw. zwei-dimensionale Raumeigenschaften aufweisen.
 
 
 ## Lernziele
