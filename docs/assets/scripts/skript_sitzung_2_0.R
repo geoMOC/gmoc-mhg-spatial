@@ -89,7 +89,7 @@ cat(
 ACHTUNG: Die Daten sind zum Teil sehr umfangreich.\n Bitte nicht einfach 'durchlaufen' lassen sondern gezielt nutzen.
 "
 )
-waiting(3)
+waiting(1)
 
 if ( auswahl=="mikrozensus"){
   # ---- Mikrozensus Daten
