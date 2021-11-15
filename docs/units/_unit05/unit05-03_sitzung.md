@@ -311,7 +311,7 @@ Die Funktion `poly2nb` kann verwendet werden um binäre (=Nachbar ja/nein) Nachb
 
 
 ```r
-# Berchnen einer binären Nachbarschaftsliste mit der vierer Nachbarschaft "rook" (=wueen="FALSE")
+# Berchnen einer binären Nachbarschaftsliste mit der vierer Nachbarschaft "rook" (queen="FALSE")
 rook = poly2nb(nuts3_kreise, row.names=nuts3_kreise$NUTS_NAME, queen=FALSE)
 
 # Ableiten der Nachbarschaftsmatrix aus der zuvor erzeugten Liste
