@@ -23,12 +23,12 @@
 
 
 # Serve on GitHub
-url: https://geomoer.github.io/
-baseurl: "/moer-mhg-spatial/"
+url: https://geomoc.github.io/
+baseurl: "/gmoc-mhg-spatial/"
 
 ##### Title ###################################################################
-title: Environmental Informatics Research Group
-name: &name "Environmental Informatics Research Group" # &name is a YAML anchor which can be *referenced later
+title: GISMA course resources
+name: &name "GISMA course resources" # &name is a YAML anchor which can be *referenced later
 email: reudenbach@geo.uni-marburg.de
 description: >- # this means to ignore newlines until next item
   course course-materials geography remote-sensing marburg-open-educational-resource 
@@ -53,7 +53,7 @@ author:
   flickr           : "https://www.flickr.com/environmentalinformatics-marburg/"
   facebook         : "https://www.facebook.com/GeographieMarburg/"
   foursquare       :
-  github           : "GeoMOER"
+  github           : "geoMOC"
   gitlab           :
   google_plus      :
   keybase          :
@@ -80,7 +80,8 @@ locale                   : "de-DE"
 # Build settings
 markdown: kramdown
 # theme: minima
-remote_theme: "GeoMOER/moer-jekyll-theme"
+remote_theme: "https://github.com/gisma-courses/moer-jekyll-theme"
+
 
 minimal_mistakes_skin    : "mhg" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 

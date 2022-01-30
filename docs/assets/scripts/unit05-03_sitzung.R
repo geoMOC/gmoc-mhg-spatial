@@ -39,20 +39,20 @@ invisible(lapply(libs, library, character.only = TRUE))
 
 # Aus der Sitzung Eins werden die gesäuberten Kreisdaten von github geladen und eingelesen
 
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/nuts3_kreise.rds",     destfile = "nuts3_kreise.rds")
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/nuts3_kreise.rds",     destfile = "nuts3_kreise.rds")
 
 # Einlesen der nuts3_kreise Daten
 nuts3_kreise = readRDS("nuts3_kreise.rds")
 
 # Gleiches gilt für die Punktdaten der Städte
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/geo_coord_city.rds",     destfile = "geo_coord_city.rds")
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/geo_coord_city.rds",     destfile = "geo_coord_city.rds")
 
 # Einlesen der city  Daten
 geo_coord_city = readRDS("geo_coord_city.rds")
 
 # zu Demozwecken wird ein Rasterdatensatz  (Corine Daten für Deutschland heruntergeladen und eingelesen)
 
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/lulc_nuts3_kreise.tif",     destfile = "lulc_nuts3_kreise.tif")
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/lulc_nuts3_kreise.tif",     destfile = "lulc_nuts3_kreise.tif")
 lulc_nuts3_kreise = raster("lulc_nuts3_kreise.tif")
 
 

@@ -77,7 +77,7 @@ file.remove(files)
 # Aus dem Statistik-Kurs lesen wir die Kreisdaten ein
 # Sie sind aus Bequemlichkeitsgründen auf github verfügbar
 
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/Kreisdaten2010.csv",     destfile = paste0(rootDIR,"Kreisdaten2010.csv"))
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/Kreisdaten2010.csv",     destfile = paste0(rootDIR,"Kreisdaten2010.csv"))
 
 # Aus dem Statistikkurs lesen wir die Kreisdaten ein
 Kreise <- read.table ("Kreisdaten2010.csv",header=T,sep=';')

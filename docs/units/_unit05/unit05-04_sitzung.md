@@ -45,7 +45,7 @@ invisible(lapply(libs, library, character.only = TRUE))
 
 # Aus der Sitzung Eins werden die gesäuberten Kreisdaten von github geladen und eingelesen
 
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/nuts3_kreise.rds",     destfile = "nuts3_kreise.rds")
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/nuts3_kreise.rds",     destfile = "nuts3_kreise.rds")
 
 # Einlesen der nuts3_kreise Daten
 nuts3_kreise = readRDS("nuts3_kreise.rds")
@@ -341,7 +341,7 @@ invisible(lapply(libs, library, character.only = TRUE))
 
 # Aus der Sitzung Eins werden die gesäuberten Kreisdaten von github geladen und eingelesen
 
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/nuts3_kreise.rds",     destfile = "nuts3_kreise.rds")
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/nuts3_kreise.rds",     destfile = "nuts3_kreise.rds")
 
 # Einlesen der nuts3_kreise Daten
 nuts3_kreise = readRDS("nuts3_kreise.rds")

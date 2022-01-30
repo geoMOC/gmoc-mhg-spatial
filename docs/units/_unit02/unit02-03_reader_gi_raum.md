@@ -50,7 +50,7 @@ Durch Anordnung, der sich nicht überschneidenden Zellen in Zeilen und Spalten e
 
 ## Bearbeiten Sie...
 
-Öffnen Sie mit Google Earth die Datei die zuvor heruntergeladene Datei [Raster oder Vektor](https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/RasteroderVektormodell3D.kmz). Versuchen Sie zu identifizieren, welches Datenmodell für welche der dargestellten Information verwendet wird.
+Öffnen Sie mit Google Earth die Datei die zuvor heruntergeladene Datei [Raster oder Vektor](https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/RasteroderVektormodell3D.kmz). Versuchen Sie zu identifizieren, welches Datenmodell für welche der dargestellten Information verwendet wird.
 
   * Welche(s) Datenmodell(e) nutzt ihrer Meinung nach Google Earth?
   * Lassen sich aus den am Bildschirm dargestellten Informationen nähere Eigenschaften des verwendeten Datenmodells ableiten? Wenn ja welche? Wenn nein warum nicht?

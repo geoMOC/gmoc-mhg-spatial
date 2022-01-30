@@ -40,12 +40,12 @@ invisible(lapply(libs, library, character.only = TRUE))
 # Aus dem Statistik-Kurs lesen wir die Kreisdaten ein
 # Sie sind aus Bequemlichkeitsgründen auf github verfügbar
 
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/nuts3_kreise.rds",     destfile = "nuts3_kreise.rds")
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/nuts3_kreise.rds",     destfile = "nuts3_kreise.rds")
 
 # Einlesen der nuts3 Daten
 nuts3_kreise = readRDS("nuts3_kreise.rds")
 
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/geo_coord_city.rds",     destfile = "geo_coord_city.rds")
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/geo_coord_city.rds",     destfile = "geo_coord_city.rds")
 
 # Einlesen der nuts3 Daten
 geo_coord_city = readRDS("geo_coord_city.rds")

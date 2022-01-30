@@ -93,13 +93,13 @@ invisible(lapply(libs, library, character.only = TRUE))
 # Aus dem Statistik-Kurs lesen wir die Kreisdaten ein
 # Sie sind aus Bequemlichkeitsgründen auf github verfügbar
 
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/Kreisdaten2010.csv",     destfile = "Kreisdaten2010.csv")
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/Kreisdaten2010.csv",     destfile = "Kreisdaten2010.csv")
 
 # Aus dem Statistikkurs lesen wir die Kreisdaten ein
 Kreise <- read.table ("Kreisdaten2010.csv",header=T,sep=';')
 
 # LAden der Geometriedaten (also die GI Daten für die NUTS3 Kreise)
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/nuts3.rds",     destfile = "nuts3.rds")
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/nuts3.rds",     destfile = "nuts3.rds")
 
 # Einlesen der nuts3 Daten
 nuts3 = readRDS("nuts3.rds")
@@ -112,7 +112,7 @@ nuts3_de = nuts3[nuts3$CNTR_CODE=="DE",]
 # laden der offiziellen Zuweisungstabellen für Lokale Verwaltungseinheiten (LAU) <-> NUTS3 Konversion
 
 # LAden der Geometriedaten (also die GI Daten für die NUTS3 Kreise)
-download(url ="https://raw.githubusercontent.com/GeoMOER/moer-mhg-spatial/master/docs/assets/data/lau_nuts3.rds",     destfile = "lau_nuts3.rds")
+download(url ="https://raw.githubusercontent.com/geoMOC/gmoc-mhg-spatial/master/docs/assets/data/lau_nuts3.rds",     destfile = "lau_nuts3.rds")
 
 # Einlesen der nuts3 Daten
 lau_nuts3 = readRDS("lau_nuts3.rds")
